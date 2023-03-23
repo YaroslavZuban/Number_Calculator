@@ -1,0 +1,291 @@
+package com.example.number_calculator;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainController {
+    @FXML
+    private Button buttonBackSpace;
+    @FXML
+    private AnchorPane windowMain;
+    @FXML
+    private ImageView buttonClose;
+
+    @FXML
+    private ImageView buttonCollapse;
+
+    @FXML
+    private ImageView buttonHistory;
+
+    @FXML
+    private ImageView buttonInfo;
+
+    @FXML
+    private Button buttonResult;
+
+    @FXML
+    private Button button_0;
+
+    @FXML
+    private Button button_Result;
+    @FXML
+    private Button button_1;
+
+    @FXML
+    private Button button_2;
+
+    @FXML
+    private Button button_3;
+
+    @FXML
+    private Button button_4;
+
+    @FXML
+    private Button button_5;
+
+    @FXML
+    private Button button_6;
+
+    @FXML
+    private Button button_7;
+
+    @FXML
+    private Button button_8;
+
+    @FXML
+    private Button button_9;
+
+    @FXML
+    private Button button_A;
+
+    @FXML
+    private Button button_Addition;
+
+    @FXML
+    private Button button_B;
+
+    @FXML
+    private Button button_C;
+
+    @FXML
+    private Button button_D;
+
+    @FXML
+    private Button button_Division;
+
+    @FXML
+    private Button button_E;
+
+    @FXML
+    private Button button_F;
+
+    @FXML
+    private Button button_Multiplication;
+
+    @FXML
+    private Button button_OneDivisionX;
+
+    @FXML
+    private Button button_Point;
+
+    @FXML
+    private Button button_Pow_Two;
+
+    @FXML
+    private Button button_SignСhange;
+
+    @FXML
+    private Button button_Subtraction;
+
+    @FXML
+    private Button button_MC;
+
+    @FXML
+    private Button button_MPlus;
+
+    @FXML
+    private Button button_MR;
+
+    @FXML
+    private Button button_MS;
+    @FXML
+    private Slider sliderInput;
+
+    @FXML
+    private Spinner<Integer> spinnerInput;
+
+    private SpinnerValueFactory<Integer> spinnerValueFactoryInput;
+
+    @FXML
+    private TextField textInput;
+    private int systemInput;
+
+    private double x, y;
+
+    public void init(Stage stage) {
+        windowMain.setOnMousePressed(mouseEvent -> {
+            x = mouseEvent.getSceneX();
+            y = mouseEvent.getSceneY();
+        });
+
+        windowMain.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - x);
+            stage.setY(mouseEvent.getScreenY() - y);
+        });
+
+        buttonHistory.setOnMouseClicked(mouseEvent -> {
+            Stage ss = (Stage) windowMain.getScene().getWindow();//береться параметры стратого она и закрывается
+            ss.close();//закрытия окна
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("HistoryInterface.fxml"));//считывание дизайн самого интерфейса
+
+            Stage s = new Stage();
+            Scene scene = null;//запуск дизайн
+
+            try {
+                scene = new Scene(fxmlLoader.load());
+                scene.setFill(Color.TRANSPARENT);
+                s.setTitle("Калькулятор");
+                s.initStyle(StageStyle.TRANSPARENT);
+                s.setResizable(false);
+                s.setScene(scene);
+                s.setScene(scene);//установка Scene для Stage
+                s.getIcons().add(new Image(getClass().getResourceAsStream("/ico/calculator.png")));
+                ((HistoryController) fxmlLoader.getController()).init(s);
+                s.show();//Попытки показать это окно, установив для видимости значение true
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        buttonInfo.setOnMouseClicked(mouseEvent -> {
+            Info.information(Reference.info, windowMain);
+        });
+
+        buttonClose.setOnMouseClicked(event -> stage.close());
+        buttonCollapse.setOnMouseClicked(event -> stage.setIconified(true));
+
+        spinnerValueFactoryInput =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 16);
+
+        spinnerValueFactoryInput.setValue(10);
+        spinnerInput.setValueFactory(spinnerValueFactoryInput);
+
+        sliderInput.setValue((10));
+    }
+
+    @FXML
+    void actionOperator(MouseEvent event) {
+        Editor.actionOperator(event);
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    void onNumberSystemSlider(MouseEvent event) {
+        systemInput = (int) sliderInput.getValue();
+        if (Editor.numberSystem != systemInput) {
+            Info.information("Все данные анурилуется, т.к сделали переход в новую систему", windowMain);
+
+            Editor.numberSystem = systemInput;
+            Editor.value = new StringBuilder();
+            Editor.leftOperand = new StringBuilder();
+            Editor.operator = " ";
+        }
+        numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
+    }
+
+    @FXML
+    void onNumberSystemSpinner(MouseEvent event) {
+        systemInput = spinnerInput.getValue();
+
+        if (Editor.numberSystem != systemInput) {
+            Info.information("Все данные анурилуется, т.к сделали переход в новую систему", windowMain);
+
+            Editor.numberSystem = systemInput;
+            Editor.value = new StringBuilder("0");
+            Editor.leftOperand = new StringBuilder();
+            Editor.operator = " ";
+
+            textInput.setText(Editor.value.toString());
+        }
+
+        numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
+    }
+
+    private void numberSystemChanges(Slider slider,
+                                     SpinnerValueFactory<Integer> factory,
+                                     Spinner<Integer> spinner, int value) {
+        factory.setValue(value);
+        spinner.setValueFactory(factory);
+        slider.setValue(value);
+    }
+
+    @FXML
+    void onNumberClicked(MouseEvent event) {
+        Editor.waterNumber(event);
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    void onSymbolClicked(MouseEvent event) {
+        Editor.waterSymbol(event);
+        System.out.println(Editor.value);
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    void onOperatorClicking(MouseEvent event) {
+        Editor.waterOperator(event);
+        System.out.println(Editor.value);
+
+        System.out.println(Editor.value.toString());
+
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    public void onClean(MouseEvent event) {
+        Editor.onClean(event);
+        System.out.println(Editor.value);
+
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    public void onMemory(MouseEvent event){
+        Editor.memory(event);
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    public void onCleanEntry(MouseEvent event) {
+        Editor.onCleanEntry(event);
+        System.out.println(Editor.value);
+
+        textInput.setText(Editor.value.toString());
+    }
+
+    @FXML
+    public void onBaskSpace(MouseEvent event) {
+        Editor.onBaskSpace(event);
+        System.out.println(Editor.value);
+
+        textInput.setText(Editor.value.toString());
+    }
+
+}
