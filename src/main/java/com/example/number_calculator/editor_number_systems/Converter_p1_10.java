@@ -1,7 +1,6 @@
-package com.example.number_calculator;
+package com.example.number_calculator.editor_number_systems;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.number_calculator.editor_number_systems.Converter;
 
 /**
  * Класс который позволяет перевести число из одной СС в 10-ную
