@@ -1,5 +1,7 @@
 package com.example.number_calculator;
 
+import com.example.number_calculator.editor_number_systems.Converter_10_p2;
+
 public class CalculatorMemory {
     private String memoryValue;
     private int system = 10;

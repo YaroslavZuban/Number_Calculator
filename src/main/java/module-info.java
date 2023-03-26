@@ -5,4 +5,6 @@ module com.example.number_calculator {
 
     opens com.example.number_calculator to javafx.fxml;
     exports com.example.number_calculator;
+    exports com.example.number_calculator.editor_number_systems;
+    opens com.example.number_calculator.editor_number_systems to javafx.fxml;
 }

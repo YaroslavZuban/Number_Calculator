@@ -133,7 +133,10 @@ public class MainController {
 
     @FXML
     private TextField textInput;
+    @FXML
+    private TextField textResult;
     private int systemInput;
+    com.example.number_calculator.editor_number_systems.Editor editor=new com.example.number_calculator.editor_number_systems.Editor();
 
     private double x, y;
 
@@ -190,40 +193,25 @@ public class MainController {
     }
 
     @FXML
-    void actionOperator(MouseEvent event) {
-        Editor.actionOperator(event);
-        textInput.setText(Editor.value.toString());
+    void actionOperator(MouseEvent event){
+        editor.actionOperator(event);
+        //Editor.actionOperator(event);
+        //textInput.setText(Editor.value.toString());
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
     }
 
     @FXML
     void onNumberSystemSlider(MouseEvent event) {
         systemInput = (int) sliderInput.getValue();
-        if (Editor.numberSystem != systemInput) {
-            Info.information("Все данные анурилуется, т.к сделали переход в новую систему", windowMain);
-
-            Editor.numberSystem = systemInput;
-            Editor.value = new StringBuilder();
-            Editor.leftOperand = new StringBuilder();
-            Editor.operator = " ";
-        }
+        com.example.number_calculator.editor_number_systems.Editor.systemNumber=systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
     }
 
     @FXML
     void onNumberSystemSpinner(MouseEvent event) {
         systemInput = spinnerInput.getValue();
-
-        if (Editor.numberSystem != systemInput) {
-            Info.information("Все данные анурилуется, т.к сделали переход в новую систему", windowMain);
-
-            Editor.numberSystem = systemInput;
-            Editor.value = new StringBuilder("0");
-            Editor.leftOperand = new StringBuilder();
-            Editor.operator = " ";
-
-            textInput.setText(Editor.value.toString());
-        }
-
+        com.example.number_calculator.editor_number_systems.Editor.systemNumber=systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
     }
 
@@ -236,34 +224,48 @@ public class MainController {
     }
 
     @FXML
+    void onResultClicked(MouseEvent event){
+        editor.onResultClicked();
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
+    }
+
+    @FXML
     void onNumberClicked(MouseEvent event) {
-        Editor.waterNumber(event);
-        textInput.setText(Editor.value.toString());
+        editor.waterNumber(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
+
+       /* Editor.waterNumber(event);
+        textInput.setText(Editor.value.toString());*/
     }
 
     @FXML
     void onSymbolClicked(MouseEvent event) {
-        Editor.waterSymbol(event);
-        System.out.println(Editor.value);
-        textInput.setText(Editor.value.toString());
+        editor.waterSymbol(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
+        /*Editor.waterSymbol(event);
+        textInput.setText(Editor.value.toString());*/
     }
 
     @FXML
     void onOperatorClicking(MouseEvent event) {
-        Editor.waterOperator(event);
-        System.out.println(Editor.value);
-
-        System.out.println(Editor.value.toString());
-
-        textInput.setText(Editor.value.toString());
+        editor.waterOperator(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
+       /* Editor.waterOperator(event);
+        textInput.setText(Editor.value.toString());*/
     }
 
     @FXML
     public void onClean(MouseEvent event) {
-        Editor.onClean(event);
-        System.out.println(Editor.value);
+        editor.onClean(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
 
-        textInput.setText(Editor.value.toString());
+       /* Editor.onClean(event);
+        textInput.setText(Editor.value.toString());*/
     }
 
     @FXML
@@ -274,18 +276,24 @@ public class MainController {
 
     @FXML
     public void onCleanEntry(MouseEvent event) {
-        Editor.onCleanEntry(event);
-        System.out.println(Editor.value);
+        editor.onCleanEntry(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
 
-        textInput.setText(Editor.value.toString());
+       /* Editor.onCleanEntry(event);
+
+        textInput.setText(Editor.value.toString());*/
     }
 
     @FXML
     public void onBaskSpace(MouseEvent event) {
-        Editor.onBaskSpace(event);
-        System.out.println(Editor.value);
+        editor.onBaskSpace(event);
+        textInput.setText(com.example.number_calculator.editor_number_systems.Editor.lineInput.toString());
+        textResult.setText(com.example.number_calculator.editor_number_systems.Editor.result.toString());
 
-        textInput.setText(Editor.value.toString());
+       /* Editor.onBaskSpace(event);
+
+        textInput.setText(Editor.value.toString());*/
     }
 
 }

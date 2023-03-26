@@ -1,14 +1,14 @@
 package com.example.number_calculator;
 
-import javafx.fxml.FXML;
+import com.example.number_calculator.editor_number_systems.Calculator;
+import com.example.number_calculator.editor_number_systems.Converter_10_p2;
+import com.example.number_calculator.editor_number_systems.Converter_p1_10;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-
-import java.util.Arrays;
 
 public class Editor {
     public static String operator = " ";
+    private static String tempOperator=" ";
     public static int numberSystem = 10;
     public static CalculatorMemory calculatorMemory = new CalculatorMemory();
 
@@ -17,6 +17,7 @@ public class Editor {
     private static Calculator calculator = new Calculator();
 
     public static StringBuilder leftOperand = new StringBuilder();
+    private static boolean isOperationPerformed=false;
     private static int count = 0;
 
     public static void waterSymbol(MouseEvent event) {
@@ -45,19 +46,46 @@ public class Editor {
 
     public static void waterOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        operationNumber();
-        operator = " ";
 
+
+        System.out.println(tempValue);
+        System.out.println(tempOperator);
+
+        if(!isOperationPerformed){
+            tempValue=new StringBuilder(value.toString());
+            tempOperator=operator;
+
+            operationNumber();
+            operator = " ";
+
+        }
 
         if (temp.equals("Result")) {
-            operationNumber();
-            leftOperand = new StringBuilder(value.toString());
+            if (!isOperationPerformed) {
+
+                operationNumber();
+                leftOperand = new StringBuilder(value.toString());
+
+                isOperationPerformed = true;
+            } else {
+                leftOperand=new StringBuilder(value);
+                value=new StringBuilder(tempValue);
+
+                operator=tempOperator;
+
+                operationNumber();
+                leftOperand = new StringBuilder(value.toString());
+            }
+
         } else if (temp.equals("SignСhange")) {
+            isOperationPerformed=false;
+
             if (value.toString().contains("-")) {
                 value.deleteCharAt(0);
             } else {
                 value.insert(0, "-");
             }
+
         } else {
             if (temp.equals("Multiplication")) {
                 if (operator.equals("*")) {
@@ -65,6 +93,8 @@ public class Editor {
                     operationNumber();
                 } else {
                     operator = "*";
+                    tempOperator=operator;
+
                 }
 
                 leftOperand = new StringBuilder(value);
@@ -74,6 +104,7 @@ public class Editor {
                     operationNumber();
                 } else {
                     operator = "/";
+                    tempOperator=operator;
                 }
 
                 leftOperand = new StringBuilder(value);
@@ -83,6 +114,7 @@ public class Editor {
                     operationNumber();
                 } else {
                     operator = "+";
+                    tempOperator=operator;
                 }
 
                 leftOperand = new StringBuilder(value);
@@ -92,12 +124,14 @@ public class Editor {
                     operationNumber();
                 } else {
                     operator = "-";
+                    tempOperator=operator;
                 }
 
                 leftOperand = new StringBuilder(value);
             }
 
             value = new StringBuilder();
+            isOperationPerformed=false;
         }
     }
 
@@ -149,8 +183,11 @@ public class Editor {
 
             value = new StringBuilder(String.valueOf(numberTemp));
             value = new StringBuilder(String.valueOf(new Converter_10_p2().conv(value.toString(), numberSystem)));
+
             result += value;
             History.data.add(result);
+
+            tempOperator=operator;
             operator = " ";
         }
     }
@@ -214,5 +251,4 @@ public class Editor {
         }
 
     }
-
 }
