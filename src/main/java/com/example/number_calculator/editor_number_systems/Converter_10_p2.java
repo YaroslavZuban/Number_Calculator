@@ -2,6 +2,8 @@ package com.example.number_calculator.editor_number_systems;
 
 import com.example.number_calculator.editor_number_systems.Converter;
 
+import java.math.BigDecimal;
+
 /**
  * Класс который позволяет перевести число из 10-ой СС в любую другую (2-16) СС
  */
@@ -11,11 +13,15 @@ public class Converter_10_p2 implements Converter {
 
         if (temp.indexOf("-") != -1) {
             temp.delete(0, 1);
-            return "-" + decimalToBaseN(Double.parseDouble(temp.toString()), system);
+            temp=new StringBuilder("-" + decimalToBaseN(Double.parseDouble(temp.toString()), system));
+        }else{
+            temp=new StringBuilder(decimalToBaseN(Double.parseDouble(temp.toString()), system));
         }
 
-        return decimalToBaseN(Double.parseDouble(line), system);
+        return temp.toString();
     }
+
+
 
     public static String decimalToBaseN(double decimalNumber, int baseN) {
         StringBuilder result = new StringBuilder();

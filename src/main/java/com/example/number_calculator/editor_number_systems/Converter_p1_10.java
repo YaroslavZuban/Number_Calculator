@@ -2,6 +2,8 @@ package com.example.number_calculator.editor_number_systems;
 
 import com.example.number_calculator.editor_number_systems.Converter;
 
+import java.math.BigDecimal;
+
 /**
  * Класс который позволяет перевести число из одной СС в 10-ную
  */
@@ -9,14 +11,41 @@ public class Converter_p1_10 implements Converter {
     private final String digits = "0123456789ABCDEF";
 
     public String conv(String line, int system) {
-        StringBuilder temp = new StringBuilder(line);
+        StringBuilder temp = new StringBuilder(fixFloatingPointString(line));
+        StringBuilder result;
 
         if (temp.indexOf("-") != -1) {
             temp.delete(0, 1);
-            return "-" + String.valueOf(parseNumber(temp.toString(), system));
+            result=new StringBuilder("-"+parseNumber(temp.toString(), system));
+        }else{
+            result=new StringBuilder(String.valueOf(parseNumber(line, system)));
         }
 
-        return String.valueOf(parseNumber(line, system));
+        return fixFloatingPointString(removeTrailingZeros(result.toString()));
+    }
+
+    public static String removeTrailingZeros(String numberStr) {
+        double number = Double.parseDouble(numberStr);
+        if (number == (long) number) {
+            return String.format("%d", (long) number);
+        } else {
+            return String.format("%s", number).replaceAll("\\.?0*$", "");
+        }
+    }
+
+
+    private String fixFloatingPointString(String input) {
+        String output;
+
+        if (input.startsWith("-")) {
+            output = "-" + "0" + input.substring(1);
+        } else if (input.startsWith(".")) {
+            output = "0" + input;
+        } else {
+            output = input;
+        }
+
+        return output;
     }
 
     private double parseNumber(String num, int base) {
