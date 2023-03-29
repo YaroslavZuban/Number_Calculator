@@ -13,12 +13,11 @@ public class Editor {
 
     public static StringBuilder lineInput = new StringBuilder();
     public static StringBuilder result = new StringBuilder();
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
     private String op;
 
     public static int systemNumber = 10;
     private static int count = 0;
-    private int countResult = 0;
 
     public void waterSymbol(MouseEvent event) {
         StringBuilder tempInput;
@@ -64,6 +63,7 @@ public class Editor {
         StringBuilder result = new StringBuilder(lineInput.toString());
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
+
         if (number_one == null) {
             number_one = new NumberInBaseN(result.toString(), systemNumber);
         }
@@ -87,128 +87,90 @@ public class Editor {
 
     public void waterOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        count = 0;
 
-        if (temp.equals("SignСhange")) {
-            if (number_two == null) {
-                if (lineInput.indexOf("-") != -1)
-                    lineInput.deleteCharAt(0);
-                else {
-                    lineInput.insert(0, "-");
-                }
+        if (number_one == null && number_two == null) {
+            number_two = new NumberInBaseN("0", systemNumber);
 
-                number_one.setNumber(lineInput.toString());
-            } else {
-                StringBuilder tempSign = new StringBuilder(number_one.getNumber());
-
-                if (number_one.getNumber().contains("-")) {
-                    tempSign.deleteCharAt(0);
-                    number_one.setNumber(tempSign.toString());
-                    lineInput = new StringBuilder(number_two.getNumber() + op + number_one.getNumber());
-                } else {
-                    tempSign.insert(0, "-");
-                    number_one.setNumber(tempSign.toString());
-                    lineInput = new StringBuilder(number_two.getNumber() + op + "(" + number_one.getNumber() + ")");
-                }
-            }
-        } else {
-            if (temp.equals("Multiplication")) {
-                op = "*";
-            } else if (temp.equals("Division")) {
-                op = "/";
-            } else if (temp.equals("Addition")) {
-                op = "+";
-            } else if (temp.equals("Subtraction")) {
-                op = "-";
+            switch (temp) {
+                case "Multiplication" -> op = "*";
+                case "Division" -> op = "/";
+                case "Addition" -> op = "+";
+                case "Subtraction" -> op = "-";
             }
 
-            if (!result.toString().equals("")) {
-                lineInput = new StringBuilder(result);
-                result = new StringBuilder();
-            }
+            lineInput = new StringBuilder(number_two.getNumber() + op);
 
-            lineInput.append(op);
+        } else if (number_one != null && number_two != null && !temp.equals("SignСhange")) {
+            operationNumber(op);
 
-            number_two = number_one;
-            tempNumber = new NumberInBaseN(number_one);
+            number_two = new NumberInBaseN(number_one);
             number_one = null;
-        }
 
-    }
-
-   /* public static void actionOperator(MouseEvent event) {
-        String result = value.toString();
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        double numberOne = Double.parseDouble(new Converter_p1_10().conv(value.toString(), numberSystem));
-
-        if (temp.equals("Pow_Two")) {
-            result += " ^2" + " (" + numberSystem + ") = ";
-            value = new StringBuilder(String.valueOf(calculator.power(numberOne)));
-            value = new StringBuilder(String.valueOf(new Converter_10_p2().conv(value.toString(), numberSystem)));
-        } else {
-            result = "1/" + value.toString() + " (" + numberSystem + ") = ";
-            value = new StringBuilder(String.valueOf(calculator.reciprocalNumber(numberOne)));
-            value = new StringBuilder(String.valueOf(new Converter_10_p2().conv(value.toString(), numberSystem)));
-        }
-
-        result = result + value;
-        History.data.add(result);
-
-        operationNumber();
-        leftOperand = new StringBuilder(value);
-
-    }*/
-
-  /*  private static void operationNumber() {
-        String result;
-
-        double numberOne = Double.parseDouble(new Converter_p1_10().conv(leftOperand.toString(), numberSystem));
-        double numberTwo = Double.parseDouble(new Converter_p1_10().conv(value.toString(), numberSystem));
-
-        double numberTemp = 0;
-
-        System.out.println(operator);
-        if (!operator.equals(" ")) {
-            result = leftOperand.toString() + " (" + numberSystem + ") " + operator + " " + value.toString() + " (" + numberSystem + ") =";
-
-            if (operator.contains("*")) {
-                numberTemp = calculator.multiply(numberOne, numberTwo);
-            } else if (operator.contains("/")) {
-                numberTemp = calculator.divide(numberOne, numberTwo);
-            } else if (operator.contains("+")) {
-                numberTemp = calculator.add(numberOne, numberTwo);
-            } else if (operator.contains("-")) {
-                numberTemp = calculator.subtract(numberOne, numberTwo);
+            switch (temp) {
+                case "Multiplication" -> op = "*";
+                case "Division" -> op = "/";
+                case "Addition" -> op = "+";
+                case "Subtraction" -> op = "-";
             }
 
+            lineInput = new StringBuilder(number_two.getNumber() + op);
+            System.out.println(op);
+        } else {
+            count = 0;
 
-            value = new StringBuilder(String.valueOf(numberTemp));
-            value = new StringBuilder(String.valueOf(new Converter_10_p2().conv(value.toString(), numberSystem)));
+            if (temp.equals("SignСhange")) {
+                if (number_two == null) {
+                    if (lineInput.indexOf("-") != -1)
+                        lineInput.deleteCharAt(0);
+                    else {
+                        lineInput.insert(0, "-");
+                    }
 
-            result += value;
-            History.data.add(result);
+                    number_one.setNumber(lineInput.toString());
+                } else {
 
-            tempOperator=operator;
-            operator = " ";
+                    checkingCharacter(lineInput);
+
+                    if (number_one != null) {
+                        StringBuilder tempSign = new StringBuilder(number_one.getNumber());
+
+                        if (number_one.getNumber().contains("-")) {
+                            tempSign.deleteCharAt(0);
+                            number_one.setNumber(tempSign.toString());
+                            lineInput = new StringBuilder(number_two.getNumber() + op + number_one.getNumber());
+                        } else {
+                            tempSign.insert(0, "-");
+                            number_one.setNumber(tempSign.toString());
+                            lineInput = new StringBuilder(number_two.getNumber() + op + "(" + number_one.getNumber() + ")");
+                        }
+                    }
+                }
+            } else {
+
+                switch (temp) {
+                    case "Multiplication" -> op = "*";
+                    case "Division" -> op = "/";
+                    case "Addition" -> op = "+";
+                    case "Subtraction" -> op = "-";
+                }
+
+                if(number_two != null && number_one==null){
+                    lineInput=new StringBuilder(number_two.getNumber()+op);
+                }else{
+                    if (!result.toString().equals("")) {
+                        lineInput = new StringBuilder(result);
+                        result = new StringBuilder();
+                    }
+
+                    lineInput.append(op);
+
+                    number_two = number_one;
+                    tempNumber = new NumberInBaseN(number_one);
+                    number_one = null;
+                }
+            }
         }
-    }*/
-
-   /* public static void memory(MouseEvent event) {
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-
-        if (temp.contains("MPlus")) {
-            calculatorMemory.memoryPlus(String.valueOf(value));
-        } else if (temp.contains("MR")) {
-            leftOperand = new StringBuilder();
-            value = new StringBuilder(calculatorMemory.memoryRead());
-            numberSystem = calculatorMemory.getSystem();
-        } else if (temp.contains("MS")) {
-            calculatorMemory.memorySave(value.toString());
-            calculatorMemory.setSystem(numberSystem);
-        } else if (temp.contains("MC")) {
-            calculatorMemory = new CalculatorMemory();
-        }
-    }*/
+    }
 
     public void onResultClicked() {
         if (number_one != null) {
@@ -227,6 +189,7 @@ public class Editor {
             number_one = number_two;
             number_two = null;
             count++;
+            op = "";
 
         }
     }
@@ -262,15 +225,16 @@ public class Editor {
         number_two = null;
 
         StringBuilder temp = new StringBuilder(String.valueOf(new Converter_10_p2().conv(result.toString(), systemNumber)));
+
         number_one.setNumber(temp.toString());
         number_one.setSystem(systemNumber);
         result = temp;
 
     }
 
-
     public void waterNumber(MouseEvent event) {
         StringBuilder tempInput;
+
         if (number_one == null) {
             number_one = new NumberInBaseN();
             tempInput = new StringBuilder();
@@ -310,6 +274,7 @@ public class Editor {
     public void onCleanEntry(MouseEvent event) {
         lineInput = new StringBuilder("0");
         result = new StringBuilder();
+
         systemNumber = 10;
         number_one = null;
         number_two = null;
@@ -323,6 +288,45 @@ public class Editor {
         } else {
             onCleanEntry(event);
             count = 0;
+        }
+    }
+
+   /* public void onMemory(MouseEvent event){
+        String temp = ((Button) event.getSource()).getId().replace("button_", "");
+
+        if (temp.contains("MPlus")) {
+            calculatorMemory.memoryPlus(String.valueOf(value));
+        } else if (temp.contains("MR")) {
+            leftOperand = new StringBuilder();
+            value = new StringBuilder(calculatorMemory.memoryRead());
+            numberSystem = calculatorMemory.getSystem();
+        } else if (temp.contains("MS")) {
+            calculatorMemory.memorySave(value.toString());
+            calculatorMemory.setSystem(numberSystem);
+        } else if (temp.contains("MC")) {
+            calculatorMemory = new CalculatorMemory();
+        }
+    }*/
+
+    private void checkingCharacter(StringBuilder line) {
+        int index;
+
+        if (number_two != null) {
+            index = line.indexOf(number_two.getNumber());
+        } else {
+            index = line.indexOf(number_one.getNumber());
+        }
+
+
+        if (index != -1) {
+            String operation = String.valueOf(line.charAt(index + 1));
+
+            if (operation.contains("-") || operation.contains("+")
+                    || operation.contains("/") || operation.contains("*")) {
+                line.deleteCharAt(index + 1);
+                number_one = number_two;
+                number_two = null;
+            }
         }
     }
 }
