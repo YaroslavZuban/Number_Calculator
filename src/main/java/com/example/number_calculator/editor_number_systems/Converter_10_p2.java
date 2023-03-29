@@ -9,6 +9,8 @@ import java.math.BigDecimal;
  */
 public class Converter_10_p2 implements Converter {
     public String conv(String line, int system) {
+
+
         StringBuilder temp = new StringBuilder(line);
 
         if (temp.indexOf("-") != -1) {
@@ -18,10 +20,20 @@ public class Converter_10_p2 implements Converter {
             temp=new StringBuilder(decimalToBaseN(Double.parseDouble(temp.toString()), system));
         }
 
-        return temp.toString();
+        return removeTrailingZeros(temp.toString());
     }
 
-
+    private String removeTrailingZeros(String numberStr) {
+        if (numberStr.contains(".")) {
+            String result = numberStr.replaceAll("\\.?0*$", "");
+            if (result.endsWith(".")) {
+                result = result.substring(0, result.length() - 1);
+            }
+            return result;
+        } else {
+            return numberStr;
+        }
+    }
 
     public static String decimalToBaseN(double decimalNumber, int baseN) {
         StringBuilder result = new StringBuilder();
