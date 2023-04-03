@@ -1,5 +1,6 @@
 package com.example.number_calculator.editor_number_systems;
 
+import com.example.number_calculator.CalculatorMemory;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
@@ -15,6 +16,8 @@ public class EditorConverter {
     public static String operation = "";
     private static String operationTemp = "";
     private Calculator calculator = new Calculator();
+
+    private static CalculatorMemory calculatorMemory = new CalculatorMemory();
 
     public void waterSymbol(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -203,12 +206,53 @@ public class EditorConverter {
 
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && !number_two.getNumber().equals("")) {
-            number_two = new NumberInBaseN("",system);
+            number_two = new NumberInBaseN("", system);
         } else if (number_one != null && !number_one.getNumber().equals("")) {
             number_one = null;
         }
 
         dataInput();
+    }
+
+    public void memory(MouseEvent event) {
+        String temp = ((Button) event.getSource()).getId().replace("button_", "");
+
+        if (temp.contains("MPlus")) {
+            if (number_result != null) {
+                calculatorMemory.memoryPlus(number_result.getNumber(), number_result.getSystem());
+            } else {
+                if (number_one != null && operation.equals("")) {
+                    calculatorMemory.memoryPlus(number_one.getNumber(), number_one.getSystem());
+                }
+            }
+        } else if (temp.contains("MR")) {
+            lineInput = new StringBuilder();
+            lineResult = new StringBuilder();
+
+            number_two = null;
+            number_result = null;
+
+            system = 10;
+            operation = "";
+
+            number_one = new NumberInBaseN(calculatorMemory.getMemoryValue(), calculatorMemory.getSystem());
+            system = calculatorMemory.getSystem();
+            dataInput();
+        } else if (temp.contains("MS")) {
+
+            if (number_result != null) {
+                calculatorMemory.memorySave(number_result.getNumber());
+                calculatorMemory.setSystem(number_result.getSystem());
+            } else {
+                if (number_one != null && operation.equals("")) {
+                    calculatorMemory.memorySave(number_one.getNumber());
+                    calculatorMemory.setSystem(number_one.getSystem());
+                }
+            }
+
+        } else if (temp.contains("MC")) {
+            calculatorMemory = new CalculatorMemory();
+        }
     }
 
     private void deleteSymbol(NumberInBaseN number) {

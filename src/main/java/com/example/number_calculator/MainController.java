@@ -256,8 +256,8 @@ public class MainController {
 
     @FXML
     public void onMemory(MouseEvent event){
-        Editor.memory(event);
-        textInput.setText(Editor.value.toString());
+        editorConverter.memory(event);
+        printf();
     }
 
     @FXML

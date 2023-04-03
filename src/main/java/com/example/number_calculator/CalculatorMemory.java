@@ -1,8 +1,13 @@
 package com.example.number_calculator;
 
 import com.example.number_calculator.editor_number_systems.Converter_10_p2;
+import com.example.number_calculator.editor_number_systems.Converter_p1_10;
 
 public class CalculatorMemory {
+    public String getMemoryValue() {
+        return memoryValue;
+    }
+
     private String memoryValue;
     private int system = 10;
 
@@ -22,13 +27,14 @@ public class CalculatorMemory {
         memoryValue = displayValue;
     }
 
-    public void memoryPlus(String displayValue) {
-        double numberOne = Double.parseDouble(new Converter_10_p2().conv(displayValue, system));
-        double numberTwo = Double.parseDouble(new Converter_10_p2().conv(memoryValue, system));
+    public void memoryPlus(String displayValue, int numberSystem) {
+        double numberOne = Double.parseDouble(new Converter_p1_10().conv(displayValue, numberSystem));
+        double numberTwo = Double.parseDouble(new Converter_p1_10().conv(memoryValue, system));
 
         numberTwo += numberOne;
 
-        memoryValue=new Converter_10_p2().conv(String.valueOf(numberTwo),system);
+        memoryValue=new Converter_10_p2().conv(String.valueOf(numberTwo),numberSystem);
+        system=numberSystem;
     }
 
     public int getSystem() {
