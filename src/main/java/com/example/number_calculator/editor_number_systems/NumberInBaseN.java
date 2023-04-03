@@ -33,4 +33,9 @@ public class NumberInBaseN {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    @Override
+    public String toString(){
+        return number+"("+system+")";
+    }
 }

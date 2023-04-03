@@ -11,17 +11,44 @@ public class Converter_p1_10 implements Converter {
     private final String digits = "0123456789ABCDEF";
 
     public String conv(String line, int system) {
-        StringBuilder temp = new StringBuilder(fixFloatingPointString(line));
+        StringBuilder temp = new StringBuilder(roundNumber(fixFloatingPointString(line),5));
+       /* System.out.println("Converter_p1_10");
+        System.out.println("Число без обработки равно temp: "+temp);*/
         StringBuilder result;
 
         if (temp.indexOf("-") != -1) {
             temp.delete(0, 1);
             result=new StringBuilder("-"+parseNumber(temp.toString(), system));
         }else{
-            result=new StringBuilder(String.valueOf(parseNumber(line, system)));
+            result=new StringBuilder(String.valueOf(parseNumber(temp.toString(), system)));
         }
+       /* System.out.println("Число без обработки равно result: "+result);*/
 
         return fixFloatingPointString(removeTrailingZeros(result.toString()));
+    }
+
+    private  String roundNumber(String input, int n) {
+        int decimalIndex = input.indexOf(".");
+        if (decimalIndex == -1) {
+            // Число целое, добавляем десятичную часть
+            input += ".";
+            for (int i = 0; i < n; i++) {
+                input += "0";
+            }
+        } else {
+            // Число с дробной частью
+            int numDecimalPlaces = input.length() - decimalIndex - 1;
+            if (numDecimalPlaces < n) {
+                // Дополняем число нулями до 3 знаков после запятой
+                for (int i = 0; i < n - numDecimalPlaces; i++) {
+                    input += "0";
+                }
+            } else if (numDecimalPlaces > n) {
+                // Обрезаем число до 3 знаков после запятой
+                input = input.substring(0, decimalIndex + n + 1);
+            }
+        }
+        return input;
     }
 
     public static String removeTrailingZeros(String numberStr) {
@@ -38,7 +65,7 @@ public class Converter_p1_10 implements Converter {
         String output;
 
         if (input.startsWith("-")) {
-            output = "-" + "0" + input.substring(1);
+            output = "-"  + input.substring(1);
         } else if (input.startsWith(".")) {
             output = "0" + input;
         } else {
@@ -86,4 +113,5 @@ public class Converter_p1_10 implements Converter {
 
         return val / power;
     }
+
 }

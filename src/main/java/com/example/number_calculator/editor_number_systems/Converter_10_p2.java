@@ -9,26 +9,54 @@ import java.math.BigDecimal;
  */
 public class Converter_10_p2 implements Converter {
     public String conv(String line, int system) {
+        StringBuilder temp = new StringBuilder(fixFloatingPointString(line));
+      /*  System.out.println("Converter_10_p2");
+        System.out.println("Число без обработки равно temp: "+temp);*/
 
-
-        StringBuilder temp = new StringBuilder(line);
 
         if (temp.indexOf("-") != -1) {
             temp.delete(0, 1);
-            temp=new StringBuilder("-" + decimalToBaseN(Double.parseDouble(temp.toString()), system));
-        }else{
-            temp=new StringBuilder(decimalToBaseN(Double.parseDouble(temp.toString()), system));
+            temp = new StringBuilder("-" + decimalToBaseN(Double.parseDouble(temp.toString()), system));
+        } else {
+            temp = new StringBuilder(decimalToBaseN(Double.parseDouble(temp.toString()), system));
         }
 
-        return removeTrailingZeros(temp.toString());
+        /* System.out.println("Число без обработки равно result: "+temp);*/
+
+        temp=new StringBuilder(addNull(temp.toString()));
+
+        return fixFloatingPointString(removeTrailingZeros(temp.toString()));
+    }
+
+    private String fixFloatingPointString(String input) {
+        String output;
+
+        if (input.startsWith("-")) {
+            output = "-" + input.substring(1);
+        } else if (input.startsWith(".")) {
+            output = "0" + input;
+        } else {
+            output = input;
+        }
+
+        return output;
+    }
+
+    private String addNull(String number) {
+        StringBuilder temp = new StringBuilder(number);
+        if (temp.charAt(0) == '-' && temp.charAt(1) == '.') {
+            temp.insert(1, "0");
+        } else if (temp.charAt(0) == '.'){
+            temp.insert(0, "0");
+        }
+
+        return temp.toString();
     }
 
     private String removeTrailingZeros(String numberStr) {
         if (numberStr.contains(".")) {
-            String result = numberStr.replaceAll("\\.?0*$", "");
-            if (result.endsWith(".")) {
-                result = result.substring(0, result.length() - 1);
-            }
+            String result = numberStr.replaceAll("0*$", "");
+            result = result.replaceAll("\\.$", ""); // Удаление точки, если она осталась в конце
             return result;
         } else {
             return numberStr;
@@ -36,6 +64,10 @@ public class Converter_10_p2 implements Converter {
     }
 
     public static String decimalToBaseN(double decimalNumber, int baseN) {
+        if (decimalNumber == 0) {
+            return "0";
+        }
+
         StringBuilder result = new StringBuilder();
         int integerPart = (int) decimalNumber;
         double fractionalPart = decimalNumber - integerPart;
