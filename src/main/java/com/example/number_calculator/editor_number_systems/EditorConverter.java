@@ -207,6 +207,8 @@ public class EditorConverter {
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && !number_two.getNumber().equals("")) {
             number_two = new NumberInBaseN("", system);
+        } else if (!operation.equals("")) {
+            operation = "";
         } else if (number_one != null && !number_one.getNumber().equals("")) {
             number_one = null;
         }
