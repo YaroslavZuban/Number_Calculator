@@ -1,8 +1,15 @@
 package com.example.number_calculator.editor_simple_fraction;
 
 public class Fraction {
-    private int numerator;
-    private int denominator;
+    private Integer numerator;
+    private Integer denominator;
+
+    public Fraction(Fraction fraction) {
+        this.numerator = fraction.getNumerator();
+        this.denominator = fraction.getDenominator();
+
+        transferringSign();
+    }
 
     public Fraction(int numerator, int denominator) {
         if (denominator == 0) {
@@ -12,14 +19,32 @@ public class Fraction {
         this.numerator = numerator;
         this.denominator = denominator;
 
-        simplify();
+        transferringSign();
     }
 
-    private void simplify() {
+    public Integer getNumerator() {
+        return numerator;
+    }
+
+    public void setNumerator(int numerator) {
+        this.numerator = numerator;
+    }
+
+    public Integer getDenominator() {
+        return denominator;
+    }
+
+    public void setDenominator(int denominator) {
+        this.denominator = denominator;
+    }
+
+
+    public void simplify() {
         int gcd = gcd(numerator, denominator);
 
         numerator /= gcd;
         denominator /= gcd;
+
     }
 
     private int gcd(int a, int b) {
@@ -30,21 +55,38 @@ public class Fraction {
         int commonDenominator = denominator * other.denominator;
         int sumNumerator = numerator * other.denominator + other.numerator * denominator;
 
-        return new Fraction(sumNumerator, commonDenominator);
+        Fraction temp = new Fraction(new Fraction(sumNumerator, commonDenominator));
+        temp.simplify();
+
+        return temp;
     }
 
     public Fraction subtract(Fraction other) {
         int commonDenominator = denominator * other.denominator;
         int diffNumerator = numerator * other.denominator - other.numerator * denominator;
 
-        return new Fraction(diffNumerator, commonDenominator);
+        Fraction temp = new Fraction(diffNumerator, commonDenominator);
+        temp.simplify();
+
+        return temp;
     }
 
     public Fraction multiply(Fraction other) {
         int productNumerator = numerator * other.numerator;
         int productDenominator = denominator * other.denominator;
 
-        return new Fraction(productNumerator, productDenominator);
+        if ((numerator < 0 && other.denominator < 0) || (denominator < 0 && other.numerator < 0)) {
+            productNumerator = Math.abs(productNumerator);
+            productDenominator = Math.abs(productDenominator);
+        } else if ((numerator < 0 && other.numerator < 0) || (denominator < 0 && other.denominator < 0)) {
+            productNumerator = Math.abs(productNumerator);
+            productDenominator = Math.abs(productDenominator);
+        }
+
+        Fraction temp = new Fraction(productNumerator, productDenominator);
+        temp.simplify();
+
+        return temp;
     }
 
     public Fraction divide(Fraction other) {
@@ -54,7 +96,27 @@ public class Fraction {
 
         int quotientNumerator = numerator * other.denominator;
         int quotientDenominator = denominator * other.numerator;
-        return new Fraction(quotientNumerator, quotientDenominator);
+
+        if ((numerator < 0 && other.denominator < 0) || (denominator < 0 && other.numerator < 0)) {
+            quotientNumerator = Math.abs(quotientNumerator);
+            quotientDenominator = Math.abs(quotientDenominator);
+        } else if ((numerator < 0 && other.numerator < 0) || (denominator < 0 && other.denominator < 0)) {
+            quotientNumerator = Math.abs(quotientNumerator);
+            quotientDenominator = Math.abs(quotientDenominator);
+        }
+
+        Fraction temp = new Fraction(quotientNumerator, quotientDenominator);
+        temp.simplify();
+
+        return temp;
+    }
+
+    @Override
+    public String toString() {
+        return "Fraction{" +
+                "numerator=" + numerator +
+                ", denominator=" + denominator +
+                '}';
     }
 
     public Fraction power(int exponent) {
@@ -82,7 +144,15 @@ public class Fraction {
         return result;
     }
 
-    public String toString() {
-        return numerator + "/" + denominator;
+
+    private void transferringSign(){
+        if (numerator != Integer.MAX_VALUE && numerator != Integer.MIN_VALUE &&
+                denominator != Integer.MAX_VALUE && denominator != Integer.MIN_VALUE ) {
+            simplify();
+        }
     }
+    public Fraction reciprocalNumber(Fraction fraction) {
+        return new Fraction(fraction.getDenominator(), fraction.getNumerator());
+    }
+
 }
