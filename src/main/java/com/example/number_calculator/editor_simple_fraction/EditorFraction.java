@@ -1,10 +1,6 @@
 package com.example.number_calculator.editor_simple_fraction;
 
 import com.example.number_calculator.CalculatorMemory;
-import com.example.number_calculator.editor_number_systems.Calculator;
-import com.example.number_calculator.editor_number_systems.Converter_10_p2;
-import com.example.number_calculator.editor_number_systems.Converter_p1_10;
-import com.example.number_calculator.editor_number_systems.NumberInBaseN;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
@@ -85,8 +81,12 @@ public class EditorFraction {
         if (number_two != null && number_one != null && findMaxMin(number_one, number_two)) {
             number_result = arithmetic(number_one, number_two);
 
-            number_one = new Fraction(number_result);
-            lineResult = new StringBuilder(number_result.getNumerator() + "|" + number_result.getDenominator());
+            if (number_result == null) {
+                clear();
+            } else {
+                number_one = new Fraction(number_result);
+                lineResult = new StringBuilder(number_result.getNumerator() + "|" + number_result.getDenominator());
+            }
         } else if (number_one != null && !operation.equals("")) {
             if (number_temp == null) {
                 number_temp = new Fraction(number_one);
@@ -96,7 +96,6 @@ public class EditorFraction {
             number_one = arithmetic(number_one, number_two);
             number_two = null;
 
-            lineResult = new StringBuilder(number_result.getNumerator() + "|" + number_result.getDenominator());
             dataInput();
         }
     }
@@ -123,18 +122,24 @@ public class EditorFraction {
             operation = "";
         }
 
-        if (temp.equals("Pow_Two")) {
-            lineTemp = lineTemp.power(2);
-        } else {
-            lineTemp = lineTemp.reciprocalNumber(lineTemp);
-        }
-
-        if (number_two != null) {
-            number_two = new Fraction(lineTemp);
-        } else {
-            if (number_one != null) {
-                number_one = new Fraction(lineTemp);
+        try {
+            if (temp.equals("Pow_Two")) {
+                lineTemp = lineTemp.power(2);
+            } else {
+                lineTemp = lineTemp.reciprocalNumber(lineTemp);
             }
+
+
+            if (number_two != null) {
+                number_two = new Fraction(lineTemp);
+            } else {
+                if (number_one != null) {
+                    number_one = new Fraction(lineTemp);
+                }
+            }
+
+        } catch (Exception e) {
+            clear();
         }
 
         dataInput();
@@ -145,7 +150,7 @@ public class EditorFraction {
             if (number_one.getDenominator() == Integer.MIN_VALUE) {
                 number_one.setDenominator(Integer.MAX_VALUE);
             }
-        } else if (number_two == null) {
+        } else if (number_two == null && number_one.getDenominator() != Integer.MAX_VALUE) {
             number_two = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
         } else if (number_two != null && number_two.getNumerator() != Integer.MIN_VALUE && number_two.getNumerator() != Integer.MAX_VALUE) {
             if (number_two.getDenominator() == Integer.MIN_VALUE) {
@@ -232,16 +237,23 @@ public class EditorFraction {
     private Fraction arithmetic(Fraction numberOne, Fraction numberTwo) {
         Fraction numberTemp = null;
 
-        if (operation.contains("*")) {
-            numberTemp = numberOne.multiply(numberTwo);
-        } else if (operation.contains("/")) {
-            numberTemp = numberOne.divide(numberTwo);
-        } else if (operation.contains("+")) {
-            numberTemp = numberOne.add(numberTwo);
-        } else if (operation.contains("-")) {
-            numberTemp = numberOne.subtract(numberTwo);
+        try {
+            if (operation.contains("*")) {
+                numberTemp = numberOne.multiply(numberTwo);
+            } else if (operation.contains("/")) {
+                numberTemp = numberOne.divide(numberTwo);
+            } else if (operation.contains("+")) {
+                numberTemp = numberOne.add(numberTwo);
+            } else if (operation.contains("-")) {
+                numberTemp = numberOne.subtract(numberTwo);
+            }
+
+            return numberTemp;
+        } catch (Exception e) {
+            clear();
         }
-        return numberTemp;
+
+        return null;
     }
 
     private int negate(int temp) {
@@ -422,5 +434,15 @@ public class EditorFraction {
         }
 
         return resultOperator;
+    }
+
+    private void clear() {
+        lineInput = new StringBuilder();
+        lineResult = new StringBuilder();
+
+        number_one = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
+        number_two = null;
+        number_result = null;
+        operation = "";
     }
 }

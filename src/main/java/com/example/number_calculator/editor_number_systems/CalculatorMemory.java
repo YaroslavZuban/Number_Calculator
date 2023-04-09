@@ -1,44 +1,46 @@
 package com.example.number_calculator.editor_number_systems;
 
 public class CalculatorMemory {
-    public String getMemoryValue() {
-        return memoryValue;
-    }
+    private TPNumber value=null;
 
-    private String memoryValue;
-    private int system = 10;
 
     public CalculatorMemory() {
-        memoryValue = "0";
+        value=new TPNumber("0",10);
     }
 
     public void memoryClear() {
-        memoryValue = "0";
+        value = new TPNumber("0",10);
     }
 
-    public String memoryRead() {
-        return memoryValue;
+    public TPNumber memoryRead() {
+        return value;
     }
 
-    public void memorySave(String displayValue) {
-        memoryValue = displayValue;
+    public void memorySave(TPNumber number) {
+        value=new TPNumber(number);
     }
 
-    public void memoryPlus(String displayValue, int numberSystem) {
-        double numberOne = Double.parseDouble(new Converter_p1_10().conv(displayValue, numberSystem));
-        double numberTwo = Double.parseDouble(new Converter_p1_10().conv(memoryValue, system));
-
-        numberTwo += numberOne;
-
-        memoryValue=new Converter_10_p2().conv(String.valueOf(numberTwo),numberSystem);
-        system=numberSystem;
+    public void memoryPlus(TPNumber number) {
+        value=value.add(number);
     }
 
     public int getSystem() {
-        return system;
+        return this.value.getSystem();
     }
 
     public void setSystem(int system) {
-        this.system = system;
+        this.value.setSystem(system);
+    }
+
+    public String getNumber(){
+        return this.value.getNumber();
+    }
+
+    public void setNumber(String line){
+        this.value.setNumber(line);
+    }
+
+    public TPNumber getValue(){
+        return value;
     }
 }

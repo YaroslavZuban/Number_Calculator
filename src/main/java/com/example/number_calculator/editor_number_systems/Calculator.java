@@ -1,29 +1,19 @@
 package com.example.number_calculator.editor_number_systems;
 
 public class Calculator {
-    public double add(double a,double b) {
-        return a + b;
-    }
+    public static TPNumber arithmetic(TPNumber number_one, TPNumber number_two,String operation) {
+        TPNumber result = null;
 
-    public double multiply(double a, double b) {
-        double result=a*b;
+        if (operation.contains("*")) {
+            result = number_one.multiply(number_two);
+        } else if (operation.contains("/")) {
+            result = number_one.divide(number_two);
+        } else if (operation.contains("+")) {
+            result = number_one.add(number_two);
+        } else if (operation.contains("-")) {
+            result = number_one.subtract(number_two);
+        }
+
         return result;
     }
-
-    public double subtract(double a, double b) {
-        return a - b;
-    }
-
-    public double divide(double a, double b) {
-        return a / b;
-    }
-
-    public double power(double a) {
-        return (int) Math.pow(a, 2);
-    }
-
-    public double reciprocalNumber(double a) {
-        return 1 / a;
-    }
-
 }

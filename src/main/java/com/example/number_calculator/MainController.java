@@ -137,7 +137,7 @@ public class MainController {
     @FXML
     private TextField textResult;
     private int systemInput;
-    EditorConverter editorConverter=new EditorConverter();
+    EditorConverter editorConverter = new EditorConverter();
 
     private double x, y;
 
@@ -194,24 +194,22 @@ public class MainController {
     }
 
     @FXML
-    void actionOperator(MouseEvent event){
+    void actionOperator(MouseEvent event) {
         editorConverter.actionOperator(event);
-        //Editor.actionOperator(event);
-        //textInput.setText(Editor.value.toString());
         printf();
     }
 
     @FXML
     void onNumberSystemSlider(MouseEvent event) {
         systemInput = (int) sliderInput.getValue();
-       EditorConverter.system=systemInput;
+        EditorConverter.system = systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
     }
 
     @FXML
     void onNumberSystemSpinner(MouseEvent event) {
         systemInput = spinnerInput.getValue();
-        EditorConverter.system=systemInput;
+        EditorConverter.system = systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
     }
 
@@ -224,27 +222,27 @@ public class MainController {
     }
 
     @FXML
-    void onResultClicked(MouseEvent event){
+    void onResultClicked(MouseEvent event) {
         editorConverter.onResultClicked();
         printf();
     }
 
     @FXML
     void onNumberClicked(MouseEvent event) {
-        editorConverter.waterNumber(event);
+        editorConverter.entryNumber(event);
         printf();
     }
 
     @FXML
     void onSymbolClicked(MouseEvent event) {
-        editorConverter.waterSymbol(event);
+        editorConverter.entrySymbol(event);
         printf();
 
     }
 
     @FXML
     void onOperatorClicking(MouseEvent event) {
-        editorConverter.waterOperator(event);
+        editorConverter.entryOperator(event);
         printf();
     }
 
@@ -252,10 +250,11 @@ public class MainController {
     public void onClean(MouseEvent event) {
         editorConverter.onClean(event);
         printf();
+        numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
     }
 
     @FXML
-    public void onMemory(MouseEvent event){
+    public void onMemory(MouseEvent event) {
         editorConverter.memory(event);
         printf();
     }
@@ -264,15 +263,17 @@ public class MainController {
     public void onCleanEntry(MouseEvent event) {
         editorConverter.onCleanEntry(event);
         printf();
+        numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
     }
 
     @FXML
     public void onBaskSpace(MouseEvent event) {
         editorConverter.onBaskSpace(event);
         printf();
+        numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
     }
 
-    private void printf(){
+    private void printf() {
         textInput.setText(EditorConverter.lineInput.toString());
         textResult.setText(EditorConverter.lineResult.toString());
     }

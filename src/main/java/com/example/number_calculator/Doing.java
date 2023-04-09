@@ -7,7 +7,6 @@ public class Doing {
     @FXML
     private Text result;
 
-
     public void setResult(String text){
         result.setText(text);
     }
