@@ -9,14 +9,14 @@ import javafx.scene.input.MouseEvent;
  * обработка нажатий на клавиши, очистка введенных данных и управление памятью.
  */
 public interface Editor {
-     void waterSymbol(MouseEvent event);
-     void waterNumber(MouseEvent event);
+     void entrySymbol(MouseEvent event);
+     void entryNumber(MouseEvent event);
 
-     void waterOperator(MouseEvent event);
+     void entryOperator(MouseEvent event);
 
      void onResultClicked();
      void actionOperator(MouseEvent event);
-     void onBaskSpace(MouseEvent event);
+     void onBackSpace(MouseEvent event);
 
      void onClean(MouseEvent event);
 

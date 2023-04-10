@@ -3,7 +3,7 @@ package com.example.number_calculator.editor_number_systems;
 import com.example.number_calculator.SignTranslation;
 import com.example.number_calculator.Operator;
 
-public class Input {
+public class InputTPNumber {
     private static TPNumber number_one;
     private static TPNumber number_two;
     private static TPNumber number_result;
@@ -11,8 +11,8 @@ public class Input {
     private static String operation;
     private static int system;
 
-    public Input(TPNumber number_one, TPNumber number_two, TPNumber number_result,
-                 String operation, int system) {
+    public InputTPNumber(TPNumber number_one, TPNumber number_two, TPNumber number_result,
+                         String operation, int system) {
         this.number_one = number_one;
         this.number_two = number_two;
         this.number_result = number_result;
@@ -25,7 +25,7 @@ public class Input {
     }
 
     public static void setNumber_one(TPNumber number_one) {
-        Input.number_one = number_one;
+        InputTPNumber.number_one = number_one;
     }
 
     public static TPNumber getNumber_two() {
@@ -33,7 +33,7 @@ public class Input {
     }
 
     public static void setNumber_two(TPNumber number_two) {
-        Input.number_two = number_two;
+        InputTPNumber.number_two = number_two;
     }
 
     public static TPNumber getNumber_result() {
@@ -41,7 +41,7 @@ public class Input {
     }
 
     public static void setNumber_result(TPNumber number_result) {
-        Input.number_result = number_result;
+        InputTPNumber.number_result = number_result;
     }
 
     public static TPNumber getNumber_temp() {
@@ -49,7 +49,7 @@ public class Input {
     }
 
     public static void setNumber_temp(TPNumber number_temp) {
-        Input.number_temp = number_temp;
+        InputTPNumber.number_temp = number_temp;
     }
 
     public static String getOperation() {
@@ -57,7 +57,7 @@ public class Input {
     }
 
     public static void setOperation(String operation) {
-        Input.operation = operation;
+        InputTPNumber.operation = operation;
     }
 
     public static int getSystem() {
@@ -65,7 +65,7 @@ public class Input {
     }
 
     public static void setSystem(int system) {
-        Input.system = system;
+        InputTPNumber.system = system;
     }
 
     public void inputNumberSymbol(String temp) {

@@ -111,7 +111,7 @@ public class FractionController {
     @FXML
     private AnchorPane windowMain;
 
-    EditorFraction editorFraction=new EditorFraction();
+    EditorFraction editorFraction = new EditorFraction();
 
     private double x, y;
 
@@ -161,62 +161,60 @@ public class FractionController {
     }
 
     @FXML
-    void actionOperator(MouseEvent event){
+    void actionOperator(MouseEvent event) {
         editorFraction.actionOperator(event);
-        //Editor.actionOperator(event);
-        //textInput.setText(Editor.value.toString());
         printf();
     }
 
 
     @FXML
-    void onResultClicked(MouseEvent event){
+    void onResultClicked(MouseEvent event) {
         editorFraction.onResultClicked();
         printf();
     }
 
     @FXML
     void onNumberClicked(MouseEvent event) {
-        editorFraction.waterNumber(event);
+        editorFraction.entryNumber(event);
         printf();
     }
 
     @FXML
     void onOperatorClicking(MouseEvent event) {
-        editorFraction.waterOperator(event);
+        editorFraction.entryOperator(event);
         printf();
     }
 
     @FXML
     public void onClean(MouseEvent event) {
-      //  editorFraction.onClean(event);
+        editorFraction.onClean(event);
         printf();
     }
 
     @FXML
-    public void onMemory(MouseEvent event){
-       // editorFraction.memory(event);
+    public void onMemory(MouseEvent event) {
+        editorFraction.memory(event);
         printf();
     }
 
-    public void onDivisionClicked(MouseEvent event){
+    public void onDivisionClicked(MouseEvent event) {
         editorFraction.onDivisionClicked();
         printf();
     }
 
     @FXML
     public void onCleanEntry(MouseEvent event) {
-        //editorFraction.onCleanEntry(event);
+        editorFraction.onCleanEntry(event);
         printf();
     }
 
     @FXML
-    public void onBaskSpace(MouseEvent event) {
-       // editorFraction.onBaskSpace(event);
+    public void onBackSpace(MouseEvent event) {
+        editorFraction.onBackSpace(event);
         printf();
     }
 
-    private void printf(){
+    private void printf() {
         textInput.setText(EditorFraction.lineInput.toString());
         textResult.setText(EditorFraction.lineResult.toString());
     }

@@ -268,7 +268,7 @@ public class MainController {
 
     @FXML
     public void onBaskSpace(MouseEvent event) {
-        editorConverter.onBaskSpace(event);
+        editorConverter.onBackSpace(event);
         printf();
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
     }

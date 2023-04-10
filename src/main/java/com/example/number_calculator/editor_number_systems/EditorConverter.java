@@ -1,10 +1,10 @@
 package com.example.number_calculator.editor_number_systems;
 
-import com.example.number_calculator.CalculatorMemory;
+import com.example.number_calculator.Editor;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class EditorConverter {
+public class EditorConverter implements Editor {
     public static TPNumber number_one = null;
     public static TPNumber number_two = null;
     public static TPNumber number_result = null;
@@ -14,19 +14,23 @@ public class EditorConverter {
     public static int system = 10;
     public static String operation = "";
     private static String operationTemp = "";
-    private Calculator calculator = new Calculator();
-    private Input input = new Input(number_one, number_two, number_result, operation, system);
+    private CalculatorTPNumberMemory calculator = new CalculatorTPNumberMemory();
+    private InputTPNumber input = new InputTPNumber(number_one, number_two, number_result, operation, system);
     private ProcessorConverter result = new ProcessorConverter(number_one, number_two, number_result, number_temp, operation, system);
+
+    @Override
     public void entrySymbol(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumberSymbol(temp);
     }
 
+    @Override
     public void entryNumber(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumberSymbol(temp);
     }
 
+    @Override
     public void entryOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
@@ -38,6 +42,7 @@ public class EditorConverter {
         dataInput();
     }
 
+    @Override
     public void onResultClicked() {
         getResult();
         result.onResultClicked(lineResult);
@@ -49,6 +54,7 @@ public class EditorConverter {
         setInput();
     }
 
+    @Override
     public void actionOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         result.actionOperator(temp);
@@ -59,7 +65,8 @@ public class EditorConverter {
         dataInput();
     }
 
-    public void onBaskSpace(MouseEvent event) {
+    @Override
+    public void onBackSpace(MouseEvent event) {
         if (number_two != null) {
             deleteSymbol(number_two);
         } else if (!operation.equals("")) {
@@ -73,7 +80,7 @@ public class EditorConverter {
 
         dataInput();
     }
-
+    @Override
     public void onClean(MouseEvent event) {
         lineInput = new StringBuilder("0");
         lineResult = new StringBuilder();
@@ -89,6 +96,7 @@ public class EditorConverter {
         setInput();
     }
 
+    @Override
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && !number_two.getNumber().equals("")) {
             number_two = new TPNumber("", system);
@@ -105,6 +113,7 @@ public class EditorConverter {
         dataInput();
     }
 
+    @Override
     public void memory(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
@@ -238,21 +247,20 @@ public class EditorConverter {
     }
 
     private void setInput() {
-        Input.setNumber_one(number_one);
-        Input.setNumber_two(number_two);
-        Input.setNumber_result(number_result);
-        Input.setNumber_temp(number_temp);
-        Input.setOperation(operation);
-        Input.setSystem(system);
+        InputTPNumber.setNumber_one(number_one);
+        InputTPNumber.setNumber_two(number_two);
+        InputTPNumber.setNumber_result(number_result);
+        InputTPNumber.setNumber_temp(number_temp);
+        InputTPNumber.setOperation(operation);
+        InputTPNumber.setSystem(system);
     }
 
     private void getInput() {
-        number_one = Input.getNumber_one();
-        number_two = Input.getNumber_two();
-        number_result = Input.getNumber_result();
-        number_temp = Input.getNumber_temp();
-        system = Input.getSystem();
-        operation = Input.getOperation();
+        number_one = InputTPNumber.getNumber_one();
+        number_two = InputTPNumber.getNumber_two();
+        number_result = InputTPNumber.getNumber_result();
+        number_temp = InputTPNumber.getNumber_temp();
+        system = InputTPNumber.getSystem();
+        operation = InputTPNumber.getOperation();
     }
-
 }

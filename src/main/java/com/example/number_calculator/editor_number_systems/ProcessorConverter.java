@@ -1,9 +1,6 @@
 package com.example.number_calculator.editor_number_systems;
 
-import com.example.number_calculator.CalculatorMemory;
 import com.example.number_calculator.History;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 public class ProcessorConverter {
 
@@ -14,14 +11,14 @@ public class ProcessorConverter {
     private static String operation;
     private static int system;
 
-    private static CalculatorMemory calculatorMemory = new CalculatorMemory();
+    private static CalculatorTPNumberMemory calculatorMemory = new CalculatorTPNumberMemory();
 
     public ProcessorConverter(TPNumber number_one, TPNumber number_two, TPNumber number_result,
                               TPNumber number_temp, String operation, int system) {
         this.number_one = number_one;
         this.number_two = number_two;
         this.number_result = number_result;
-        this.number_temp=number_temp;
+        this.number_temp = number_temp;
         this.operation = operation;
         this.system = system;
     }
@@ -76,32 +73,30 @@ public class ProcessorConverter {
     public void memory(String temp) {
         if (temp.contains("MPlus")) {
             if (number_result != null) {
-                calculatorMemory.memoryPlus(number_result.getNumber(), number_result.getSystem());
+                calculatorMemory.memoryPlus(number_result);
             } else {
                 if (number_one != null && operation.equals("")) {
-                    calculatorMemory.memoryPlus(number_one.getNumber(), number_one.getSystem());
+                    calculatorMemory.memoryPlus(number_one);
                 }
             }
         } else if (temp.contains("MR")) {
             if (number_one != null && !operation.equals("")) {
-                number_two = new TPNumber(calculatorMemory.getMemoryValue(), calculatorMemory.getSystem());
+                number_two = new TPNumber(calculatorMemory.getValue());
                 system = calculatorMemory.getSystem();
             } else if (number_one == null) {
-                number_one = new TPNumber(calculatorMemory.getMemoryValue(), calculatorMemory.getSystem());
+                number_one = new TPNumber(calculatorMemory.getValue());
                 system = calculatorMemory.getSystem();
             }
         } else if (temp.contains("MS")) {
             if (number_result != null) {
-                calculatorMemory.memorySave(number_result.getNumber());
-                calculatorMemory.setSystem(number_result.getSystem());
+                calculatorMemory.memorySave(number_result);
             } else {
                 if (number_one != null && operation.equals("")) {
-                    calculatorMemory.memorySave(number_one.getNumber());
-                    calculatorMemory.setSystem(number_one.getSystem());
+                    calculatorMemory.memorySave(number_one);
                 }
             }
         } else if (temp.contains("MC")) {
-            calculatorMemory = new CalculatorMemory();
+            calculatorMemory = new CalculatorTPNumberMemory();
         }
     }
 

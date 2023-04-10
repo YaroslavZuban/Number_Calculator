@@ -1,10 +1,10 @@
 package com.example.number_calculator.editor_number_systems;
 
-public class CalculatorMemory {
+public class CalculatorTPNumberMemory {
     private TPNumber value=null;
 
 
-    public CalculatorMemory() {
+    public CalculatorTPNumberMemory() {
         value=new TPNumber("0",10);
     }
 

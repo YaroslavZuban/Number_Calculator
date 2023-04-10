@@ -180,7 +180,7 @@
                                         <Font name="Arial" size="19.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="buttonBackSpace" mnemonicParsing="false" onMouseClicked="#onBaskSpace" prefHeight="55.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="BackSpace" textFill="WHITE" GridPane.columnSpan="2">
+                                <Button fx:id="buttonBackSpace" mnemonicParsing="false" onMouseClicked="#onBackSpace" prefHeight="55.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="BackSpace" textFill="WHITE" GridPane.columnSpan="2">
                                     <font>
                                         <Font name="Arial" size="17.0" />
                                     </font>
