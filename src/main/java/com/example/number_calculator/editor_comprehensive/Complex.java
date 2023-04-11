@@ -62,4 +62,29 @@ public class Complex {
             return real + " - " + (-imaginary) + "i";
         }
     }
+
+
+    public double argumentInDegrees() {
+        return Math.toDegrees(Math.atan2(imaginary, real));
+    }
+
+    public double argumentInRadians() {
+        return Math.atan2(imaginary, real);
+    }
+
+    public Complex[] roots(int n) {
+        Complex[] roots = new Complex[n];
+
+        double theta = argumentInRadians();
+        double modulus = modulus();
+
+        for (int i = 0; i < n; i++) {
+            double newTheta = (theta + 2 * i * Math.PI) / n;
+            double newReal = Math.pow(modulus, 1.0 / n) * Math.cos(newTheta);
+            double newImaginary = Math.pow(modulus, 1.0 / n) * Math.sin(newTheta);
+            roots[i] = new Complex(newReal, newImaginary);
+        }
+
+        return roots;
+    }
 }
