@@ -55,7 +55,7 @@
                         <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onCleanEntry" prefHeight="55.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="CE" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2">
+                        <Button mnemonicParsing="false" onMouseClicked="#onCleanEntry" prefHeight="55.0" prefWidth="119.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="CE" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2">
                            <font>
                               <Font name="Arial" size="28.0" />
                            </font>
@@ -100,11 +100,6 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#onClean" prefHeight="55.0" prefWidth="110.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="C" textFill="WHITE" GridPane.columnIndex="4" GridPane.columnSpan="2">
-                           <font>
-                              <Font name="Arial" size="28.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="button_Pow_Two" mnemonicParsing="false" onMouseClicked="#actionOperator" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #F29611;" text="x^2" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="19.0" />
@@ -125,7 +120,7 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_Point" mnemonicParsing="false" onMouseClicked="#onSymbolClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="." textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <Button fx:id="button_Point" mnemonicParsing="false" onMouseClicked="#onNumberClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="." textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <font>
                               <Font name="Arial" size="24.0" />
                            </font>
@@ -160,17 +155,17 @@
                               <Font name="Arial" size="29.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_B" mnemonicParsing="false" onMouseClicked="#onSymbolClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Mdl" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Button fx:id="button_mdl" mnemonicParsing="false" onMouseClicked="#onMdlClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Mdl" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_C" mnemonicParsing="false" onMouseClicked="#onSymbolClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Cnd" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <Button fx:id="button_cnd" mnemonicParsing="false" onMouseClicked="#onCndClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Cnd" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <font>
                               <Font name="Arial" size="17.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_D" mnemonicParsing="false" onMouseClicked="#onSymbolClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Cnr" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                        <Button fx:id="button_cnr" mnemonicParsing="false" onMouseClicked="#onCnrClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Cnr" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="5">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
@@ -195,14 +190,34 @@
                               <Font name="Arial" size="19.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_A" mnemonicParsing="false" onMouseClicked="#onSymbolClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Root" textFill="WHITE" GridPane.rowIndex="5">
+                        <Button fx:id="button_root" mnemonicParsing="false" onMouseClicked="#onRootClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="Root" textFill="WHITE" GridPane.rowIndex="5">
                            <font>
-                              <Font name="Arial" size="16.0" />
+                              <Font name="Arial" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="buttonBackSpace" mnemonicParsing="false" onMouseClicked="#onBaskSpace" prefHeight="55.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="BackSpace" textFill="WHITE" GridPane.columnSpan="2">
+                        <Button fx:id="buttonBackSpace" mnemonicParsing="false" onMouseClicked="#onBaskSpace" prefHeight="55.0" prefWidth="121.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="BackSpace" textFill="WHITE" GridPane.columnSpan="2">
                            <font>
                               <Font name="Arial" size="17.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_CloseBracket" mnemonicParsing="false" onMouseClicked="#onBrackets" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text=")" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_OpenBracket" mnemonicParsing="false" onMouseClicked="#onBrackets" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #3E3E3E;" text="(" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_61" mnemonicParsing="false" onMouseClicked="#onNumberClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="C" textFill="WHITE" GridPane.columnIndex="4">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_i" mnemonicParsing="false" onMouseClicked="#onNumberClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #32CD32;" text="i" textFill="WHITE" GridPane.columnIndex="5">
+                           <font>
+                              <Font name="Arial" size="28.0" />
                            </font>
                         </Button>
                      </children>
