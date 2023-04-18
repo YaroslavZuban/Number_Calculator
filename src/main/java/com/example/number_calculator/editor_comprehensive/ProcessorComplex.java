@@ -85,79 +85,69 @@ public class ProcessorComplex {
     }
 
     public void inputOperation(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
-        if (temp.equals("SignChange")) {
-            converter = new PostfixConverter(inputLine.toString());
-            calc = new PostfixCalculator(converter.convertToPostfix());
+        String inputOperator = Operator.operatorDefinition(temp);
+        operation = new StringBuilder(inputOperator);
 
-            Vector postfixVector = calc.getPostfixVector();
-            String numberSignChanged="";
-            int indexNumberSignChanged=0;
-
-            for (int i = postfixVector.size() - 1; i >= 0; i--) {
-                String operation = postfixVector.get(i).toString();
-
-                if (!operation.equals("-") && !operation.equals("+") &&
-                        !operation.equals("/") && !operation.equals("*")) {
-                    numberSignChanged=operation;
-                    indexNumberSignChanged=i;
-                    break;
-                }
-            }
-
-            numberSignChanged=Negate.negateLastNumber(numberSignChanged);
-            postfixVector.set(indexNumberSignChanged, numberSignChanged);
-
-            inputLine = new StringBuilder(MathExpressionParser.arrayToString(postfixVector));
-        } else {
-            String inputOperator = Operator.operatorDefinition(temp);
-            operation = new StringBuilder(inputOperator);
-
-            if (!tempLine.toString().equals("")) {
-                tempLine = new StringBuilder();
-            }
-
-            if (isSign(inputLine)) {
-                inputLine.deleteCharAt(inputLine.length() - 1);
-                inputLine.append(inputOperator);
-            } else {
-
-                if (!resultLine.toString().equals("")) {
-                    inputLine = new StringBuilder(resultLine);
-                    resultLine = new StringBuilder();
-                }
-
-                inputLine.append(operation);
-                tempLine = new StringBuilder();
-            }
+        if (!tempLine.toString().equals("")) {
+            tempLine = new StringBuilder();
         }
+
+        if (isSign(inputLine)) {
+            inputLine.deleteCharAt(inputLine.length() - 1);
+            inputLine.append(inputOperator);
+        } else {
+
+            if (!resultLine.toString().equals("")) {
+                inputLine = new StringBuilder(resultLine);
+                resultLine = new StringBuilder();
+            }
+
+            inputLine.append(operation);
+            tempLine = new StringBuilder();
+        }
+
     }
 
     public void actionOperator(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
         converter = new PostfixConverter(inputLine.toString());
+
         calc = new PostfixCalculator(converter.convertToPostfix());
         Vector postfixVector = calc.getPostfixVector();
-        String numberSquared = "";
-        int indexNumberSquared = 0;
+
+        StringBuilder number = new StringBuilder();
+        StringBuilder initialValue = new StringBuilder();
 
         for (int i = postfixVector.size() - 1; i >= 0; i--) {
             String operation = postfixVector.get(i).toString();
 
             if (!operation.equals("-") && !operation.equals("+") &&
                     !operation.equals("/") && !operation.equals("*")) {
-                numberSquared = operation;
-                indexNumberSquared = i;
+                initialValue = new StringBuilder(operation);
                 break;
             }
         }
 
         if (temp.equals("Pow_Two")) {
-            numberSquared = Squaring.squareNumber(numberSquared);
+            number = new StringBuilder(Squaring.squareNumber(initialValue.toString()));
+        } else if (temp.equals("OneDivisionX")) {
+            number = new StringBuilder(ComplexNumberOneDivide.divideOneByNumber(initialValue.toString()));
         } else {
-            numberSquared = ComplexNumberOneDivide.divideOneByNumber(numberSquared);
+            number = new StringBuilder(Negate.negateLastNumber(initialValue.toString()));
         }
 
-        postfixVector.set(indexNumberSquared, numberSquared);
-        inputLine = new StringBuilder(MathExpressionParser.arrayToString(postfixVector));
+        int index;
+
+        if (initialValue.charAt(0) == '-') {
+            initialValue.insert(0, "(");
+            initialValue.append(")");
+        }
+
+        index = inputLine.lastIndexOf(initialValue.toString());
+
+        if (index != -1) {
+            inputLine.delete(index, index + initialValue.length());
+            inputLine.insert(index, number);
+        }
     }
 
 

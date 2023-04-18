@@ -11,17 +11,11 @@ public class MathExpressionParser {
             String str = obj.toString();
 
             switch (str) {
-                case "+":
-                case "-":
-                case "*":
-                case "/":
+                case "+", "-", "*", "/" -> stack.push(str);
+                default -> {
                     stack.push(str);
-                    break;
-                default:
-                    stack.push(str);
-
                     while (stack.size() >= 3) {
-                        String temp=stack.pop(); // удаляем закрывающую скобку
+                        String temp = stack.pop(); // удаляем закрывающую скобку
 
                         String op = stack.pop();
                         String right = stack.pop();
@@ -29,7 +23,7 @@ public class MathExpressionParser {
                         stack.push("(" + left + op + right + ")");
                         stack.push(temp);
                     }
-                    break;
+                }
             }
         }
 

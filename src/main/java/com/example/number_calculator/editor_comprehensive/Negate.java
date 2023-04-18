@@ -11,6 +11,8 @@ public class Negate {
             temp.deleteCharAt(0);
         } else {
             temp.insert(0,"-");
+            temp.insert(0,"(");
+            temp.append(")");
         }
 
         return temp.toString();

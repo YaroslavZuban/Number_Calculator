@@ -110,7 +110,7 @@
                               <Font name="Arial" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_SignChange" mnemonicParsing="false" onMouseClicked="#onOperatorClicking" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #F29611;" text="+/-" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Button fx:id="button_SignChange" mnemonicParsing="false" onMouseClicked="#actionOperator" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #F29611;" text="+/-" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="Arial" size="21.0" />
                            </font>

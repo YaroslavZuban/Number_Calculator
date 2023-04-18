@@ -7,11 +7,20 @@ public class Squaring {
             double n = Double.valueOf(number) * (-1);
 
             double result = n * n * -1;
-            return String.valueOf(result);
+            return "(" + removeDecimalPart(String.valueOf(result).replace('.', ',')) + ")";
         } else {
             double number = Double.parseDouble(input);
             double square = Math.pow(number, 2);
-            return Double.toString(square);
+
+            return removeDecimalPart(String.valueOf(square).replace('.', ','));
         }
+    }
+
+    public static String removeDecimalPart(String str) {
+        int commaPos = str.indexOf(',');
+        if (commaPos >= 0) {
+            return str.substring(0, commaPos);
+        }
+        return str;
     }
 }
