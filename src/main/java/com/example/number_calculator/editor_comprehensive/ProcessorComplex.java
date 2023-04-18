@@ -24,13 +24,14 @@ public class ProcessorComplex {
         this.tempLine = tempLine;
     }
 
-    public void inputSymbol(String temp){
-        if(temp.equals("OpenBracket")){
+    public void inputSymbol(String temp) {
+        if (temp.equals("OpenBracket")) {
             inputLine.append("(");
-        }else{
+        } else {
             inputLine.append(")");
         }
     }
+
     public void result() throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException, ParseException {
         if (isSign(inputLine)) {
             if (tempLine.toString().equals("")) {
@@ -71,11 +72,7 @@ public class ProcessorComplex {
                 tempLine = new StringBuilder();
             }
 
-            if (temp.equals("OpenBracket")) {
-                inputLine.append("(");
-            } else if (temp.equals("CloseBracket")) {
-                inputLine.append(")");
-            } else if (temp.equals("Point")) {
+            if (temp.equals("Point")) {
                 if (isSign(inputLine)) {
                     inputLine.append("0,");
                 } else {
@@ -92,7 +89,25 @@ public class ProcessorComplex {
             converter = new PostfixConverter(inputLine.toString());
             calc = new PostfixCalculator(converter.convertToPostfix());
 
-            inputLine = new StringBuilder(Negate.negateLastNumber(inputLine.toString()));
+            Vector postfixVector = calc.getPostfixVector();
+            String numberSignChanged="";
+            int indexNumberSignChanged=0;
+
+            for (int i = postfixVector.size() - 1; i >= 0; i--) {
+                String operation = postfixVector.get(i).toString();
+
+                if (!operation.equals("-") && !operation.equals("+") &&
+                        !operation.equals("/") && !operation.equals("*")) {
+                    numberSignChanged=operation;
+                    indexNumberSignChanged=i;
+                    break;
+                }
+            }
+
+            numberSignChanged=Negate.negateLastNumber(numberSignChanged);
+            postfixVector.set(indexNumberSignChanged, numberSignChanged);
+
+            inputLine = new StringBuilder(MathExpressionParser.arrayToString(postfixVector));
         } else {
             String inputOperator = Operator.operatorDefinition(temp);
             operation = new StringBuilder(inputOperator);
@@ -121,28 +136,28 @@ public class ProcessorComplex {
         converter = new PostfixConverter(inputLine.toString());
         calc = new PostfixCalculator(converter.convertToPostfix());
         Vector postfixVector = calc.getPostfixVector();
-        String numberSquared="";
-        int indexNumberSquared=0;
+        String numberSquared = "";
+        int indexNumberSquared = 0;
 
-        for (int i = postfixVector.size() - 1; i >= 0; i --) {
+        for (int i = postfixVector.size() - 1; i >= 0; i--) {
             String operation = postfixVector.get(i).toString();
 
-            if(!operation.equals("-") && !operation.equals("+") &&
-                    !operation.equals("/") &&!operation.equals("*") ){
-                numberSquared=operation;
-                indexNumberSquared=i;
+            if (!operation.equals("-") && !operation.equals("+") &&
+                    !operation.equals("/") && !operation.equals("*")) {
+                numberSquared = operation;
+                indexNumberSquared = i;
                 break;
             }
         }
 
         if (temp.equals("Pow_Two")) {
-            numberSquared=Squaring.squareNumber(numberSquared);
-        } else{
-            numberSquared=ComplexNumberOneDivide.divideOneByNumber(numberSquared);
+            numberSquared = Squaring.squareNumber(numberSquared);
+        } else {
+            numberSquared = ComplexNumberOneDivide.divideOneByNumber(numberSquared);
         }
 
-        postfixVector.set(indexNumberSquared,numberSquared);
-         inputLine=new StringBuilder(MathExpressionParser.arrayToString(postfixVector));
+        postfixVector.set(indexNumberSquared, numberSquared);
+        inputLine = new StringBuilder(MathExpressionParser.arrayToString(postfixVector));
     }
 
 
