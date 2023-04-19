@@ -178,17 +178,20 @@ public class ComplexController {
 
     @FXML
     void onBaskSpace(MouseEvent event) {
-
+        complex.onBackSpace(event);
+        printf();
     }
 
     @FXML
     void onClean(MouseEvent event) {
-
+        complex.onClean(event);
+        printf();
     }
 
     @FXML
     void onCleanEntry(MouseEvent event) {
-
+        complex.onCleanEntry(event);
+        printf();
     }
 
     @FXML

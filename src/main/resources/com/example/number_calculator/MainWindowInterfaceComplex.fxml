@@ -210,7 +210,7 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="button_61" mnemonicParsing="false" onMouseClicked="#onNumberClicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="C" textFill="WHITE" GridPane.columnIndex="4">
+                        <Button fx:id="button_61" mnemonicParsing="false" onMouseClicked="#onClean" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #ACACAC;" text="C" textFill="WHITE" GridPane.columnIndex="4">
                            <font>
                               <Font name="Arial" size="24.0" />
                            </font>

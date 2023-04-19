@@ -81,18 +81,26 @@ public class EditorComplex implements Editor {
 
     @Override
     public void onBackSpace(MouseEvent event) {
-
+        inputLine.deleteCharAt(inputLine.length() - 1);
+        setInput();
     }
 
     @Override
     public void onClean(MouseEvent event) {
+        inputLine = new StringBuilder();
+        resultLine = new StringBuilder();
+        tempLine = new StringBuilder();
 
+        processor = new ProcessorComplex(inputLine, resultLine, tempLine);
 
+        setInput();
     }
 
     @Override
     public void onCleanEntry(MouseEvent event) {
+        inputLine = new StringBuilder(removeLastPart(inputLine.toString()));
 
+        setInput();
     }
 
     @Override
@@ -119,5 +127,29 @@ public class EditorComplex implements Editor {
     private void getInput() {
         inputLine = ProcessorComplex.getInputLine();
         resultLine = ProcessorComplex.getResultLine();
+    }
+
+    private String removeLastPart(String str) {
+        char ch = str.charAt(str.length() - 1);
+
+        if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+            return str.substring(0, str.length() - 1);
+        } else {
+            for (int i = str.length() - 1; i >= 0; i--) {
+                ch = str.charAt(i);
+
+                if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+                    return str.substring(0, i + 1);
+                }
+            }
+        }
+
+        return "";
+    }
+
+    private void setInput() {
+        ProcessorComplex.setInputLine(inputLine);
+        ProcessorComplex.setResultLine(resultLine);
+        ProcessorComplex.setTempLine(tempLine);
     }
 }

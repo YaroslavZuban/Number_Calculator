@@ -98,7 +98,6 @@ public class ProcessorComplex {
             inputLine.deleteCharAt(inputLine.length() - 1);
             inputLine.append(inputOperator);
         } else {
-
             if (!resultLine.toString().equals("")) {
                 inputLine = new StringBuilder(resultLine);
                 resultLine = new StringBuilder();
@@ -107,7 +106,6 @@ public class ProcessorComplex {
             inputLine.append(operation);
             tempLine = new StringBuilder();
         }
-
     }
 
     public void actionOperator(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
@@ -202,7 +200,7 @@ public class ProcessorComplex {
         }
     }
 
-    private void addDataMemoryOutputLine(){
+    private void addDataMemoryOutputLine() {
         char elementOperation = inputLine.charAt(inputLine.length() - 1);
 
         if (elementOperation == '/' || elementOperation == '*' ||
