@@ -193,7 +193,8 @@ public class ComplexController {
 
     @FXML
     void onMemory(MouseEvent event) {
-
+        complex.memory(event);
+        printf();
     }
 
     @FXML

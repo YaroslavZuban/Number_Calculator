@@ -99,6 +99,9 @@ public class EditorComplex implements Editor {
     public void memory(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
+        processor.workingMemory(temp);
+
+        getInput();
     }
 
     private void deleteSymbol(TPNumber number) {
@@ -112,11 +115,6 @@ public class EditorComplex implements Editor {
             number = null;
         }
     }
-
-    private void log() {
-
-    }
-
 
     private void getInput() {
         inputLine = ProcessorComplex.getInputLine();

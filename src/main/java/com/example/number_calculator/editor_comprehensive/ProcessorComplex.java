@@ -2,6 +2,7 @@ package com.example.number_calculator.editor_comprehensive;
 
 import com.example.number_calculator.Operator;
 import com.example.number_calculator.SignTranslation;
+import com.example.number_calculator.editor_number_systems.CalculatorTPNumberMemory;
 import com.example.number_calculator.editor_number_systems.ProcessorConverter;
 import com.example.number_calculator.editor_number_systems.TPNumber;
 
@@ -14,6 +15,7 @@ public class ProcessorComplex {
     private static StringBuilder resultLine = new StringBuilder();
     private static StringBuilder operation = new StringBuilder();
 
+    private CalculatorComplexMemory memory = new CalculatorComplexMemory();
     private PostfixConverter converter = null;
     private PostfixCalculator calc = null;
     private ComplexNumber result = null;
@@ -135,14 +137,12 @@ public class ProcessorComplex {
             number = new StringBuilder(Negate.negateLastNumber(initialValue.toString()));
         }
 
-        int index;
-
         if (initialValue.charAt(0) == '-') {
             initialValue.insert(0, "(");
             initialValue.append(")");
         }
 
-        index = inputLine.lastIndexOf(initialValue.toString());
+        int index = inputLine.lastIndexOf(initialValue.toString());
 
         if (index != -1) {
             inputLine.delete(index, index + initialValue.length());
@@ -184,5 +184,30 @@ public class ProcessorComplex {
         }
 
         return false;
+    }
+
+    public void workingMemory(String temp) {
+        if (temp.contains("MPlus")) {
+            memory.memoryPlus(resultLine.toString());
+        } else if (temp.contains("MR")) {
+            if (inputLine.toString().equals("")) {
+                inputLine = new StringBuilder(memory.getValue());
+            } else {
+                addDataMemoryOutputLine();
+            }
+        } else if (temp.contains("MS")) {
+            memory.memorySave(resultLine.toString());
+        } else if (temp.contains("MC")) {
+            memory.deleteValue();
+        }
+    }
+
+    private void addDataMemoryOutputLine(){
+        char elementOperation = inputLine.charAt(inputLine.length() - 1);
+
+        if (elementOperation == '/' || elementOperation == '*' ||
+                elementOperation == '+' || elementOperation == '-') {
+            inputLine.append(memory.getValue());
+        }
     }
 }
