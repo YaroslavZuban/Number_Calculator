@@ -1,7 +1,7 @@
 /*
  * PostfixElementType.java
  *
- * Created on 6 Май 2004 г., 14:17
+ * Created on 6 пїЅпїЅпїЅ 2004 пїЅ., 14:17
  */
 
 package com.example.number_calculator.editor_number_complex;
@@ -11,18 +11,18 @@ package com.example.number_calculator.editor_number_complex;
  * @author  Statsenko Vladimir
  */
 public interface PostfixElementType {
-    //типы элементов
+    //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     final int NUMBER = 100;
     final int OPERATOR = 101;
-    //порядковые номера операторов
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     final int PLUS = 0;
     final int MINUS = 1;
     final int DIVISION = 2;
     final int MULTIPLICATION = 3;
     final int LEFT_BRACKET = 4;
     final int RIGHT_BRACKET = 5;
-    //приоритеты операторов (индекс массива соответствует порядковому
-    //номеру оператора). Чем больше число - тем выше приоретет.
-    //Например, оператор MULTIPLICATION имеет приоретет = 1.
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ). пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MULTIPLICATION пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ = 1.
     final int[] priorities = {0, 0, 1, 1, 2, 2};
 }

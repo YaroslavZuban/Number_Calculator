@@ -1,40 +1,24 @@
 /*
  * InfixChecker.java
  *
- * Created on 15 Май 2004 г., 16:00
+ * Created on 15 пїЅпїЅпїЅ 2004 пїЅ., 16:00
  */
 
 package com.example.number_calculator.editor_number_complex;
 
 import java.util.Vector;
 import java.util.Iterator;
-/**
- * Этот класс предназначен для использования в пакете CalcClasses.
- * Он выполняет поиск ошибок в инфиксном выражении. Например,
- * отсутсвие части скобок "(2+3)-(5", запись нескольких операторов
- * подряд "3/*+-2" и др.
- *
- * @author  Statsenko Vladimir
- */
+
 public class InfixChecker {
     
     Vector elements;
     
-    /** Создает новые экземпляры класса InfixChecker
-     *
-     * @param infixVector указатель на объект класса
-     * <code>Vector</code>, содержащий анализируемую последовательность. */
+
     public InfixChecker(Vector infixVector) {
         elements = infixVector;
     }
     
-    /**Выполняет проверку.
-     * 
-     * @exception IncorrectElementException если была найдена ошибка
-     * 
-     * @exception IncorrectTypeException если в процессе обработки
-     * возникла ошибка при работе с объектами типа PostfixElement
-     */
+
     public void check() throws IncorrectElementException,
                                 IncorrectTypeException {
         if(elements == null)
@@ -55,18 +39,18 @@ public class InfixChecker {
         {
             curElem = (PostfixElement)iterator.next();
             
-            //первый элемент может быть либо числом, либо открывающей скобкой
+            //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if(firstElem)
             {
                 if(curElem.isOperator() && (curElem.getOperatorType() !=
                                         PostfixElementType.LEFT_BRACKET))
-                    throw new IncorrectElementException("Ошибка при анализе выражения",
+                    throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                     curElem.getElementIndex());
                 firstElem = false;
             }
             
-            //считаем количество круглых скобок и количество последовательно
-            //записанных операторов (скобки не учитываются) и чисел
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ) пїЅ пїЅпїЅпїЅпїЅпїЅ
             if(curElem.getElementType() == PostfixElementType.OPERATOR)
             {
                 numbersCount = 0;
@@ -85,14 +69,14 @@ public class InfixChecker {
                 operatorsCount = 0;
             }
             
-            //числа и операторы должны чередоваться
+            //пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if(numbersCount > 1 || operatorsCount > 1)
-                throw new IncorrectElementException("Ошибка при анализе выражения",
+                throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                     curElem.getElementIndex());
             
             if(prevElem != null)
             {
-                //после открывающей скобки может идти либо число, либо другая скобка
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 if(prevElem.isOperator() && (prevElem.getOperatorType() ==
                                             PostfixElementType.LEFT_BRACKET))
                 {
@@ -101,22 +85,22 @@ public class InfixChecker {
                                     PostfixElementType.LEFT_BRACKET) &&
                                     curElem.getOperatorType() !=
                                     PostfixElementType.RIGHT_BRACKET)
-                            throw new IncorrectElementException("Ошибка при анализе выражения",
+                            throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                         curElem.getElementIndex());
                 }
 
-                //после закрывающей скобки может идти любой оператор, но не
-                //может идти число и открывающая скобка
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 if(prevElem.isOperator() && (prevElem.getOperatorType() ==
                                             PostfixElementType.RIGHT_BRACKET))
                 {
                     if(curElem.isNumber())
-                        throw new IncorrectElementException("Ошибка при анализе выражения",
+                        throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                     curElem.getElementIndex());
                     else
                         if(curElem.getOperatorType() ==
                                             PostfixElementType.LEFT_BRACKET)
-                            throw new IncorrectElementException("Ошибка при анализе выражения",
+                            throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                     curElem.getElementIndex());
                 }
             }
@@ -124,16 +108,16 @@ public class InfixChecker {
             prevElem = curElem;
         }
         
-        //последний элемент может быть либо числом, либо закрывающей скобкой
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if(curElem.isOperator() && (curElem.getOperatorType() !=
                                         PostfixElementType.RIGHT_BRACKET))
-                throw new IncorrectElementException("Ошибка при анализе выражения",
+                throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                                                     curElem.getElementIndex());
         
-        //количество открывающих скобок должно быть равно количеству закрывающих
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if(leftBracketsCount > rightBracketsCount)
-            throw new IncorrectElementException("Отсутствует \")\"", 0);
+            throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \")\"", 0);
         if(leftBracketsCount < rightBracketsCount)
-            throw new IncorrectElementException("Отсутствует \"(\"", 0);
+            throw new IncorrectElementException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"(\"", 0);
     }
 }

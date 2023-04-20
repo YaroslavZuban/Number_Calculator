@@ -43,17 +43,25 @@ public class ProcessorComplex {
             temp.append(operation);
             temp.append(tempLine);
 
+            System.out.println("temp= "+temp);
+
             converter = new PostfixConverter(temp.toString());
             calc = new PostfixCalculator(converter.convertToPostfix());
             result = new ComplexNumber(calc.calculate());
 
             inputLine = new StringBuilder(result.toString());
             inputLine.append(operation);
+
+            System.out.println("inputLine= "+inputLine);
         } else {
+            System.out.println("inputLine= "+inputLine);
+
             converter = new PostfixConverter(inputLine.toString());
             calc = new PostfixCalculator(converter.convertToPostfix());
             result = new ComplexNumber(calc.calculate());
             resultLine = new StringBuilder(result.toString());
+
+            System.out.println("resultLine= "+resultLine);
             History.data.add(inputLine + " = " + resultLine);
         }
     }

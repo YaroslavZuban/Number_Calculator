@@ -1,7 +1,7 @@
 /*
  * PostfixConverter.java
  *
- * Created on 7 Май 2004 г., 10:15
+ * Created on 7 пїЅпїЅпїЅ 2004 пїЅ., 10:15
  */
 
 package com.example.number_calculator.editor_number_complex;
@@ -10,41 +10,18 @@ import java.util.Vector;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Iterator;
-/**
- * Этот класс преобразует строку, записанную в инфиксной форме
- * в массив объектов PostfixElement в постфиксной форме.
- *
- * @author  Statsenko Vladimir
- */
+
 public class PostfixConverter {
     
     private Vector postfixVector = null;
     private Vector infixVector = null;
     String infixStr;
-    
-    /** Создает новые экземпляры класса PostfixConverter
-     *
-     * @param str строка, содержащая выражение в инфиксной форме */ 
+
     public PostfixConverter(String str) {
         infixStr = str;
     }
     
-    /** Преобразует строку, записанную в инфиксной форме
-     * в массив объектов PostfixElement в постфиксной форме. 
-     *
-     * @return ссылку на объект класса <code>java.util.Vector</code>,
-     * содежащий массив объектов PostfixElement в постфиксной форме.
-     *
-     * @exception IllegalArgumentException если была попытка
-     * создать массив объектов с отрицательной длиной 
-     *
-     * @exception UnrecognizableElementException если невозможно
-     * распознать новый элемент 
-     *
-     * @exception IncorrectTypeException если была попытка вызвать
-     * один из методов класса PostfixElement, который недопустим для 
-     * данного экземпляра класса. Например, к экземпляру класса PostfixElement
-     * не может быть применена функция getNumber(), если он содержит оператор.*/
+
     public Vector convertToPostfix() throws IllegalArgumentException,
                 UnrecognizableElementException, IncorrectTypeException,
                 IncorrectElementException {
@@ -56,8 +33,8 @@ public class PostfixConverter {
         return postfixVector;
     }
     
-    /* Преобразует строку, записанную в инфиксной форме в массив
-       объектов PostfixElement в инфиксной форме */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+       пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PostfixElement пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ */
     private void parseStr(String str) throws UnrecognizableElementException,
                 IncorrectTypeException {
         infixStr = removeSpaces(str);
@@ -107,9 +84,9 @@ public class PostfixConverter {
         }
     }
     
-    /* Преобразует массив объектов PostfixElement, записанный 
-     в инфиксной форме в массив объектов PostfixElement
-     в постфиксной форме.*/ 
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PostfixElement, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+     пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PostfixElement
+     пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.*/ 
     private void convert() throws IllegalArgumentException,
                 UnrecognizableElementException, IncorrectTypeException {
         postfixVector = new Vector(infixVector.size());
@@ -172,7 +149,7 @@ public class PostfixConverter {
         }
     }
 
-    /* Удаляет пробелы из строки str. Возвращает строку без пробелов */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ str. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     private String removeSpaces(String str) {
         StringTokenizer st = new StringTokenizer(str);
         StringBuffer temp = new StringBuffer(str.length());
@@ -183,7 +160,7 @@ public class PostfixConverter {
         return temp.toString();
     }
     
-    /*Используется для отладки. На работу программы не влияет.*/
+    /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.*/
     public String VectorDump(String name) {
         StringBuffer retValue = new StringBuffer();
         Iterator vectorIterator = null;

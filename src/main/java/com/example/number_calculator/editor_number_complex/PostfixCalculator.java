@@ -1,7 +1,7 @@
 /*
  * PostfixCalculator.java
  *
- * Created on 7 Май 2004 г., 10:15
+ * Created on 7 пїЅпїЅпїЅ 2004 пїЅ., 10:15
  */
 
 package com.example.number_calculator.editor_number_complex;
@@ -9,12 +9,7 @@ package com.example.number_calculator.editor_number_complex;
 import java.util.Vector;
 import java.util.Stack;
 
-/** Этот класс вычисляет значение выражения, записанного в постфиксной
- * форме. Это выражение можно получить из обычной строки (записанной в
- * инфиксной форме) с помощью класса PostfixConverter.
- *
- * @author  Statsenko Vladimir
- */
+
 public class PostfixCalculator {
 
     public Vector getPostfixVector() {
@@ -23,17 +18,11 @@ public class PostfixCalculator {
 
     private Vector postfixVector = null;
     private ComplexNumber result = null;
-    
-    /** Создает новые экземпляры класса PostfixCalculator
-     *
-     * @param postfixVector объект класса <code>java.util.Vector</code>,
-     * содержащий массив исходных данных в постфиксной форме. */
+
     public PostfixCalculator(Vector postfixVector) {
         this.postfixVector = postfixVector;
     }
-    
-    /** Вычисляет значение выражения.
-     * @return результат вычислений */
+
     public ComplexNumber calculate() throws java.text.ParseException,
             IncorrectTypeException, UnrecognizableElementException {
         result = new ComplexNumber("0");
@@ -57,7 +46,7 @@ public class PostfixCalculator {
         return result;
     }
     
-    /* Вычисляет результат каждой операции */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     private ComplexNumber solveOperation(ComplexNumber x, ComplexNumber y,
                         int operatorType) throws java.text.ParseException{
         ComplexNumber res = new ComplexNumber("0");
@@ -65,9 +54,9 @@ public class PostfixCalculator {
         switch(operatorType)
         {
             case PostfixElementType.PLUS : res.add(y); break;
-            case PostfixElementType.MINUS : res.subtract(y); break;
-            case PostfixElementType.MULTIPLICATION : res.multiply(y); break;
-            case PostfixElementType.DIVISION : res.divide(y); break;
+            case PostfixElementType.MINUS : res.sub(y); break;
+            case PostfixElementType.MULTIPLICATION : res.mult(y); break;
+            case PostfixElementType.DIVISION : res.div(y); break;
         }
         return res;
     }

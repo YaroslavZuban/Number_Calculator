@@ -1,101 +1,100 @@
 /*
  * ComplexNumber.java
  *
- * Created on 5 Май 2004 г., 9:12
+ * Created on 5 пїЅпїЅпїЅ 2004 пїЅ., 9:12
  */
 
 package com.example.number_calculator.editor_number_complex;
 
-import com.example.number_calculator.Number;
-
 import java.util.StringTokenizer;
 import java.text.NumberFormat;
-
 /**
- * Этот класс содержит комплексное число и позволяет
- * выполнять математические операции над ним.
- *
- * @author Statsenko Vladimir
+ * пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ.
+ * @author  Statsenko Vladimir
  */
-public class ComplexNumber  {
+public class ComplexNumber {
+    
+    private double Re = 0; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    private double Im = 0; //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    
 
-    private double Re = 0; //действительная часть числа
-    private double Im = 0; //мнимая часть числа
-
-
-    public ComplexNumber(double re, double im) {
-        this.Re = re;
-        this.Im = im;
-    }
-
-    /**
-     * Создает новые экземпляры ComplexNumber
-     *
-     * @param value строка, содержащая комплексное число.
-     *              Например, "5,6 + 2,2i"; "-2"; "-0,3i"
-     */
     public ComplexNumber(String value) throws java.text.ParseException {
         String val = removeSpaces(value);
         parseComplexNumber(val);
     }
+    
 
-    /**
-     * Создает новые экземпляры ComplexNumber
-     *
-     * @param value экземпляр класса ComplexNumber.
-     */
+    public ComplexNumber(double re,double im){
+        this.Re=re;
+        this.Im=im;
+    }
     public ComplexNumber(ComplexNumber value) {
         Re = value.getRe();
         Im = value.getIm();
     }
+    
 
-    /**
-     * Возвращает действительную часть числа
-     */
     public double getRe() {
         return Re;
     }
 
-    /**
-     * Возвращает мнимую часть числа
-     */
+
     public double getIm() {
         return Im;
     }
 
-    /* Удаляет пробелы из строки str. Возвращает строку без пробелов */
+    public String toString() {
+        String retValue;
+        NumberFormat nf = NumberFormat.getInstance();
+        if(Re == 0)
+            retValue = nf.format(Im) + "i";
+        else
+            if(Im > 0)
+                retValue = nf.format(Re) + "+" + nf.format(Im) + "i";
+            else
+                retValue = nf.format(Re) + nf.format(Im) + "i";
+        if(Im == 0)
+            retValue = nf.format(Re);
+        return retValue;
+    }
+    
+
     private String removeSpaces(String str) {
         StringTokenizer st = new StringTokenizer(str);
         StringBuffer temp = new StringBuffer(str.length());
-        while (st.hasMoreTokens()) {
+        while(st.hasMoreTokens())
+        {
             temp.append(st.nextToken());
         }
         return temp.toString();
     }
+    
 
-    /* Преобразует строку str в комплексное число 
-       (строка не должна содержать пробелов)*/
-    private void parseComplexNumber(String str)
-            throws java.text.ParseException {
+    private void parseComplexNumber(String str) 
+                    throws java.text.ParseException {
         StringTokenizer st = new StringTokenizer(str, "+-", true);
         String previousToken = "";
         String currentToken = "";
         String numb = "";
         NumberFormat nf = NumberFormat.getInstance();
-        while (st.hasMoreTokens()) {
+        while(st.hasMoreTokens())
+        {
             currentToken = st.nextToken();
-            if (previousToken.equals("-"))
+            if(previousToken.equals("-"))
                 numb = previousToken + currentToken;
             else
                 numb = currentToken;
-            if (numb.equals("+") == false && numb.equals("-") == false) {
-                if (numb.indexOf('i') == -1)
+            if(numb.equals("+") == false && numb.equals("-") == false)
+            {
+                if(numb.indexOf('i') == -1)
                     Re = nf.parse(numb).doubleValue();
-                else {
+                else
+                {
                     numb = numb.replace('i', ' ');
-                    if (numb.equals(" "))
+                    if(numb.equals(" "))
                         numb = "1";
-                    if (numb.equals("- "))
+                    if(numb.equals("- "))
                         numb = "-1";
                     Im = nf.parse(numb).doubleValue();
                 }
@@ -104,62 +103,36 @@ public class ComplexNumber  {
         }
     }
 
-    /**
-     * Проверяет равно ли данное комплексное число заданному
-     *
-     * @param value заданное число
-     */
+
     public boolean equal(ComplexNumber value) {
-        if (Re == value.Re && Im == value.Im)
+        if(Re == value.Re && Im == value.Im)
             return true;
         return false;
     }
-
-    /**
-     * Прибавляет к данному комплексному числу заданное
-     *
-     * @param value заданное число
-     */
-
+    
 
     public void add(ComplexNumber value) {
         Re += value.Re;
         Im += value.Im;
     }
 
-    /**
-     * Вычитает из данного комплексного числа заданное
-     *
-     * @param value заданное число
-     */
-
-    public void subtract(ComplexNumber value) {
+    public void sub(ComplexNumber value) {
         Re -= value.Re;
         Im -= value.Im;
     }
 
-    /**
-     * Умножает данное комплексное число на заданное
-     *
-     * @param value заданное число
-     */
-
-    public void multiply(ComplexNumber value) {
+    public void mult(ComplexNumber value) {
         double tempRe = Re * value.Re - Im * value.Im;
         double tempIm = Re * value.Im + Im * value.Re;
         Re = tempRe;
         Im = tempIm;
     }
 
-    /**
-     * Делит данное комплексное число на заданное
-     *
-     * @param value заданное число
-     */
 
-    public void divide(ComplexNumber value) {
+    public void div(ComplexNumber value) {
         double denominator = value.Re * value.Re + value.Im * value.Im;
-        if (denominator == 0) {
+        if(denominator == 0)
+        {
             Re = Im = 0;
             return;
         }
@@ -170,39 +143,23 @@ public class ComplexNumber  {
         Im = tempIm;
     }
 
-
     public double Mdl() {
         return Math.sqrt(Re * Re + Im * Im);
     }
 
-    // вычисление аргумента комплексного числа в градусах
+
     public double cnd() {
         return Math.toDegrees(Math.atan2(Im, Re));
     }
 
-    // вычисление аргумента комплексного числа в радианах
+
     public double cnr() {
         return Math.atan2(Im, Re);
     }
 
-    /**
-     * Преобразует комплексное число в строку
-     */
-    @Override
-    public String toString() {
-        String negative = String.valueOf(Im);
 
-        if (negative.charAt(0) == '-') {
-            negative = "-" + negative;
-        } else {
-            negative = "+" + negative;
-        }
 
-        return Re + Im + "i";
-
-    }
-
-    // вычисление корня комплексного числа
+    // ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГҐ ГЄГ®Г°Г­Гї ГЄГ®Г¬ГЇГ«ГҐГЄГ±Г­Г®ГЈГ® Г·ГЁГ±Г«Г 
     public ComplexNumber[] Root(int n) {
         ComplexNumber[] roots = new ComplexNumber[n];
         double r = Math.pow(Mdl(), 1.0 / n);
@@ -210,6 +167,7 @@ public class ComplexNumber  {
         for (int i = 0; i < n; i++) {
             double realPart = r * Math.cos(theta + 2 * Math.PI * i / n);
             double imagPart = r * Math.sin(theta + 2 * Math.PI * i / n);
+
             roots[i] = new ComplexNumber(realPart, imagPart);
         }
 

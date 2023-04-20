@@ -1,6 +1,6 @@
 package com.example.number_calculator;
 /**
- * Что делает данный класс, ответ пиши на русском
+ * Данный интерфейс реализует число и операции над ним
  */
 public interface Number<T> {
     T add(T value);
