@@ -1,10 +1,12 @@
 package com.example.number_calculator.editor_simple_fraction;
 
 import com.example.number_calculator.Editor;
+import com.example.number_calculator.TextEditingListener;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class EditorFraction {
+public class EditorFraction implements TextEditingListener,Editor {
     public static Fraction number_one = null;
     public static Fraction number_two = null;
     public static Fraction number_result = null;
@@ -13,12 +15,15 @@ public class EditorFraction {
     public static StringBuilder lineResult = new StringBuilder();
     public static String operation = "";
     InputFraction input = new InputFraction(number_one, number_two, number_result, number_temp, operation);
-
+    @Override
+    public void entrySymbol(MouseEvent event) {}
+    @Override
     public void entryNumber(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumber(temp);
     }
 
+    @Override
     public void entryOperator(MouseEvent event) {
         setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -36,6 +41,7 @@ public class EditorFraction {
        dataInput();
     }
 
+    @Override
     public void onBackSpace(MouseEvent event) {
         String temp;
 
@@ -93,6 +99,7 @@ public class EditorFraction {
         dataInput();
     }
 
+    @Override
     public void onClean(MouseEvent event) {
         lineInput = new StringBuilder("0");
         lineResult = new StringBuilder();
@@ -106,6 +113,7 @@ public class EditorFraction {
         setInput();
     }
 
+    @Override
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && number_two.getNumerator() != Integer.MAX_VALUE) {
             number_two.setNumerator(Integer.MAX_VALUE);

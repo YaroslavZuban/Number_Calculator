@@ -1,5 +1,7 @@
 package com.example.number_calculator.editor_number_systems;
 
+import com.example.number_calculator.Number;
+
 /**
  * number - поле типа String, содержащее значение числа в данной системе счисления.
  * system - поле типа int, представляющее систему счисления данного числа.
@@ -12,7 +14,7 @@ package com.example.number_calculator.editor_number_systems;
  * setNumber(String number) - метод, устанавливающий значение поля number.
  * toString() - метод, возвращающий строковое представление объекта в формате "number(system)".
  */
-public class TPNumber {
+public class TPNumber implements Number<TPNumber> {
     private String number;
     private int system = Integer.MIN_VALUE;
 
@@ -55,6 +57,7 @@ public class TPNumber {
     }
 
 
+    @Override
     public TPNumber add(TPNumber n) {
         converter = new Converter_p1_10();
 
@@ -67,6 +70,7 @@ public class TPNumber {
         return new TPNumber(converter.conv(String.valueOf(result), n.getSystem()), n.getSystem());
     }
 
+    @Override
     public TPNumber multiply(TPNumber n) {
         converter = new Converter_p1_10();
 
@@ -79,6 +83,7 @@ public class TPNumber {
         return new TPNumber(converter.conv(String.valueOf(result), n.getSystem()), n.getSystem());
     }
 
+    @Override
     public TPNumber subtract(TPNumber n) {
         converter = new Converter_p1_10();
 
@@ -91,6 +96,7 @@ public class TPNumber {
         return new TPNumber(converter.conv(String.valueOf(result), n.getSystem()), n.getSystem());
     }
 
+    @Override
     public TPNumber divide(TPNumber n) {
         converter = new Converter_p1_10();
 

@@ -65,9 +65,9 @@ public class PostfixCalculator {
         switch(operatorType)
         {
             case PostfixElementType.PLUS : res.add(y); break;
-            case PostfixElementType.MINUS : res.sub(y); break;
-            case PostfixElementType.MULTIPLICATION : res.mult(y); break;
-            case PostfixElementType.DIVISION : res.div(y); break;
+            case PostfixElementType.MINUS : res.subtract(y); break;
+            case PostfixElementType.MULTIPLICATION : res.multiply(y); break;
+            case PostfixElementType.DIVISION : res.divide(y); break;
         }
         return res;
     }

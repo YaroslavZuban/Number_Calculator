@@ -265,7 +265,7 @@ public class ConverterController {
 
     @FXML
     public void onClean(MouseEvent event) {
-        editorConverter.onClean();
+        editorConverter.onClean(event);
 
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
         getEditor();

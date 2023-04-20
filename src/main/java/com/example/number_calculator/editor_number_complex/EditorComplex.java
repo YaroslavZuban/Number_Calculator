@@ -1,13 +1,14 @@
 package com.example.number_calculator.editor_number_complex;
 
 import com.example.number_calculator.Editor;
+import com.example.number_calculator.TextEditingListener;
 import com.example.number_calculator.editor_number_systems.TPNumber;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 import java.text.ParseException;
 
-public class EditorComplex {
+public class EditorComplex implements TextEditingListener,Editor {
     public static StringBuilder inputLine = new StringBuilder();
     public static StringBuilder tempLine = new StringBuilder();
     public static StringBuilder resultLine = new StringBuilder();
@@ -16,6 +17,8 @@ public class EditorComplex {
     public static StringBuilder functionResult=new StringBuilder();
 
     public static InputComplex input = new InputComplex();
+
+    @Override
     public void entrySymbol(MouseEvent event) {
         setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -23,6 +26,8 @@ public class EditorComplex {
 
         getInput();
     }
+
+    @Override
     public void entryNumber(MouseEvent event) {
         setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -30,6 +35,8 @@ public class EditorComplex {
 
         getInput();
     }
+
+    @Override
     public void entryOperator(MouseEvent event) {
         setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -43,11 +50,14 @@ public class EditorComplex {
 
         getInput();
     }
+
+    @Override
     public void onBackSpace(MouseEvent event) {
         inputLine.deleteCharAt(inputLine.length() - 1);
         setInput();
     }
 
+    @Override
     public void onClean(MouseEvent event) {
         inputLine = new StringBuilder();
         resultLine = new StringBuilder();
@@ -56,6 +66,7 @@ public class EditorComplex {
         setInput();
     }
 
+    @Override
     public void onCleanEntry(MouseEvent event) {
         inputLine = new StringBuilder(removeLastPart(inputLine.toString()));
 

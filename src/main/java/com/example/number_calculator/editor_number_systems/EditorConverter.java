@@ -1,10 +1,11 @@
 package com.example.number_calculator.editor_number_systems;
 
 import com.example.number_calculator.Editor;
+import com.example.number_calculator.TextEditingListener;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class EditorConverter {
+public class EditorConverter implements TextEditingListener,Editor {
     public static TPNumber number_one = null;
     public static TPNumber number_two = null;
     public static TPNumber number_result = null;
@@ -15,18 +16,19 @@ public class EditorConverter {
     public static String operation = "";
     private InputTPNumber input = new InputTPNumber();
 
+    @Override
     public void entrySymbol(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumberSymbol(temp);
     }
 
-
+    @Override
     public void entryNumber(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumberSymbol(temp);
     }
 
-
+    @Override
     public void entryOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
@@ -37,6 +39,7 @@ public class EditorConverter {
         dataResult();
     }
 
+    @Override
     public void onBackSpace(MouseEvent event) {
         if (number_two != null) {
             deleteSymbol(number_two);
@@ -60,7 +63,8 @@ public class EditorConverter {
         dataResult();
     }
 
-    public void onClean() {
+    @Override
+    public void onClean(MouseEvent event) {
         lineInput = new StringBuilder();
         lineResult = new StringBuilder();
 
@@ -74,6 +78,7 @@ public class EditorConverter {
         setInput();
     }
 
+    @Override
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && !number_two.getNumber().equals("")) {
             number_two = new TPNumber("", system);

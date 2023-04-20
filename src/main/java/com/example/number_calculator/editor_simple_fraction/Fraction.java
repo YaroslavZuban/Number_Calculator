@@ -1,6 +1,8 @@
 package com.example.number_calculator.editor_simple_fraction;
 
-public class Fraction {
+import com.example.number_calculator.Number;
+
+public class Fraction implements Number<Fraction> {
     @Override
     public String toString() {
         return  numerator + "/" + denominator ;
@@ -54,6 +56,7 @@ public class Fraction {
         return b == 0 ? a : gcd(b, a % b);
     }
 
+    @Override
     public Fraction add(Fraction other) {
         int commonDenominator = denominator * other.denominator;
         int sumNumerator = numerator * other.denominator + other.numerator * denominator;
@@ -64,6 +67,7 @@ public class Fraction {
         return temp;
     }
 
+    @Override
     public Fraction subtract(Fraction other) {
         int commonDenominator = denominator * other.denominator;
         int diffNumerator = numerator * other.denominator - other.numerator * denominator;
@@ -74,6 +78,7 @@ public class Fraction {
         return temp;
     }
 
+    @Override
     public Fraction multiply(Fraction other) {
         int productNumerator = numerator * other.numerator;
         int productDenominator = denominator * other.denominator;
@@ -92,6 +97,7 @@ public class Fraction {
         return temp;
     }
 
+    @Override
     public Fraction divide(Fraction other) {
         if (other.numerator == 0) {
             throw new IllegalArgumentException("Cannot divide by zero");

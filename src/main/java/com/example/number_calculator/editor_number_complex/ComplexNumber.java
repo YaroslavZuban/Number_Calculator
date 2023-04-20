@@ -6,6 +6,8 @@
 
 package com.example.number_calculator.editor_number_complex;
 
+import com.example.number_calculator.Number;
+
 import java.util.StringTokenizer;
 import java.text.NumberFormat;
 
@@ -15,7 +17,7 @@ import java.text.NumberFormat;
  *
  * @author Statsenko Vladimir
  */
-public class ComplexNumber {
+public class ComplexNumber  {
 
     private double Re = 0; //действительная часть числа
     private double Im = 0; //мнимая часть числа
@@ -118,6 +120,8 @@ public class ComplexNumber {
      *
      * @param value заданное число
      */
+
+
     public void add(ComplexNumber value) {
         Re += value.Re;
         Im += value.Im;
@@ -128,7 +132,8 @@ public class ComplexNumber {
      *
      * @param value заданное число
      */
-    public void sub(ComplexNumber value) {
+
+    public void subtract(ComplexNumber value) {
         Re -= value.Re;
         Im -= value.Im;
     }
@@ -138,7 +143,8 @@ public class ComplexNumber {
      *
      * @param value заданное число
      */
-    public void mult(ComplexNumber value) {
+
+    public void multiply(ComplexNumber value) {
         double tempRe = Re * value.Re - Im * value.Im;
         double tempIm = Re * value.Im + Im * value.Re;
         Re = tempRe;
@@ -150,7 +156,8 @@ public class ComplexNumber {
      *
      * @param value заданное число
      */
-    public void div(ComplexNumber value) {
+
+    public void divide(ComplexNumber value) {
         double denominator = value.Re * value.Re + value.Im * value.Im;
         if (denominator == 0) {
             Re = Im = 0;
