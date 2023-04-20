@@ -1,11 +1,16 @@
 package com.example.number_calculator.editor_number_complex;
 
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+
 public class WorkingMemory {
-    private static StringBuilder inputLine = new StringBuilder();
-    private static StringBuilder resultLine = new StringBuilder();
+    public static StringBuilder inputLine = new StringBuilder();
+    public static StringBuilder resultLine = new StringBuilder();
     private CalculatorComplexMemory memory = new CalculatorComplexMemory();
 
-    public void workingMemory(String temp) {
+    public void workingMemory(MouseEvent event) {
+        String temp = ((Button) event.getSource()).getId().replace("button_", "");
+
         if (temp.contains("MPlus")) {
             memory.memoryPlus(resultLine.toString());
         } else if (temp.contains("MR")) {

@@ -1,7 +1,6 @@
 package com.example.number_calculator;
 
-import com.example.number_calculator.editor_number_complex.EditorComplex;
-import com.example.number_calculator.editor_number_complex.ProcessorComplex;
+import com.example.number_calculator.editor_number_complex.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class ComplexController {
     @FXML
@@ -121,9 +121,16 @@ public class ComplexController {
     private TextField textResult;
 
     @FXML
+    private TextField textExponent;
+
+    @FXML
+    private TextField textCalculationResult;
+
+    @FXML
     private AnchorPane windowMain;
-    private EditorComplex complex=new EditorComplex();
-    private ProcessorComplex processorComplex=new ProcessorComplex();
+    private EditorComplex complex = new EditorComplex();
+    private ProcessorComplex processorComplex = new ProcessorComplex();
+    private WorkingMemory memory = new WorkingMemory();
 
     private double x, y;
 
@@ -171,86 +178,122 @@ public class ComplexController {
         buttonCollapse.setOnMouseClicked(event -> stage.setIconified(true));
 
     }
-
     @FXML
     void actionOperator(MouseEvent event) {
-        complex.actionOperator(event);
-        printf();
-    }
+        try {
+            processorComplex.actionOperator(event);
+        } catch (IncorrectTypeException | UnrecognizableElementException | IncorrectElementException e) {
+            throw new RuntimeException(e);
+        }
 
+        getProcessor();
+        printEditor();
+    }
     @FXML
     void onBaskSpace(MouseEvent event) {
         complex.onBackSpace(event);
-        printf();
-    }
 
+        getEditor();
+        printEditor();
+    }
     @FXML
     void onClean(MouseEvent event) {
         complex.onClean(event);
-        printf();
-    }
 
+        getEditor();
+        printEditor();
+    }
     @FXML
     void onCleanEntry(MouseEvent event) {
         complex.onCleanEntry(event);
-        printf();
-    }
 
+        getEditor();
+        printEditor();
+    }
     @FXML
     void onMemory(MouseEvent event) {
-        complex.memory(event);
-        printf();
-    }
+        memory.workingMemory(event);
 
+        getMemory();
+        printEditor();
+    }
     @FXML
     void onNumberClicked(MouseEvent event) {
         complex.entryNumber(event);
-        printf();
-    }
 
+        getEditor();
+        printEditor();
+    }
     @FXML
     void onOperatorClicking(MouseEvent event) {
         complex.entryOperator(event);
-        printf();
-    }
 
+        getEditor();
+        printEditor();
+    }
     @FXML
     void onResultClicked(MouseEvent event) {
-        complex.onResultClicked();
-        printf();
+        try {
+            processorComplex.result();
+        } catch (IncorrectTypeException | UnrecognizableElementException | IncorrectElementException |
+                 ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        getProcessor();
+        printEditor();
     }
-
-    @FXML
-    void onSymbolClicked(MouseEvent event) {}
-
-    void printf(){
-        textInput.setText(EditorComplex.getInputLine().toString());
-        textResult.setText(EditorComplex.getResultLine().toString());
-    }
-
     public void onMdlClicked(MouseEvent event) {
-        complex.onMdl(event);
-        printf();
+        try {
+            processorComplex.mdl();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        getProcessor();
+        printEditor();
     }
 
     public void onCndClicked(MouseEvent event) {
-        complex.onCnd(event);
-        printf();
+        try {
+            processorComplex.cnd();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        getProcessor();
+        printEditor();
     }
 
     public void onCnrClicked(MouseEvent event) {
-        complex.onCnr(event);
-        printf();
+        try {
+            processorComplex.cnr();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        getProcessor();
+        printEditor();
     }
 
-    public void onBrackets(MouseEvent event){
+    public void onBrackets(MouseEvent event) {
         complex.entrySymbol(event);
-        printf();
+
+        getEditor();
+        printEditor();
     }
 
     public void onRootClicked(MouseEvent event) {
-        complex.onRoot(event,2);
-        printf();
+        if (!textExponent.getText().equals("")) {
+            try {
+                processorComplex.root(Integer.parseInt(textExponent.getText()));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+            getProcessor();
+            printEditor();
+        }
     }
 
     public void onWindowConverter(MouseEvent event) {
@@ -259,5 +302,41 @@ public class ComplexController {
 
     public void onWindowFraction(MouseEvent event) {
 
+    }
+
+    private void printEditor() {
+        textInput.setText(EditorComplex.inputLine.toString());
+        textResult.setText(EditorComplex.resultLine.toString());
+        textCalculationResult.setText(EditorComplex.functionResult.toString());
+    }
+
+    private void getMemory() {
+        EditorComplex.inputLine = WorkingMemory.inputLine;
+        EditorComplex.resultLine = WorkingMemory.resultLine;
+
+        ProcessorComplex.inputLine = WorkingMemory.inputLine;
+        ProcessorComplex.resultLine = WorkingMemory.resultLine;
+    }
+
+    private void getEditor() {
+        WorkingMemory.inputLine = EditorComplex.inputLine;
+        WorkingMemory.resultLine = EditorComplex.resultLine;
+
+        ProcessorComplex.inputLine = EditorComplex.inputLine;
+        ProcessorComplex.resultLine = EditorComplex.resultLine;
+        ProcessorComplex.tempLine = EditorComplex.tempLine;
+        ProcessorComplex.operation = EditorComplex.operation;
+        ProcessorComplex.functionResult = EditorComplex.functionResult;
+    }
+
+    private void getProcessor() {
+        WorkingMemory.inputLine = ProcessorComplex.inputLine;
+        WorkingMemory.resultLine = ProcessorComplex.resultLine;
+
+        EditorComplex.inputLine = ProcessorComplex.inputLine;
+        EditorComplex.resultLine = ProcessorComplex.resultLine;
+        EditorComplex.tempLine = ProcessorComplex.tempLine;
+        EditorComplex.operation = ProcessorComplex.operation;
+        EditorComplex.functionResult = ProcessorComplex.functionResult;
     }
 }

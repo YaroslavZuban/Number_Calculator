@@ -25,8 +25,6 @@ public class CalculatorComplexMemory {
                  ParseException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public void memorySave(String number) {
@@ -40,6 +38,4 @@ public class CalculatorComplexMemory {
     public void deleteValue() {
         value = "";
     }
-
-
 }

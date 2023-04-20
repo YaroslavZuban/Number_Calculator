@@ -1,46 +1,25 @@
 package com.example.number_calculator.editor_number_complex;
 
 import com.example.number_calculator.Operator;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Vector;
 
 public class ProcessorComplex {
-    private static StringBuilder inputLine = new StringBuilder();
-    private static StringBuilder tempLine = new StringBuilder();
-    private static StringBuilder resultLine = new StringBuilder();
-    private static StringBuilder operation = new StringBuilder();
-
-    private static StringBuilder functionResult=new StringBuilder();
+    public static StringBuilder inputLine = new StringBuilder();
+    public static StringBuilder tempLine = new StringBuilder();
+    public static StringBuilder resultLine = new StringBuilder();
+    public static StringBuilder operation = new StringBuilder();
+    public static StringBuilder functionResult=new StringBuilder();
     private CalculatorComplexMemory memory = new CalculatorComplexMemory();
     private PostfixConverter converter = null;
     private PostfixCalculator calc = null;
     private ComplexNumber result = null;
 
     public ProcessorComplex() {}
-    public ProcessorComplex(StringBuilder inputLine, StringBuilder resultLine, StringBuilder tempLine) {
-        this.inputLine = inputLine;
-        this.resultLine = resultLine;
-        this.tempLine = tempLine;
-    }
-
-    public static StringBuilder getFunctionResult() {
-        return functionResult;
-    }
-
-    public static void setFunctionResult(StringBuilder functionResult) {
-        ProcessorComplex.functionResult = functionResult;
-    }
-
-    public void inputSymbol(String temp) {
-        if (temp.equals("OpenBracket")) {
-            inputLine.append("(");
-        } else {
-            inputLine.append(")");
-        }
-    }
-
     public void result() throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException, ParseException {
         if (isSign(inputLine)) {
             if (tempLine.toString().equals("")) {
@@ -51,7 +30,7 @@ public class ProcessorComplex {
             StringBuilder temp = new StringBuilder("(" + inputLine.deleteCharAt(inputLine.length() - 1) + ")");
 
             temp.append(operation);
-            temp.append("(" + tempLine + ")");
+            temp.append(tempLine);
 
             converter = new PostfixConverter(temp.toString());
             calc = new PostfixCalculator(converter.convertToPostfix());
@@ -66,56 +45,8 @@ public class ProcessorComplex {
             resultLine = new StringBuilder(result.toString());
         }
     }
-
-    public void input(String temp) {
-        if (!resultLine.toString().equals("")) {
-            resultLine = new StringBuilder();
-            inputLine = new StringBuilder();
-            tempLine = new StringBuilder();
-        }
-
-        if (inputLine.toString().equals("") && temp.equals("Point")) {
-            inputLine.append("0,");
-        } else {
-            if (!tempLine.toString().equals("")) {
-                tempLine = new StringBuilder();
-            }
-
-            if (temp.equals("Point")) {
-                if (isSign(inputLine)) {
-                    inputLine.append("0,");
-                } else {
-                    inputLine.append(",");
-                }
-            } else {
-                inputLine.append(temp);
-            }
-        }
-    }
-
-    public void inputOperation(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
-        String inputOperator = Operator.operatorDefinition(temp);
-        operation = new StringBuilder(inputOperator);
-
-        if (!tempLine.toString().equals("")) {
-            tempLine = new StringBuilder();
-        }
-
-        if (isSign(inputLine)) {
-            inputLine.deleteCharAt(inputLine.length() - 1);
-            inputLine.append(inputOperator);
-        } else {
-            if (!resultLine.toString().equals("")) {
-                inputLine = new StringBuilder(resultLine);
-                resultLine = new StringBuilder();
-            }
-
-            inputLine.append(operation);
-            tempLine = new StringBuilder();
-        }
-    }
-
-    public void actionOperator(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
+    public void actionOperator(MouseEvent event) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
+        String temp = ((Button) event.getSource()).getId().replace("button_", "");
         converter = new PostfixConverter(inputLine.toString());
 
         calc = new PostfixCalculator(converter.convertToPostfix());
@@ -154,60 +85,30 @@ public class ProcessorComplex {
             inputLine.insert(index, number);
         }
     }
-
     public void mdl() throws ParseException {
         if(!resultLine.toString().equals("")){
             ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            resultLine=new StringBuilder(String.valueOf(complexNumber.Mdl()));
+            functionResult=new StringBuilder(String.valueOf(complexNumber.Mdl()));
         }
     }
-
     public void cnd() throws ParseException {
         if(!resultLine.toString().equals("")){
             ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            resultLine=new StringBuilder(String.valueOf(complexNumber.cnd()));
+            functionResult=new StringBuilder(String.valueOf(complexNumber.cnd()));
         }
     }
-
     public void cnr() throws ParseException {
         if(!resultLine.toString().equals("")){
             ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            resultLine=new StringBuilder(String.valueOf(complexNumber.cnr()));
+            functionResult=new StringBuilder(String.valueOf(complexNumber.cnr()));
         }
     }
-
     public void root(int n) throws ParseException {
         if(!resultLine.toString().equals("")){
             ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            resultLine=new StringBuilder(Arrays.toString(complexNumber.Root(n)));
+            functionResult=new StringBuilder(Arrays.toString(complexNumber.Root(n)));
         }
     }
-
-
-    public static StringBuilder getInputLine() {
-        return inputLine;
-    }
-
-    public static void setInputLine(StringBuilder inputLine) {
-        ProcessorComplex.inputLine = inputLine;
-    }
-
-    public static StringBuilder getTempLine() {
-        return tempLine;
-    }
-
-    public static void setTempLine(StringBuilder tempLine) {
-        ProcessorComplex.tempLine = tempLine;
-    }
-
-    public static StringBuilder getResultLine() {
-        return resultLine;
-    }
-
-    public static void setResultLine(StringBuilder resultLine) {
-        ProcessorComplex.resultLine = resultLine;
-    }
-
     public boolean isSign(StringBuilder line) {
         int end = line.length() - 1;
 
@@ -217,30 +118,5 @@ public class ProcessorComplex {
         }
 
         return false;
-    }
-
-    public void workingMemory(String temp) {
-        if (temp.contains("MPlus")) {
-            memory.memoryPlus(resultLine.toString());
-        } else if (temp.contains("MR")) {
-            if (inputLine.toString().equals("")) {
-                inputLine = new StringBuilder(memory.getValue());
-            } else {
-                addDataMemoryOutputLine();
-            }
-        } else if (temp.contains("MS")) {
-            memory.memorySave(resultLine.toString());
-        } else if (temp.contains("MC")) {
-            memory.deleteValue();
-        }
-    }
-
-    private void addDataMemoryOutputLine() {
-        char elementOperation = inputLine.charAt(inputLine.length() - 1);
-
-        if (elementOperation == '/' || elementOperation == '*' ||
-                elementOperation == '+' || elementOperation == '-') {
-            inputLine.append(memory.getValue());
-        }
     }
 }

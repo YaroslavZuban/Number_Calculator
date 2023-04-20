@@ -7,43 +7,35 @@ import javafx.scene.input.MouseEvent;
 
 import java.text.ParseException;
 
-public class EditorComplex implements Editor {
-    public static StringBuilder getInputLine() {
-        return inputLine;
-    }
-
-    public static StringBuilder getResultLine() {
-        return resultLine;
-    }
-
+public class EditorComplex {
     public static StringBuilder inputLine = new StringBuilder();
     public static StringBuilder tempLine = new StringBuilder();
     public static StringBuilder resultLine = new StringBuilder();
 
-    private static ProcessorComplex processor = new ProcessorComplex(inputLine, tempLine, resultLine);
+    public static StringBuilder operation = new StringBuilder();
+    public static StringBuilder functionResult=new StringBuilder();
 
-    @Override
+    public static InputComplex input = new InputComplex();
     public void entrySymbol(MouseEvent event) {
+        setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        processor.inputSymbol(temp);
+        input.inputSymbol(temp);
 
         getInput();
     }
-
-    @Override
     public void entryNumber(MouseEvent event) {
+        setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        processor.input(temp);
+        input.input(temp);
 
         getInput();
     }
-
-    @Override
     public void entryOperator(MouseEvent event) {
+        setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
         try {
-            processor.inputOperation(temp);
+            input.inputOperation(temp);
         } catch (IncorrectTypeException | UnrecognizableElementException | IncorrectElementException e) {
             throw new RuntimeException(e);
         }
@@ -51,82 +43,24 @@ public class EditorComplex implements Editor {
 
         getInput();
     }
-
-    @Override
-    public void onResultClicked() {
-        try {
-            processor.result();
-        } catch (IncorrectTypeException | UnrecognizableElementException | IncorrectElementException |
-                 ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        getInput();
-    }
-
-    @Override
-    public void actionOperator(MouseEvent event) {
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-
-        try {
-            processor.actionOperator(temp);
-        } catch (IncorrectTypeException | UnrecognizableElementException | IncorrectElementException e) {
-            throw new RuntimeException(e);
-        }
-
-        getInput();
-    }
-
-    @Override
     public void onBackSpace(MouseEvent event) {
         inputLine.deleteCharAt(inputLine.length() - 1);
         setInput();
     }
 
-    @Override
     public void onClean(MouseEvent event) {
         inputLine = new StringBuilder();
         resultLine = new StringBuilder();
         tempLine = new StringBuilder();
 
-        processor = new ProcessorComplex(inputLine, resultLine, tempLine);
-
         setInput();
     }
 
-    @Override
     public void onCleanEntry(MouseEvent event) {
         inputLine = new StringBuilder(removeLastPart(inputLine.toString()));
 
         setInput();
     }
-
-    @Override
-    public void memory(MouseEvent event) {
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-
-        processor.workingMemory(temp);
-
-        getInput();
-    }
-
-    private void deleteSymbol(TPNumber number) {
-        if (number.getNumber().length() != 0) {
-            StringBuilder temp = new StringBuilder(number.getNumber());
-            temp.deleteCharAt(temp.length() - 1);
-            number.setNumber(temp.toString());
-        }
-
-        if (number.getNumber().equals("")) {
-            number = null;
-        }
-    }
-
-    private void getInput() {
-        inputLine = ProcessorComplex.getInputLine();
-        resultLine = ProcessorComplex.getResultLine();
-    }
-
     private String removeLastPart(String str) {
         char ch = str.charAt(str.length() - 1);
 
@@ -144,53 +78,16 @@ public class EditorComplex implements Editor {
 
         return "";
     }
-
+    private void getInput() {
+        inputLine = InputComplex.inputLine;
+        resultLine = InputComplex.resultLine;
+        operation = InputComplex.operation;
+        tempLine = InputComplex.tempLine;
+    }
     private void setInput() {
-        ProcessorComplex.setInputLine(inputLine);
-        ProcessorComplex.setResultLine(resultLine);
-        ProcessorComplex.setTempLine(tempLine);
-    }
-
-    public void onMdl(MouseEvent event) {
-        try {
-            processor.mdl();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        getInput();
-    }
-
-    public void onCnd(MouseEvent event) {
-        try {
-            processor.cnd();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        getInput();
-    }
-
-    public void onCnr(MouseEvent event) {
-        try {
-            processor.cnr();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        getInput();
-    }
-
-    public void onRoot(MouseEvent event,int n) {
-        try {
-            processor.root(n);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        getInput();
+        InputComplex.inputLine = inputLine;
+        InputComplex.resultLine = resultLine;
+        InputComplex.operation = operation;
+        InputComplex.tempLine = tempLine;
     }
 }

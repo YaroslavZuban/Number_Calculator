@@ -3,12 +3,11 @@ package com.example.number_calculator.editor_number_complex;
 import com.example.number_calculator.Operator;
 
 public class InputComplex {
-    private static StringBuilder inputLine = new StringBuilder();
-    private static StringBuilder tempLine = new StringBuilder();
-    private static StringBuilder resultLine = new StringBuilder();
-    private static StringBuilder operation = new StringBuilder();
+    public static StringBuilder inputLine = new StringBuilder();
+    public static StringBuilder tempLine = new StringBuilder();
+    public static StringBuilder resultLine = new StringBuilder();
 
-    private static StringBuilder functionResult=new StringBuilder();
+    public static StringBuilder operation = new StringBuilder();
 
     public void inputSymbol(String temp) {
         if (temp.equals("OpenBracket")) {
@@ -75,6 +74,38 @@ public class InputComplex {
         }
 
         return false;
+    }
+
+    public static StringBuilder getInputLine() {
+        return inputLine;
+    }
+
+    public static void setInputLine(StringBuilder inputLine) {
+        InputComplex.inputLine = inputLine;
+    }
+
+    public static StringBuilder getTempLine() {
+        return tempLine;
+    }
+
+    public static void setTempLine(StringBuilder tempLine) {
+        InputComplex.tempLine = tempLine;
+    }
+
+    public static StringBuilder getResultLine() {
+        return resultLine;
+    }
+
+    public static void setResultLine(StringBuilder resultLine) {
+        InputComplex.resultLine = resultLine;
+    }
+
+    public static StringBuilder getOperation() {
+        return operation;
+    }
+
+    public static void setOperation(StringBuilder operation) {
+        InputComplex.operation = operation;
     }
 
 }
