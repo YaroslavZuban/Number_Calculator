@@ -11,7 +11,20 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * отвечает за загрузку и создание экземпляра контроллера для FXML-файлов,
+ * которые используются для создания графического интерфейса приложения на JavaFX.
+ */
 public class FXMLManager {
+    /**
+     * загружает FXML-файл из указанного пути, создает новый экземпляр контроллера с
+     * помощью метода setControllerFactory класса FXMLLoader, и инициализирует его с
+     * помощью метода init класса IController, передавая в качестве параметра объект
+     * Stage, который представляет текущее окно приложения. Затем метод создает
+     * новую сцену с загруженным FXML-контентом, устанавливает ее в качестве сцены
+     * текущего окна, настраивает свойства окна (заголовок, иконка, стиль),
+     * и отображает его на экране с помощью метода show()
+     */
     public <T> T loadFXML(String fxmlPath, String title, StageStyle style) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         fxmlLoader.setControllerFactory(param -> {

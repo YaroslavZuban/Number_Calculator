@@ -1,19 +1,14 @@
 package com.example.number_calculator.editor_number_systems;
 
+/**
+ * представляет собой класс для хранения значения числа типа TPNumber и выполнения операций с ним
+ */
 public class CalculatorTPNumberMemory {
     private TPNumber value=null;
 
 
     public CalculatorTPNumberMemory() {
         value=new TPNumber("0",10);
-    }
-
-    public void memoryClear() {
-        value = new TPNumber("0",10);
-    }
-
-    public TPNumber memoryRead() {
-        return value;
     }
 
     public void memorySave(TPNumber number) {

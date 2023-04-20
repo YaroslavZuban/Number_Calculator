@@ -4,6 +4,10 @@ import com.example.number_calculator.History;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
+/***
+ * содержит методы для выполнения арифметических операций над числами в разных системах счисления,
+ * а также для изменения чисел (возведение в квадрат и получение обратного числа)
+ */
 public class ProcessorConverter {
 
     public static TPNumber number_one;
@@ -13,7 +17,11 @@ public class ProcessorConverter {
     public static String operation;
     public static int system;
 
-
+    /**
+     * вызывается, когда пользователь нажимает кнопку "=",
+     * чтобы выполнить операцию. Если есть два числа и оператор,
+     * функция выполняет арифметическую операцию и сохраняет результат
+     */
     public void onResultClicked(StringBuilder lineResult) {
 
         if (number_two != null && number_one != null && !number_two.getNumber().equals("")) {
@@ -27,13 +35,6 @@ public class ProcessorConverter {
             NumberSystemChecker.isNumberValidInBase(number_one.getNumber(), number_one.getSystem());
 
             number_result = Calculator.arithmetic(number_one, number_two, operation);
-
-
-                /*if (String.valueOf(number_result.getNumber()).equals("0.0")) {
-                    number_result.setNumber(String.valueOf(new Converter_10_p2().conv(numberTemp + "", number_result.getSystem())));
-                } else {
-                    number_result.setNumber("0");
-                }*/
 
             String history = number_one.getNumber() + "(" + number_one.getSystem() + ")" + operation +
                     number_two.getNumber() + "(" + number_two.getSystem() + ") =";
@@ -59,6 +60,10 @@ public class ProcessorConverter {
             number_two = null;
         }
     }
+
+    /**
+     * вызывается, когда пользователь нажимает кнопку для изменения числа ("x^2" или "1/x").
+     */
     public void actionOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 

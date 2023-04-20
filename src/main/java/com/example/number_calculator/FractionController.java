@@ -19,6 +19,25 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * реализует интерфейс IController. Класс FractionController является частью приложения-калькулятора.
+ *
+ * Класс имеет несколько переменных экземпляра, которые представляют различные кнопки и текстовые поля,
+ * используемые в приложении-калькуляторе. Он также имеет три приватные переменные - workingMemory,
+ * processor и editorFraction, которые являются экземплярами других классов.
+ *
+ * Метод init устанавливает начальное состояние калькулятора и вызывается при запуске приложения.
+ * Он также обрабатывает перетаскивание и закрытие окна калькулятора,
+ * а также нажатие кнопок "History" и "Info".
+ *
+ * Методы actionOperator, onResultClicked, onNumberClicked, onOperatorClicking, onClean,
+ * onMemory, onDivisionClicked, onCleanEntry и onBackSpace являются обработчиками событий
+ * для различных действий калькулятора, таких как нажатие кнопки числа или оператора.
+ *
+ * Метод printf обновляет текстовые поля ввода и результата на основе текущего состояния калькулятора.
+ *
+ * Методы onWindowComplex и onWindowConverter обрабатывают переход к другим режимам калькулятора
+ */
 public class FractionController implements IController {
 
     @FXML

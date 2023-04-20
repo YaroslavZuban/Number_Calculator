@@ -9,6 +9,11 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Vector;
 
+/**
+ * Данный класс является частью калькулятора для работы с комплексными числами.
+ * Он содержит методы для обработки пользовательского ввода и
+ * выполнения операций над комплексными числами.
+ */
 public class ProcessorComplex {
     public static StringBuilder inputLine = new StringBuilder();
     public static StringBuilder tempLine = new StringBuilder();
@@ -20,6 +25,12 @@ public class ProcessorComplex {
     private PostfixCalculator calc = null;
     private ComplexNumber result = null;
 
+    /**
+     * осуществляет вычисление результата на основе введенных данных и выбранной операции.
+     * Если в конце введенной строки находится знак операции (+, -, *, /),
+     * то метод выполняет операцию с предыдущим введенным числом и сохраняет результат в строку ввода.
+     * Если же в конце строки нет знака операции, то метод выполняет вычисление всей введенной строки и сохраняет результат в отдельную строку.
+     */
     public void result() throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException, ParseException {
         if (isSign(inputLine)) {
             if (tempLine.toString().equals("")) {
@@ -47,6 +58,12 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод вызывается при нажатии кнопки операции на калькуляторе.
+     * Он получает значение операции и выполняет соответствующее действие
+     * над последним введенным числом. Например, для операции возведения в квадрат,
+     * метод возведет в квадрат последнее введенное число и заменит его в строке ввода на полученный результат.
+     */
     public void actionOperator(MouseEvent event) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         converter = new PostfixConverter(inputLine.toString());
@@ -88,6 +105,9 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод вычисляет модуль комплексного числа
+     */
     public void mdl() throws ParseException {
         if (!resultLine.toString().equals("")) {
             ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
@@ -95,6 +115,9 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод вычисляет аргумент (угол) комплексного числа
+     */
     public void cnd() throws ParseException {
         if (!resultLine.toString().equals("")) {
             ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
@@ -102,6 +125,9 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод вычисляет действительную часть комплексного числа
+     */
     public void cnr() throws ParseException {
         if (!resultLine.toString().equals("")) {
             ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
@@ -109,6 +135,9 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод вычисляет корни степени n комплексного числа
+     */
     public void root(int n) throws ParseException {
         if (!resultLine.toString().equals("")) {
             ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
@@ -116,6 +145,10 @@ public class ProcessorComplex {
         }
     }
 
+    /**
+     * метод проверяет, заканчивается ли строка line на знак операции
+     * (+, -, *, /). Если да, метод возвращает true, иначе false.
+     */
     public boolean isSign(StringBuilder line) {
         int end = line.length() - 1;
 

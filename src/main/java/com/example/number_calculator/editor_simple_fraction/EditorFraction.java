@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * реализует интерфейсы TextEditingListener и Editor и представляет
+ *  * собой редактор для работы с числами в дробных числах.
+ */
 public class EditorFraction implements TextEditingListener,Editor {
     public static Fraction number_one = null;
     public static Fraction number_two = null;
@@ -17,6 +21,11 @@ public class EditorFraction implements TextEditingListener,Editor {
     InputFraction input = new InputFraction(number_one, number_two, number_result, number_temp, operation);
     @Override
     public void entrySymbol(MouseEvent event) {}
+
+    /**
+     * обрабатывают пользовательский ввод и выполняют соответствующие операции с числами, например, ввод нового символа или оператора.
+     * @param event
+     */
     @Override
     public void entryNumber(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
@@ -40,7 +49,10 @@ public class EditorFraction implements TextEditingListener,Editor {
        getInput();
        dataInput();
     }
-
+    /**
+     * удаляет последний введенный символ или оператор
+     * @param event
+     */
     @Override
     public void onBackSpace(MouseEvent event) {
         String temp;
@@ -98,7 +110,10 @@ public class EditorFraction implements TextEditingListener,Editor {
         setInput();
         dataInput();
     }
-
+    /**
+     * очищает всю введенную информацию
+     * @param event
+     */
     @Override
     public void onClean(MouseEvent event) {
         lineInput = new StringBuilder("0");
@@ -113,6 +128,10 @@ public class EditorFraction implements TextEditingListener,Editor {
         setInput();
     }
 
+    /**
+     * очищает последнее введенное число или оператор.
+     * @param event
+     */
     @Override
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && number_two.getNumerator() != Integer.MAX_VALUE) {
@@ -130,6 +149,10 @@ public class EditorFraction implements TextEditingListener,Editor {
         dataInput();
     }
 
+    /**
+     * обрабатывает ввод цифры.
+     * @param temp
+     */
     private void inputNumber(String temp) {
         if (number_one != null && number_two != null && number_result != null) {
             number_two = null;
@@ -187,6 +210,7 @@ public class EditorFraction implements TextEditingListener,Editor {
 
         lineInput = new StringBuilder(result);
     }
+
     public void dataResult(){
         StringBuilder result = new StringBuilder();
 

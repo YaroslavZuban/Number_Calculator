@@ -2,6 +2,11 @@ package com.example.number_calculator.editor_simple_fraction;
 
 import com.example.number_calculator.Operator;
 
+/**
+ * Этот класс представляет собой часть программы, реализующей калькулятор дробей.
+ * Он содержит статические переменные и методы для ввода и обработки чисел
+ * и операторов в калькуляторе дробей.
+ */
 public class InputFraction {
     public static Fraction number_one = null;
     public static Fraction number_two = null;
@@ -9,18 +14,21 @@ public class InputFraction {
     public static Fraction number_temp = null;
     public static String operation = "";
 
-    public InputFraction(Fraction number_one,Fraction number_two,Fraction number_result,
-                             Fraction number_temp,String operation) {
-        this.number_one=number_one;
-        this.number_two=number_two;
-        this.number_result=number_result;
-        this.number_temp=number_temp;
-        this.operation=operation;
+    public InputFraction(Fraction number_one, Fraction number_two, Fraction number_result,
+                         Fraction number_temp, String operation) {
+        this.number_one = number_one;
+        this.number_two = number_two;
+        this.number_result = number_result;
+        this.number_temp = number_temp;
+        this.operation = operation;
     }
 
+    /**
+     * принимает символ, который был введен пользователем, добавляет его к числу и передает его в функцию enteringNumber()
+     */
     public void inputNumber(String temp) {
         System.out.println(temp);
-        StringBuilder line ;
+        StringBuilder line;
 
         if (number_two == null) {
             if (number_one == null) {
@@ -37,6 +45,9 @@ public class InputFraction {
         enteringNumber(line);
     }
 
+    /**
+     * вызывается при нажатии на кнопку деления, преобразует число, если оно имеет неполное представление в виде дроби;
+     */
     public void onDivisionClicked() {
         if (number_two == null && number_one.getNumerator() != Integer.MIN_VALUE && number_one.getNumerator() != Integer.MAX_VALUE) {
             if (number_one.getDenominator() == Integer.MIN_VALUE) {
@@ -51,6 +62,11 @@ public class InputFraction {
         }
     }
 
+    /**
+     * принимает символ операции, добавляет его к текущей операции, передает ее в ProcessorFraction
+     * для вычисления результата и обновляет переменные number_one, number_two и number_temp в
+     * соответствии с введенными числами и операцией;
+     */
     public void entryOperator(String temp) {
         if (temp.equals("SignСhange")) {
             if (number_result != null) {
@@ -75,11 +91,11 @@ public class InputFraction {
         } else {
             String inputOperator = Operator.operatorDefinition(temp);
 
-            if (number_one != null && !operation.equals("") && number_two != null && number_two.getNumerator()!=Integer.MAX_VALUE) {
+            if (number_one != null && !operation.equals("") && number_two != null && number_two.getNumerator() != Integer.MAX_VALUE) {
                 if (number_result == null) {
-                    ProcessorFraction result=new ProcessorFraction();
+                    ProcessorFraction result = new ProcessorFraction();
                     result.onResultClicked();
-                    number_result=ProcessorFraction.number_result;
+                    number_result = ProcessorFraction.number_result;
                     number_one = new Fraction(number_result);
                     number_result = null;
                 } else {
@@ -106,10 +122,18 @@ public class InputFraction {
             operation = inputOperator;
         }
     }
+
+    /**
+     * меняет знак переданного числа
+     */
     private int negate(int temp) {
         return temp * (-1);
     }
 
+    /**
+     * принимает число, добавляет его к текущему числу (number_one или number_two) и
+     * обновляет соответствующую переменную объекта Fraction
+     */
     private void enteringNumber(StringBuilder line) {
         if (number_two == null) {
             if (number_one.getDenominator() == Integer.MAX_VALUE || number_one.getDenominator() != Integer.MIN_VALUE) {
@@ -126,6 +150,10 @@ public class InputFraction {
         }
     }
 
+    /**
+     * принимает объект Fraction, возвращает строку, которая содержит числитель или знаменатель,
+     * если они определены, или пустую строку, если они не определены.
+     */
     private StringBuilder numberDefinitions(Fraction fraction) {
         StringBuilder line = new StringBuilder();
 

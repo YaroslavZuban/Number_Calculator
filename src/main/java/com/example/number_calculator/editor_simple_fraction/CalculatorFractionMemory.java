@@ -2,6 +2,9 @@ package com.example.number_calculator.editor_simple_fraction;
 
 import com.example.number_calculator.editor_number_systems.TPNumber;
 
+/**
+ *представляет собой класс для хранения значения числа типа Fraction и выполнения операций с ним
+ */
 public class CalculatorFractionMemory {
     private Fraction value=null;
 

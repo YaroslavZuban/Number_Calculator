@@ -2,6 +2,9 @@ package com.example.number_calculator.editor_number_complex;
 
 import com.example.number_calculator.Operator;
 
+/**
+ * Данный класс представляет собой часть программы калькулятора и отвечает за обработку ввода пользователя.
+ */
 public class InputComplex {
     public static StringBuilder inputLine = new StringBuilder();
     public static StringBuilder tempLine = new StringBuilder();
@@ -9,6 +12,11 @@ public class InputComplex {
 
     public static StringBuilder operation = new StringBuilder();
 
+    /**
+     *  добавляет символ открытой или закрытой скобки в строку inputLine,
+     *  в зависимости от того, какую кнопку пользователь нажал на экране.
+     * @param temp
+     */
     public void inputSymbol(String temp) {
         if (temp.equals("OpenBracket")) {
             inputLine.append("(");
@@ -17,6 +25,10 @@ public class InputComplex {
         }
     }
 
+    /**
+     * добавляет числа и точку в строку inputLine в соответствии с нажатыми пользователем кнопками.
+     * @param temp
+     */
     public void input(String temp) {
         if (!resultLine.toString().equals("")) {
             resultLine = new StringBuilder();
@@ -43,6 +55,14 @@ public class InputComplex {
         }
     }
 
+    /**
+     * добавляет оператор (+,-,*,/) в строку inputLine в соответствии с нажатыми пользователем кнопками,
+     * проверяет правильность введенной операции и выбрасывает соответствующие исключения, если операция неправильна.
+     * @param temp
+     * @throws IncorrectTypeException
+     * @throws UnrecognizableElementException
+     * @throws IncorrectElementException
+     */
     public void inputOperation(String temp) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
         String inputOperator = Operator.operatorDefinition(temp);
         operation = new StringBuilder(inputOperator);
@@ -65,6 +85,11 @@ public class InputComplex {
         }
     }
 
+    /**
+     *  проверяет, является ли последний символ в строке inputLine знаком операции (+,-,*,/).
+     * @param line
+     * @return
+     */
     public boolean isSign(StringBuilder line) {
         int end = line.length() - 1;
 
@@ -75,37 +100,4 @@ public class InputComplex {
 
         return false;
     }
-
-    public static StringBuilder getInputLine() {
-        return inputLine;
-    }
-
-    public static void setInputLine(StringBuilder inputLine) {
-        InputComplex.inputLine = inputLine;
-    }
-
-    public static StringBuilder getTempLine() {
-        return tempLine;
-    }
-
-    public static void setTempLine(StringBuilder tempLine) {
-        InputComplex.tempLine = tempLine;
-    }
-
-    public static StringBuilder getResultLine() {
-        return resultLine;
-    }
-
-    public static void setResultLine(StringBuilder resultLine) {
-        InputComplex.resultLine = resultLine;
-    }
-
-    public static StringBuilder getOperation() {
-        return operation;
-    }
-
-    public static void setOperation(StringBuilder operation) {
-        InputComplex.operation = operation;
-    }
-
 }

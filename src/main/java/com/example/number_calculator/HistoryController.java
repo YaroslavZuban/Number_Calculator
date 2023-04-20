@@ -18,6 +18,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Данный класс представляет контроллер для окна "История" в калькуляторе.
+ * Он содержит методы для инициализации этого окна, обработки событий
+ * нажатия кнопок, а также для отображения записей из истории
+ * вычислений в таблице на этом окне.
+ */
 public class HistoryController implements Initializable {
     @FXML
     private ImageView buttonClose;

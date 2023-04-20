@@ -2,6 +2,10 @@ package com.example.number_calculator.editor_simple_fraction;
 
 import com.example.number_calculator.Number;
 
+/**
+ * Данный класс представляет собой реализацию класса дроби,
+ * который реализует интерфейс Number. Класс Fraction позволяет создавать и манипулировать дробями
+ */
 public class Fraction implements Number<Fraction> {
     @Override
     public String toString() {
@@ -45,6 +49,9 @@ public class Fraction implements Number<Fraction> {
         this.denominator = denominator;
     }
 
+    /**
+     * упрощает дробь, находя наибольший общий делитель числителя и знаменателя, и деля их на него.
+     */
     public void simplify() {
         int gcd = gcd(numerator, denominator);
 
@@ -145,12 +152,19 @@ public class Fraction implements Number<Fraction> {
         return result;
     }
 
+    /**
+     * переводит знак дроби
+     */
     private void transferringSign(){
         if (numerator != Integer.MAX_VALUE && numerator != Integer.MIN_VALUE &&
                 denominator != Integer.MAX_VALUE && denominator != Integer.MIN_VALUE ) {
             simplify();
         }
     }
+
+    /**
+     * возвращает обратную дробь для заданной дроби.
+     */
     public Fraction reciprocalNumber(Fraction fraction) {
         return new Fraction(fraction.getDenominator(), fraction.getNumerator());
     }

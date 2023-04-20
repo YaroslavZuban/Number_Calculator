@@ -4,6 +4,11 @@ import com.example.number_calculator.History;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Данный класс является процессором для работы с дробями и содержит методы для
+ * выполнения арифметических операций с дробями и обработки взаимодействия
+ * пользователя с графическим интерфейсом.
+ */
 public class ProcessorFraction {
     public static Fraction number_one = null;
     public static Fraction number_two = null;
@@ -11,6 +16,12 @@ public class ProcessorFraction {
     public static Fraction number_temp = null;
     public static String operation = "";
 
+    /**
+     * обработчик события нажатия на кнопку "=" (равно),
+     * выполняющий операцию между двумя дробями и выводящий
+     * результат в соответствующее поле, а также сохраняющий
+     * историю операций в объекте класса History.
+     */
     public void onResultClicked() {
         if (number_two.getNumerator() != Integer.MAX_VALUE && number_two.getDenominator() == Integer.MIN_VALUE) {
             number_two.setDenominator(1);
@@ -38,6 +49,12 @@ public class ProcessorFraction {
         }
     }
 
+    /**
+     * обработчик событий нажатия на кнопки операций (умножения, деления, сложения, вычитания)
+     * и возведения в квадрат/взятия обратной дроби. Метод выполняет соответствующие операции
+     * с дробями, сохраняет результат в поле number_two, если оно пустое, или в поле number_one,
+     * если оно уже содержит дробь.
+     */
     public void actionOperator(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         Fraction lineTemp = null;
@@ -80,6 +97,11 @@ public class ProcessorFraction {
         }
     }
 
+    /**
+     * метод для выполнения арифметических операций между двумя дробями
+     * (умножение, деление, сложение, вычитание), возвращает результат операции в виде новой дроби.
+
+     */
     private Fraction arithmetic(Fraction numberOne, Fraction numberTwo) {
         Fraction numberTemp = null;
 
@@ -102,6 +124,9 @@ public class ProcessorFraction {
         return null;
     }
 
+    /**
+     * метод для очистки всех полей класса ProcessorFraction.
+     */
     private void clear() {
         number_one = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
         number_two = null;
@@ -109,6 +134,11 @@ public class ProcessorFraction {
         operation = "";
     }
 
+    /**
+     * метод для проверки максимального и минимального значения числителя и знаменателя дроби.
+     * Возвращает true, если оба значения числителя и знаменателя не равны Integer.MAX_VALUE
+     * или Integer.MIN_VALUE, и false в противном случае.
+     */
     private boolean findMaxMin(Fraction fraction_one) {
         if (fraction_one.getNumerator() != Integer.MAX_VALUE && fraction_one.getNumerator() != Integer.MIN_VALUE &&
                 fraction_one.getDenominator() != Integer.MAX_VALUE && fraction_one.getDenominator() != Integer.MIN_VALUE)

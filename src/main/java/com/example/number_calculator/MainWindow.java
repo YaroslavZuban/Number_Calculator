@@ -11,6 +11,9 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * Данный класс представляет основное окно приложения и запускает его
+ */
 public class MainWindow extends Application {
     @Override
     public void start(Stage stage) throws IOException {

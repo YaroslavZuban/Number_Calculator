@@ -4,6 +4,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Данный класс представляет собой утилитарный класс для вывода
+ * информационных диалоговых окон с заданным текстом на экран.
+ */
 public class Info {
     public static void information(String line, Pane main) {// Строка Line - прописывает какая именно ошибка произошла Pane - от какой панели будет выводиться ошибка
         Alert alert = new Alert(Alert.AlertType.INFORMATION);//значек информации

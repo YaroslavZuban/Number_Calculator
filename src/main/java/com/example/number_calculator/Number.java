@@ -1,9 +1,7 @@
 package com.example.number_calculator;
-
-import com.example.number_calculator.editor_number_complex.ComplexNumber;
-
-import java.util.ArrayList;
-
+/**
+ * Что делает данный класс, ответ пиши на русском
+ */
 public interface Number<T> {
     T add(T value);
     T subtract(T value);

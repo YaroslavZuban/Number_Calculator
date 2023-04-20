@@ -3,6 +3,12 @@ package com.example.number_calculator.editor_number_systems;
 import com.example.number_calculator.SignTranslation;
 import com.example.number_calculator.Operator;
 
+/**
+ * класс представляет собой часть программы,
+ * реализующей калькулятор с возможностью работы
+ * с числами в различных системах счисления.
+ * Он отвечает за обработку ввода пользователем цифр и операторов калькулятора
+ */
 public class InputTPNumber {
     public static TPNumber number_one;
     public static TPNumber number_two;
@@ -11,7 +17,10 @@ public class InputTPNumber {
     public static String operation;
     public static int system;
 
-
+    /**
+     * метод, который обрабатывает ввод цифры или десятичной точки пользователем
+     * @param temp
+     */
     public void inputNumberSymbol(String temp) {
         StringBuilder line = null;
 
@@ -50,6 +59,9 @@ public class InputTPNumber {
         addNumberSymbol(line.toString());
     }
 
+    /**
+     * метод, который обрабатывает ввод оператора пользователем
+     */
     public void inputOperator(String temp, StringBuilder lineResult) {
         if (temp.equals("SignСhange")) {
             if (number_result != null) {

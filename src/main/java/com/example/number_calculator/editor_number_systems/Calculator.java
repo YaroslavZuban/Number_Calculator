@@ -1,5 +1,11 @@
 package com.example.number_calculator.editor_number_systems;
 
+/**
+ * который выполняет арифметические операции (+, -, *, /)
+ * над двумя объектами типа TPNumber
+ * (пользовательского класса для представления чисел с произвольной точностью),
+ * в зависимости от переданного аргумента operation и возвращает результат в виде нового объекта TPNumber.
+ */
 public class Calculator {
     public static TPNumber arithmetic(TPNumber number_one, TPNumber number_two,String operation) {
         TPNumber result = null;
