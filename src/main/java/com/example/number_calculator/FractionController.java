@@ -19,7 +19,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class FractionController {
+public class FractionController implements IController {
 
     @FXML
     private Button buttonBackSpace;
@@ -118,10 +118,12 @@ public class FractionController {
     ProcessorFraction processor = new ProcessorFraction();
 
     EditorFraction editorFraction = new EditorFraction();
+    private Stage stage;
 
     private double x, y;
 
     public void init(Stage stage) {
+        this.stage=stage;
         windowMain.setOnMousePressed(mouseEvent -> {
             x = mouseEvent.getSceneX();
             y = mouseEvent.getSceneY();
@@ -158,7 +160,7 @@ public class FractionController {
         });
 
         buttonInfo.setOnMouseClicked(mouseEvent -> {
-            Info.information(Reference.info, windowMain);
+            Info.information(Reference.infoFraction, windowMain);
         });
 
         buttonClose.setOnMouseClicked(event -> stage.close());
@@ -240,10 +242,25 @@ public class FractionController {
     }
 
     public void onWindowComplex(MouseEvent event) {
+        Stage oldStage = (Stage) windowMain.getScene().getWindow();
+        oldStage.close();
 
+        try {
+            ComplexController controller =  new FXMLManager().loadFXML("MainWindowInterfaceComplex.fxml", "Калькулятор - комплексный", StageStyle.TRANSPARENT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void onWindowConverter(MouseEvent event) {
+        Stage ss = (Stage) windowMain.getScene().getWindow();//береться параметры стратого она и закрывается
+        ss.close();//закрытия окна
+
+        try {
+            ConverterController controller = new FXMLManager().loadFXML("MainWindowInterface.fxml", "Калькулятор - конвертер", StageStyle.TRANSPARENT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void getProcessor() {

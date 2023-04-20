@@ -18,7 +18,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class ConverterController {
+public class ConverterController implements IController {
     @FXML
     private Button buttonBackSpace;
     @FXML
@@ -140,9 +140,12 @@ public class ConverterController {
     ProcessorConverter processorConverter = new ProcessorConverter();
     WorkingMemory memory = new WorkingMemory();
 
+    private Stage stage;
     private double x, y;
 
     public void init(Stage stage) {
+        this.stage = stage;
+
         windowMain.setOnMousePressed(mouseEvent -> {
             x = mouseEvent.getSceneX();
             y = mouseEvent.getSceneY();
@@ -179,7 +182,7 @@ public class ConverterController {
         });
 
         buttonInfo.setOnMouseClicked(mouseEvent -> {
-            Info.information(Reference.info, windowMain);
+            Info.information(Reference.infoConverter, windowMain);
         });
 
         buttonClose.setOnMouseClicked(event -> stage.close());
@@ -299,18 +302,31 @@ public class ConverterController {
     }
 
     public void onWindowFraction(MouseEvent event) {
+        Stage oldStage = (Stage) windowMain.getScene().getWindow();
+        oldStage.close();
 
+        try {
+            FractionController controller = new FXMLManager().loadFXML("MainWindowsInterfaceFraction.fxml", "Калькулятор - дроби", StageStyle.TRANSPARENT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void onWindowComplex(MouseEvent event) {
+        Stage oldStage = (Stage) windowMain.getScene().getWindow();
+        oldStage.close();
 
-
+        try {
+            ComplexController controller = new FXMLManager().loadFXML("MainWindowInterfaceComplex.fxml", "Калькулятор - комплексный", StageStyle.TRANSPARENT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void printEditor() {
-        if(EditorConverter.number_two!=null){
+        if (EditorConverter.number_two != null) {
             editorConverter.dataResult();
-        }else {
+        } else {
             editorConverter.dataInput();
         }
 

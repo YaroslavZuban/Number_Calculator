@@ -56,7 +56,7 @@ public class HistoryController implements Initializable {
         buttonClose.setOnMouseClicked(mouseEvent -> stage.close());//закрытие приложения
 
         buttonInfo.setOnMouseClicked(mouseEvent -> {
-            Info.information(Reference.info, windowMain);
+            Info.information(Reference.infoHistory, windowMain);
         });
 
         buttonHistory.setOnMouseClicked(mouseEvent -> {
