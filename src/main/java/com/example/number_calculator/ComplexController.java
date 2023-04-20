@@ -1,6 +1,7 @@
 package com.example.number_calculator;
 
-import com.example.number_calculator.editor_comprehensive.EditorComplex;
+import com.example.number_calculator.editor_number_complex.EditorComplex;
+import com.example.number_calculator.editor_number_complex.ProcessorComplex;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -122,6 +123,7 @@ public class ComplexController {
     @FXML
     private AnchorPane windowMain;
     private EditorComplex complex=new EditorComplex();
+    private ProcessorComplex processorComplex=new ProcessorComplex();
 
     private double x, y;
 
@@ -219,9 +221,7 @@ public class ComplexController {
     }
 
     @FXML
-    void onSymbolClicked(MouseEvent event) {
-
-    }
+    void onSymbolClicked(MouseEvent event) {}
 
     void printf(){
         textInput.setText(EditorComplex.getInputLine().toString());
@@ -229,15 +229,18 @@ public class ComplexController {
     }
 
     public void onMdlClicked(MouseEvent event) {
-
+        complex.onMdl(event);
+        printf();
     }
 
     public void onCndClicked(MouseEvent event) {
-
+        complex.onCnd(event);
+        printf();
     }
 
     public void onCnrClicked(MouseEvent event) {
-
+        complex.onCnr(event);
+        printf();
     }
 
     public void onBrackets(MouseEvent event){
@@ -246,7 +249,15 @@ public class ComplexController {
     }
 
     public void onRootClicked(MouseEvent event) {
+        complex.onRoot(event,2);
+        printf();
+    }
 
+    public void onWindowConverter(MouseEvent event) {
+
+    }
+
+    public void onWindowFraction(MouseEvent event) {
 
     }
 }

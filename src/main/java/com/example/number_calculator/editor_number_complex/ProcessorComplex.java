@@ -1,12 +1,9 @@
-package com.example.number_calculator.editor_comprehensive;
+package com.example.number_calculator.editor_number_complex;
 
 import com.example.number_calculator.Operator;
-import com.example.number_calculator.SignTranslation;
-import com.example.number_calculator.editor_number_systems.CalculatorTPNumberMemory;
-import com.example.number_calculator.editor_number_systems.ProcessorConverter;
-import com.example.number_calculator.editor_number_systems.TPNumber;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class ProcessorComplex {
@@ -15,15 +12,25 @@ public class ProcessorComplex {
     private static StringBuilder resultLine = new StringBuilder();
     private static StringBuilder operation = new StringBuilder();
 
+    private static StringBuilder functionResult=new StringBuilder();
     private CalculatorComplexMemory memory = new CalculatorComplexMemory();
     private PostfixConverter converter = null;
     private PostfixCalculator calc = null;
     private ComplexNumber result = null;
 
+    public ProcessorComplex() {}
     public ProcessorComplex(StringBuilder inputLine, StringBuilder resultLine, StringBuilder tempLine) {
         this.inputLine = inputLine;
         this.resultLine = resultLine;
         this.tempLine = tempLine;
+    }
+
+    public static StringBuilder getFunctionResult() {
+        return functionResult;
+    }
+
+    public static void setFunctionResult(StringBuilder functionResult) {
+        ProcessorComplex.functionResult = functionResult;
     }
 
     public void inputSymbol(String temp) {
@@ -145,6 +152,34 @@ public class ProcessorComplex {
         if (index != -1) {
             inputLine.delete(index, index + initialValue.length());
             inputLine.insert(index, number);
+        }
+    }
+
+    public void mdl() throws ParseException {
+        if(!resultLine.toString().equals("")){
+            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
+            resultLine=new StringBuilder(String.valueOf(complexNumber.Mdl()));
+        }
+    }
+
+    public void cnd() throws ParseException {
+        if(!resultLine.toString().equals("")){
+            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
+            resultLine=new StringBuilder(String.valueOf(complexNumber.cnd()));
+        }
+    }
+
+    public void cnr() throws ParseException {
+        if(!resultLine.toString().equals("")){
+            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
+            resultLine=new StringBuilder(String.valueOf(complexNumber.cnr()));
+        }
+    }
+
+    public void root(int n) throws ParseException {
+        if(!resultLine.toString().equals("")){
+            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
+            resultLine=new StringBuilder(Arrays.toString(complexNumber.Root(n)));
         }
     }
 

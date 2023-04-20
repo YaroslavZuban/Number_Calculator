@@ -4,7 +4,7 @@
  * Created on 7 Май 2004 г., 10:15
  */
 
-package com.example.number_calculator.editor_comprehensive;
+package com.example.number_calculator.editor_number_complex;
 
 import java.util.Vector;
 import java.util.Stack;

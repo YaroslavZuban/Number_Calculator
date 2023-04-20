@@ -219,4 +219,10 @@ public class FractionController {
         textResult.setText(EditorFraction.lineResult.toString());
     }
 
+    public void onWindowComplex(MouseEvent event) {
+
+    }
+
+    public void onWindowConverter(MouseEvent event) {
+    }
 }

@@ -4,7 +4,7 @@
  * Created on 6 Май 2004 г., 20:01
  */
 
-package com.example.number_calculator.editor_comprehensive;
+package com.example.number_calculator.editor_number_complex;
 
 /**
  * Этот класс предназначен для использования в пакете CalcClasses.

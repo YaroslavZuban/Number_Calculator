@@ -278,4 +278,12 @@ public class MainController {
         textResult.setText(EditorConverter.lineResult.toString());
     }
 
+    public void onWindowFraction(MouseEvent event) {
+
+    }
+
+    public void onWindowComplex(MouseEvent event) {
+
+
+    }
 }

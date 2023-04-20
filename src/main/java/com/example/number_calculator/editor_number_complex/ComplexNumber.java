@@ -4,7 +4,7 @@
  * Created on 5 Май 2004 г., 9:12
  */
 
-package com.example.number_calculator.editor_comprehensive;
+package com.example.number_calculator.editor_number_complex;
 
 import java.util.StringTokenizer;
 import java.text.NumberFormat;
@@ -17,6 +17,12 @@ public class ComplexNumber {
     
     private double Re = 0; //действительная часть числа
     private double Im = 0; //мнимая часть числа
+
+
+    public ComplexNumber(double re,double im){
+        this.Re=re;
+        this.Im=im;
+    }
     
     /**
      * Создает новые экземпляры ComplexNumber
@@ -158,5 +164,34 @@ public class ComplexNumber {
         tempIm = (Im * value.Re - Re * value.Im) / denominator;
         Re = tempRe;
         Im = tempIm;
+    }
+
+
+    public double Mdl() {
+        return Math.sqrt(Re * Re + Im * Im);
+    }
+
+    // вычисление аргумента комплексного числа в градусах
+    public double cnd() {
+        return Math.toDegrees(Math.atan2(Im, Re));
+    }
+
+    // вычисление аргумента комплексного числа в радианах
+    public double cnr() {
+        return Math.atan2(Im, Re);
+    }
+
+    // вычисление корня комплексного числа
+    public ComplexNumber[] Root(int n) {
+        ComplexNumber[] roots = new ComplexNumber[n];
+        double r = Math.pow(Mdl(), 1.0 / n);
+        double theta = cnr() / n;
+        for (int i = 0; i < n; i++) {
+            double realPart = r * Math.cos(theta + 2 * Math.PI * i / n);
+            double imagPart = r * Math.sin(theta + 2 * Math.PI * i / n);
+            roots[i] = new ComplexNumber(realPart, imagPart);
+        }
+
+        return roots;
     }
 }

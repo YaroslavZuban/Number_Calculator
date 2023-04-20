@@ -1,8 +1,6 @@
-package com.example.number_calculator.editor_comprehensive;
+package com.example.number_calculator.editor_number_complex;
 
 import com.example.number_calculator.Editor;
-import com.example.number_calculator.editor_number_systems.InputTPNumber;
-import com.example.number_calculator.editor_number_systems.ProcessorConverter;
 import com.example.number_calculator.editor_number_systems.TPNumber;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -151,5 +149,48 @@ public class EditorComplex implements Editor {
         ProcessorComplex.setInputLine(inputLine);
         ProcessorComplex.setResultLine(resultLine);
         ProcessorComplex.setTempLine(tempLine);
+    }
+
+    public void onMdl(MouseEvent event) {
+        try {
+            processor.mdl();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        getInput();
+    }
+
+    public void onCnd(MouseEvent event) {
+        try {
+            processor.cnd();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        getInput();
+    }
+
+    public void onCnr(MouseEvent event) {
+        try {
+            processor.cnr();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        getInput();
+    }
+
+    public void onRoot(MouseEvent event,int n) {
+        try {
+            processor.root(n);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        getInput();
     }
 }

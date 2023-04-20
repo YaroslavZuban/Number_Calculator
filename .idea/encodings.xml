@@ -2,24 +2,24 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/ComplexNumber.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/IncorrectElementException.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/IncorrectTypeException.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/InfixChecker.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/PostfixCalculator.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/PostfixConverter.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/PostfixElement.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/PostfixElementType.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/CalcClasses/UnrecognizableElementException.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/ComplexNumber.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/IncorrectElementException.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/IncorrectTypeException.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/InfixChecker.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/PostfixCalculator.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/PostfixConverter.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/PostfixElement.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/PostfixElementType.java" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_comprehensive/UnrecognizableElementException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/ComplexNumber.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/IncorrectElementException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/IncorrectTypeException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/InfixChecker.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/PostfixCalculator.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/PostfixConverter.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/PostfixElement.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/PostfixElementType.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/CalcClasses/UnrecognizableElementException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/ComplexNumber.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/IncorrectElementException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/IncorrectTypeException.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/InfixChecker.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/PostfixCalculator.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/PostfixConverter.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/PostfixElement.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/PostfixElementType.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/number_calculator/editor_number_complex/UnrecognizableElementException.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>

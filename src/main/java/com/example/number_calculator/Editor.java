@@ -11,16 +11,11 @@ import javafx.scene.input.MouseEvent;
 public interface Editor {
      void entrySymbol(MouseEvent event);
      void entryNumber(MouseEvent event);
-
      void entryOperator(MouseEvent event);
-
      void onResultClicked();
      void actionOperator(MouseEvent event);
      void onBackSpace(MouseEvent event);
-
      void onClean(MouseEvent event);
-
      void onCleanEntry(MouseEvent event);
      void memory(MouseEvent event);
-
 }
