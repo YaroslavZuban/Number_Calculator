@@ -1,6 +1,11 @@
 package com.example.number_calculator.editor_simple_fraction;
 
 public class Fraction {
+    @Override
+    public String toString() {
+        return  numerator + "/" + denominator ;
+    }
+
     private Integer numerator;
     private Integer denominator;
 
@@ -107,14 +112,6 @@ public class Fraction {
         temp.simplify();
 
         return temp;
-    }
-
-    @Override
-    public String toString() {
-        return "Fraction{" +
-                "numerator=" + numerator +
-                ", denominator=" + denominator +
-                '}';
     }
 
     public Fraction power(int exponent) {

@@ -1,5 +1,6 @@
 package com.example.number_calculator.editor_number_complex;
 
+import com.example.number_calculator.History;
 import com.example.number_calculator.Operator;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -13,13 +14,12 @@ public class ProcessorComplex {
     public static StringBuilder tempLine = new StringBuilder();
     public static StringBuilder resultLine = new StringBuilder();
     public static StringBuilder operation = new StringBuilder();
-    public static StringBuilder functionResult=new StringBuilder();
+    public static StringBuilder functionResult = new StringBuilder();
     private CalculatorComplexMemory memory = new CalculatorComplexMemory();
     private PostfixConverter converter = null;
     private PostfixCalculator calc = null;
     private ComplexNumber result = null;
 
-    public ProcessorComplex() {}
     public void result() throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException, ParseException {
         if (isSign(inputLine)) {
             if (tempLine.toString().equals("")) {
@@ -43,8 +43,10 @@ public class ProcessorComplex {
             calc = new PostfixCalculator(converter.convertToPostfix());
             result = new ComplexNumber(calc.calculate());
             resultLine = new StringBuilder(result.toString());
+            History.data.add(inputLine + " = " + resultLine);
         }
     }
+
     public void actionOperator(MouseEvent event) throws IncorrectTypeException, UnrecognizableElementException, IncorrectElementException {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         converter = new PostfixConverter(inputLine.toString());
@@ -85,30 +87,35 @@ public class ProcessorComplex {
             inputLine.insert(index, number);
         }
     }
+
     public void mdl() throws ParseException {
-        if(!resultLine.toString().equals("")){
-            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            functionResult=new StringBuilder(String.valueOf(complexNumber.Mdl()));
+        if (!resultLine.toString().equals("")) {
+            ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
+            functionResult = new StringBuilder(String.valueOf(complexNumber.Mdl()));
         }
     }
+
     public void cnd() throws ParseException {
-        if(!resultLine.toString().equals("")){
-            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            functionResult=new StringBuilder(String.valueOf(complexNumber.cnd()));
+        if (!resultLine.toString().equals("")) {
+            ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
+            functionResult = new StringBuilder(String.valueOf(complexNumber.cnd()));
         }
     }
+
     public void cnr() throws ParseException {
-        if(!resultLine.toString().equals("")){
-            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            functionResult=new StringBuilder(String.valueOf(complexNumber.cnr()));
+        if (!resultLine.toString().equals("")) {
+            ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
+            functionResult = new StringBuilder(String.valueOf(complexNumber.cnr()));
         }
     }
+
     public void root(int n) throws ParseException {
-        if(!resultLine.toString().equals("")){
-            ComplexNumber complexNumber=new ComplexNumber(resultLine.toString());
-            functionResult=new StringBuilder(Arrays.toString(complexNumber.Root(n)));
+        if (!resultLine.toString().equals("")) {
+            ComplexNumber complexNumber = new ComplexNumber(resultLine.toString());
+            functionResult = new StringBuilder(Arrays.toString(complexNumber.Root(n)));
         }
     }
+
     public boolean isSign(StringBuilder line) {
         int end = line.length() - 1;
 

@@ -1,5 +1,6 @@
 package com.example.number_calculator.editor_simple_fraction;
 
+import com.example.number_calculator.History;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
@@ -11,18 +12,18 @@ public class ProcessorFraction {
     public static String operation = "";
 
     public void onResultClicked() {
-        if (number_two.getNumerator() != Integer.MAX_VALUE && number_two.getDenominator()==Integer.MIN_VALUE) {
+        if (number_two.getNumerator() != Integer.MAX_VALUE && number_two.getDenominator() == Integer.MIN_VALUE) {
             number_two.setDenominator(1);
         }
 
-        if (number_one != null && !operation.equals("") && number_two.getNumerator()==Integer.MAX_VALUE) {
+        if (number_one != null && !operation.equals("") && number_two.getNumerator() == Integer.MAX_VALUE) {
             if (number_temp == null) {
                 number_temp = new Fraction(number_one);
             }
 
             number_two = new Fraction(number_temp);
             number_one = arithmetic(number_one, number_two);
-            number_two = new Fraction(Integer.MAX_VALUE,Integer.MIN_VALUE);
+            number_two = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
         } else if (number_two != null && number_one != null && findMaxMin(number_one) && findMaxMin(number_one)) {
             number_result = arithmetic(number_one, number_two);
 
@@ -30,6 +31,9 @@ public class ProcessorFraction {
                 clear();
             } else {
                 number_one = new Fraction(number_result);
+                String result = "(" + number_one.toString() + ")" + operation +
+                        "(" + number_two.toString() + ") = " + number_result.toString();
+                History.data.add(result);
             }
         }
     }
