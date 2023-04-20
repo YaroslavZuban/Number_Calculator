@@ -14,7 +14,7 @@ import java.io.IOException;
 public class MainWindow extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("MainWindowInterface.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("MainWindowsInterfaceFraction.fxml"));
         Scene scene=new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Калькулятор");
@@ -22,7 +22,7 @@ public class MainWindow extends Application {
         stage.setResizable(false);//нельяз расширять окно
         stage.setScene(scene);//установление сцены
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/ico/calculator.png")));
-        ((ConverterController)fxmlLoader.getController()).init(stage);//устанавливаем сцену
+        ((FractionController)fxmlLoader.getController()).init(stage);//устанавливаем сцену
         stage.show();//отображаем сцену
     }
 

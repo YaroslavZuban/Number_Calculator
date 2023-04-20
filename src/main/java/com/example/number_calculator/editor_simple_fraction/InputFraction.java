@@ -3,11 +3,11 @@ package com.example.number_calculator.editor_simple_fraction;
 import com.example.number_calculator.Operator;
 
 public class InputFraction {
-    private static Fraction number_one = null;
-    private static Fraction number_two = null;
-    private static Fraction number_result = null;
-    private static Fraction number_temp = null;
-    private static String operation = "";
+    public static Fraction number_one = null;
+    public static Fraction number_two = null;
+    public static Fraction number_result = null;
+    public static Fraction number_temp = null;
+    public static String operation = "";
 
     public InputFraction(Fraction number_one,Fraction number_two,Fraction number_result,
                              Fraction number_temp,String operation) {
@@ -18,9 +18,9 @@ public class InputFraction {
         this.operation=operation;
     }
 
-
     public void inputNumber(String temp) {
-        StringBuilder line = null;
+        System.out.println(temp);
+        StringBuilder line ;
 
         if (number_two == null) {
             if (number_one == null) {
@@ -33,12 +33,22 @@ public class InputFraction {
             line = new StringBuilder(numberDefinitions(number_two));
         }
 
-
         line.append(temp);
-
         enteringNumber(line);
+    }
 
-
+    public void onDivisionClicked() {
+        if (number_two == null && number_one.getNumerator() != Integer.MIN_VALUE && number_one.getNumerator() != Integer.MAX_VALUE) {
+            if (number_one.getDenominator() == Integer.MIN_VALUE) {
+                number_one.setDenominator(Integer.MAX_VALUE);
+            }
+        } else if (number_two == null && number_one.getDenominator() != Integer.MAX_VALUE) {
+            number_two = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
+        } else if (number_two != null && number_two.getNumerator() != Integer.MIN_VALUE && number_two.getNumerator() != Integer.MAX_VALUE) {
+            if (number_two.getDenominator() == Integer.MIN_VALUE) {
+                number_two.setDenominator(Integer.MAX_VALUE);
+            }
+        }
     }
 
     public void entryOperator(String temp) {
@@ -67,8 +77,9 @@ public class InputFraction {
 
             if (number_one != null && !operation.equals("") && number_two != null && number_two.getNumerator()!=Integer.MAX_VALUE) {
                 if (number_result == null) {
-                    ProcessorFraction result=new ProcessorFraction(number_one,number_two,number_result,number_temp,operation);
+                    ProcessorFraction result=new ProcessorFraction();
                     result.onResultClicked();
+                    number_result=ProcessorFraction.number_result;
                     number_one = new Fraction(number_result);
                     number_result = null;
                 } else {
@@ -95,52 +106,9 @@ public class InputFraction {
             operation = inputOperator;
         }
     }
-
-    public static Fraction getNumber_one() {
-        return number_one;
-    }
-
-    public static void setNumber_one(Fraction number_one) {
-        InputFraction.number_one = number_one;
-    }
-
-    public static Fraction getNumber_two() {
-        return number_two;
-    }
-
-    public static void setNumber_two(Fraction number_two) {
-        InputFraction.number_two = number_two;
-    }
-
-    public static Fraction getNumber_result() {
-        return number_result;
-    }
-
-    public static void setNumber_result(Fraction number_result) {
-        InputFraction.number_result = number_result;
-    }
-
-    public static Fraction getNumber_temp() {
-        return number_temp;
-    }
-
-    public static void setNumber_temp(Fraction number_temp) {
-        InputFraction.number_temp = number_temp;
-    }
-
-    public static String getOperation() {
-        return operation;
-    }
-
-    public static void setOperation(String operation) {
-        InputFraction.operation = operation;
-    }
-
-
     private int negate(int temp) {
         return temp * (-1);
     }
-
 
     private void enteringNumber(StringBuilder line) {
         if (number_two == null) {
@@ -175,6 +143,4 @@ public class InputFraction {
 
         return line;
     }
-
-
 }

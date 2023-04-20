@@ -38,13 +38,11 @@ public class Fraction {
         this.denominator = denominator;
     }
 
-
     public void simplify() {
         int gcd = gcd(numerator, denominator);
 
         numerator /= gcd;
         denominator /= gcd;
-
     }
 
     private int gcd(int a, int b) {
@@ -143,7 +141,6 @@ public class Fraction {
 
         return result;
     }
-
 
     private void transferringSign(){
         if (numerator != Integer.MAX_VALUE && numerator != Integer.MIN_VALUE &&

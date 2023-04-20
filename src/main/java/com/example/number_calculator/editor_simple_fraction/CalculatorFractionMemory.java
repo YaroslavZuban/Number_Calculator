@@ -24,23 +24,6 @@ public class CalculatorFractionMemory {
     public void memoryPlus(Fraction number) {
         value=value.add(number);
     }
-
-    public int getDenominator() {
-        return this.value.getDenominator();
-    }
-
-    public int getNumerator() {
-        return this.value.getNumerator();
-    }
-
-    public void setDenominator(int denominator) {
-        value.setDenominator(denominator);
-    }
-
-    public void setNumerator(int numerator) {
-        value.setNumerator(numerator);
-    }
-
     public Fraction getValue(){
         return value;
     }

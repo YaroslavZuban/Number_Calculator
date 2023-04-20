@@ -4,71 +4,38 @@ import com.example.number_calculator.Editor;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class EditorFraction implements Editor {
+public class EditorFraction {
     public static Fraction number_one = null;
     public static Fraction number_two = null;
     public static Fraction number_result = null;
-    private static Fraction number_temp = null;
+    public static Fraction number_temp = null;
     public static StringBuilder lineInput = new StringBuilder();
     public static StringBuilder lineResult = new StringBuilder();
     public static String operation = "";
-    private ProcessorFraction processorFraction = new ProcessorFraction(number_one, number_two, number_result,
-            number_temp, operation);
-    private InputFraction input = new InputFraction(number_one, number_two, number_result, number_temp, operation);
-    private static CalculatorFractionMemory calculatorMemory = new CalculatorFractionMemory();
+    InputFraction input = new InputFraction(number_one, number_two, number_result, number_temp, operation);
 
-    @Override
-    public void entrySymbol(MouseEvent event) {
-
-    }
-
-    @Override
     public void entryNumber(MouseEvent event) {
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
         inputNumber(temp);
     }
 
-    @Override
     public void entryOperator(MouseEvent event) {
+        setInput();
         String temp = ((Button) event.getSource()).getId().replace("button_", "");
 
         input.entryOperator(temp);
         getInput();
-        setResult();
 
         dataInput();
     }
 
-    @Override
-    public void onResultClicked() {
-        getResult();
+    public void onDivisionClicked(){
+       input.onDivisionClicked();
 
-        Fraction temp = number_one;
-
-        processorFraction.onResultClicked();
-        getResult();
-
-        if (number_result != null) {
-            number_one = temp;
-        }
-
-        dataInput();
-        setInput();
-
+       getInput();
+       dataInput();
     }
 
-    @Override
-    public void actionOperator(MouseEvent event) {
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-        processorFraction.actionOperator(temp);
-
-        getResult();
-        setInput();
-
-        dataInput();
-    }
-
-    @Override
     public void onBackSpace(MouseEvent event) {
         String temp;
 
@@ -122,13 +89,10 @@ public class EditorFraction implements Editor {
             }
         }
 
-        setResult();
         setInput();
-
         dataInput();
     }
 
-    @Override
     public void onClean(MouseEvent event) {
         lineInput = new StringBuilder("0");
         lineResult = new StringBuilder();
@@ -139,11 +103,9 @@ public class EditorFraction implements Editor {
 
         operation = "";
 
-        setResult();
         setInput();
     }
 
-    @Override
     public void onCleanEntry(MouseEvent event) {
         if (number_two != null && number_two.getNumerator() != Integer.MAX_VALUE) {
             number_two.setNumerator(Integer.MAX_VALUE);
@@ -155,67 +117,9 @@ public class EditorFraction implements Editor {
             number_one = null;
         }
 
-        setResult();
         setInput();
 
         dataInput();
-    }
-
-    @Override
-    public void memory(MouseEvent event) {
-        String temp = ((Button) event.getSource()).getId().replace("button_", "");
-
-        if (temp.contains("MPlus")) {
-            if (number_result != null && findMaxMin(number_result)) {
-                calculatorMemory.memoryPlus(number_result);
-            } else {
-                if (number_one != null && operation.equals("") && findMaxMin(number_one)) {
-                    calculatorMemory.memoryPlus(number_one);
-                }
-            }
-        } else if (temp.contains("MR")) {
-            lineInput = new StringBuilder();
-            lineResult = new StringBuilder();
-
-            number_two = null;
-            number_result = null;
-
-            operation = "";
-
-            if (number_one != null && !findMaxMin(number_one)) {
-                number_one = calculatorMemory.getValue();
-            } else if (number_two != null && !operation.equals("") && !findMaxMin(number_two)) {
-                number_two = calculatorMemory.getValue();
-            }
-
-            dataInput();
-        } else if (temp.contains("MS")) {
-
-            if (number_result != null && findMaxMin(number_result)) {
-                calculatorMemory.memorySave(number_result);
-            } else {
-                if (number_one != null && operation.equals("") && findMaxMin(number_one)) {
-                    calculatorMemory.memorySave(number_one);
-                }
-            }
-
-        } else if (temp.contains("MC")) {
-            calculatorMemory = new CalculatorFractionMemory();
-        }
-    }
-
-    public void onDivisionClicked() {
-        if (number_two == null && number_one.getNumerator() != Integer.MIN_VALUE && number_one.getNumerator() != Integer.MAX_VALUE) {
-            if (number_one.getDenominator() == Integer.MIN_VALUE) {
-                number_one.setDenominator(Integer.MAX_VALUE);
-            }
-        } else if (number_two == null && number_one.getDenominator() != Integer.MAX_VALUE) {
-            number_two = new Fraction(Integer.MAX_VALUE, Integer.MIN_VALUE);
-        } else if (number_two != null && number_two.getNumerator() != Integer.MIN_VALUE && number_two.getNumerator() != Integer.MAX_VALUE) {
-            if (number_two.getDenominator() == Integer.MIN_VALUE) {
-                number_two.setDenominator(Integer.MAX_VALUE);
-            }
-        }
     }
 
     private void inputNumber(String temp) {
@@ -229,60 +133,16 @@ public class EditorFraction implements Editor {
             lineInput = new StringBuilder();
             lineResult = new StringBuilder();
 
-            setResult();
             setInput();
         }
 
         input.inputNumber(temp);
 
         getInput();
-        setResult();
-
         dataInput();
     }
 
-    private boolean findMaxMin(Fraction fraction_one) {
-        if (fraction_one.getNumerator() != Integer.MAX_VALUE && fraction_one.getNumerator() != Integer.MIN_VALUE &&
-                fraction_one.getDenominator() != Integer.MAX_VALUE && fraction_one.getDenominator() != Integer.MIN_VALUE)
-            return true;
-
-
-        return false;
-    }
-
-    private void log() {
-        if (number_one != null) {
-            System.out.println("number_one: " + number_one.toString());
-        } else {
-            System.out.println("number_one: " + null);
-        }
-
-        if (number_two != null) {
-            System.out.println("number_two: " + number_two.toString());
-        } else {
-            System.out.println("number_two: " + null);
-        }
-
-        if (number_result != null) {
-            System.out.println("number_result: " + number_result.toString());
-        } else {
-            System.out.println("number_result: " + null);
-        }
-
-        if (lineResult != null) {
-            System.out.println("lineResult: " + lineResult.toString());
-        } else {
-            System.out.println("lineResult: " + null);
-        }
-
-        if (lineInput != null) {
-            System.out.println("lineInput: " + lineInput.toString());
-        } else {
-            System.out.println("lineInput: " + null);
-        }
-    }
-
-    private void dataInput() {
+    public void dataInput() {
         StringBuilder result = new StringBuilder();
 
         if (number_one != null) {
@@ -318,7 +178,9 @@ public class EditorFraction implements Editor {
         }
 
         lineInput = new StringBuilder(result);
-        result.delete(0, result.length());
+    }
+    public void dataResult(){
+        StringBuilder result = new StringBuilder();
 
         if (number_result != null) {
             if (number_result.getNumerator() != Integer.MAX_VALUE && number_result.getNumerator() != Integer.MIN_VALUE) {
@@ -352,35 +214,19 @@ public class EditorFraction implements Editor {
         return line;
     }
 
-    private void setResult() {
-        ProcessorFraction.setNumber_one(number_one);
-        ProcessorFraction.setNumber_two(number_two);
-        ProcessorFraction.setNumber_result(number_result);
-        ProcessorFraction.setNumber_temp(number_temp);
-        ProcessorFraction.setOperation(operation);
-    }
-
-    private void getResult() {
-        number_one = ProcessorFraction.getNumber_one();
-        number_two = ProcessorFraction.getNumber_two();
-        number_result = ProcessorFraction.getNumber_result();
-        number_temp = ProcessorFraction.getNumber_temp();
-        operation = ProcessorFraction.getOperation();
-    }
-
     private void setInput() {
-        InputFraction.setNumber_one(number_one);
-        InputFraction.setNumber_two(number_two);
-        InputFraction.setNumber_result(number_result);
-        InputFraction.setNumber_temp(number_temp);
-        InputFraction.setOperation(operation);
+        InputFraction.number_one = number_one;
+        InputFraction.number_two = number_two;
+        InputFraction.number_result = number_result;
+        InputFraction.number_temp = number_temp;
+        InputFraction.operation = operation;
     }
 
     private void getInput() {
-        number_one = InputFraction.getNumber_one();
-        number_two = InputFraction.getNumber_two();
-        number_result = InputFraction.getNumber_result();
-        number_temp = InputFraction.getNumber_temp();
-        operation = InputFraction.getOperation();
+        number_one = InputFraction.number_one;
+        number_two = InputFraction.number_two;
+        number_result = InputFraction.number_result;
+        number_temp = InputFraction.number_temp;
+        operation = InputFraction.operation;
     }
 }

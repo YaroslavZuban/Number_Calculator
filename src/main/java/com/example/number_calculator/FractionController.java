@@ -1,7 +1,10 @@
 package com.example.number_calculator;
 
 import com.example.number_calculator.editor_number_systems.EditorConverter;
+import com.example.number_calculator.editor_simple_fraction.CalculatorFractionMemory;
 import com.example.number_calculator.editor_simple_fraction.EditorFraction;
+import com.example.number_calculator.editor_simple_fraction.ProcessorFraction;
+import com.example.number_calculator.editor_simple_fraction.WorkingMemory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -111,6 +114,9 @@ public class FractionController {
     @FXML
     private AnchorPane windowMain;
 
+    WorkingMemory workingMemory = new WorkingMemory();
+    ProcessorFraction processor = new ProcessorFraction();
+
     EditorFraction editorFraction = new EditorFraction();
 
     private double x, y;
@@ -162,59 +168,73 @@ public class FractionController {
 
     @FXML
     void actionOperator(MouseEvent event) {
-        editorFraction.actionOperator(event);
+        processor.actionOperator(event);
+
+        getProcessor();
         printf();
     }
-
-
     @FXML
     void onResultClicked(MouseEvent event) {
-        editorFraction.onResultClicked();
+        processor.onResultClicked();
+        getProcessor();
         printf();
     }
 
     @FXML
     void onNumberClicked(MouseEvent event) {
         editorFraction.entryNumber(event);
+        getEditor();
         printf();
     }
 
     @FXML
     void onOperatorClicking(MouseEvent event) {
         editorFraction.entryOperator(event);
+        getEditor();
         printf();
     }
 
     @FXML
     public void onClean(MouseEvent event) {
         editorFraction.onClean(event);
+        getEditor();
         printf();
     }
 
     @FXML
     public void onMemory(MouseEvent event) {
-        editorFraction.memory(event);
+        workingMemory.memory(event);
+        getMemory();
         printf();
     }
 
     public void onDivisionClicked(MouseEvent event) {
         editorFraction.onDivisionClicked();
+        getEditor();
         printf();
     }
 
     @FXML
     public void onCleanEntry(MouseEvent event) {
         editorFraction.onCleanEntry(event);
+        getEditor();
         printf();
     }
 
     @FXML
     public void onBackSpace(MouseEvent event) {
         editorFraction.onBackSpace(event);
+        getEditor();
         printf();
     }
 
     private void printf() {
+        if(EditorFraction.number_result!=null){
+            editorFraction.dataResult();
+        }else {
+            editorFraction.dataInput();
+        }
+
         textInput.setText(EditorFraction.lineInput.toString());
         textResult.setText(EditorFraction.lineResult.toString());
     }
@@ -224,5 +244,47 @@ public class FractionController {
     }
 
     public void onWindowConverter(MouseEvent event) {
+    }
+
+    private void getProcessor() {
+        WorkingMemory.number_one = ProcessorFraction.number_one;
+        WorkingMemory.number_two = ProcessorFraction.number_two;
+        WorkingMemory.number_result = ProcessorFraction.number_result;
+        WorkingMemory.number_temp = ProcessorFraction.number_temp;
+        WorkingMemory.operation = ProcessorFraction.operation;
+
+        EditorFraction.number_one = ProcessorFraction.number_one;
+        EditorFraction.number_two = ProcessorFraction.number_two;
+        EditorFraction.number_result = ProcessorFraction.number_result;
+        EditorFraction.number_temp = ProcessorFraction.number_temp;
+        EditorFraction.operation = ProcessorFraction.operation;
+    }
+
+    private void getEditor() {
+        WorkingMemory.number_one = EditorFraction.number_one;
+        WorkingMemory.number_two = EditorFraction.number_two;
+        WorkingMemory.number_result = EditorFraction.number_result;
+        WorkingMemory.number_temp = EditorFraction.number_temp;
+        WorkingMemory.operation = EditorFraction.operation;
+
+        ProcessorFraction.number_one = EditorFraction.number_one;
+        ProcessorFraction.number_two = EditorFraction.number_two;
+        ProcessorFraction.number_result = EditorFraction.number_result;
+        ProcessorFraction.number_temp = EditorFraction.number_temp;
+        ProcessorFraction.operation = EditorFraction.operation;
+    }
+
+    private void getMemory() {
+        EditorFraction.number_one = WorkingMemory.number_one;
+        EditorFraction.number_two = WorkingMemory.number_two;
+        EditorFraction.number_result = WorkingMemory.number_result;
+        EditorFraction.number_temp = WorkingMemory.number_temp;
+        EditorFraction.operation = WorkingMemory.operation;
+
+        ProcessorFraction.number_one = WorkingMemory.number_one;
+        ProcessorFraction.number_two = WorkingMemory.number_two;
+        ProcessorFraction.number_result = WorkingMemory.number_result;
+        ProcessorFraction.number_temp = WorkingMemory.number_temp;
+        ProcessorFraction.operation = WorkingMemory.operation;
     }
 }

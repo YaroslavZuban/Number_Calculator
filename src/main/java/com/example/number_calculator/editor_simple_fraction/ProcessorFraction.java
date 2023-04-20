@@ -4,21 +4,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class ProcessorFraction {
-    private static Fraction number_one = null;
-    private static Fraction number_two = null;
-    private static Fraction number_result = null;
-    private static Fraction number_temp = null;
-    private static String operation = "";
-
-
-    public ProcessorFraction(Fraction number_one, Fraction number_two, Fraction number_result,
-                             Fraction number_temp, String operation) {
-        this.number_one = number_one;
-        this.number_two = number_two;
-        this.number_result = number_result;
-        this.number_temp = number_temp;
-        this.operation = operation;
-    }
+    public static Fraction number_one = null;
+    public static Fraction number_two = null;
+    public static Fraction number_result = null;
+    public static Fraction number_temp = null;
+    public static String operation = "";
 
     public void onResultClicked() {
         if (number_two.getNumerator() != Integer.MAX_VALUE && number_two.getDenominator()==Integer.MIN_VALUE) {
@@ -44,7 +34,8 @@ public class ProcessorFraction {
         }
     }
 
-    public void actionOperator(String temp) {
+    public void actionOperator(MouseEvent event) {
+        String temp = ((Button) event.getSource()).getId().replace("button_", "");
         Fraction lineTemp = null;
 
         if (number_result == null) {
@@ -83,52 +74,6 @@ public class ProcessorFraction {
         } catch (Exception e) {
             clear();
         }
-
-    }
-
-
-    public static Fraction getNumber_one() {
-        return number_one;
-    }
-
-    public static void setNumber_one(Fraction number_one) {
-        ProcessorFraction.number_one = number_one;
-    }
-
-    public static Fraction getNumber_two() {
-        return number_two;
-    }
-
-    public static void setNumber_two(Fraction number_two) {
-        ProcessorFraction.number_two = number_two;
-    }
-
-    public static Fraction getNumber_result() {
-        return number_result;
-    }
-
-    public static void setNumber_result(Fraction number_result) {
-        ProcessorFraction.number_result = number_result;
-    }
-
-    public static Fraction getNumber_temp() {
-        return number_temp;
-    }
-
-    public static void setNumber_temp(Fraction number_temp) {
-        ProcessorFraction.number_temp = number_temp;
-    }
-
-    public static String getOperation() {
-        return operation;
-    }
-
-    public static void setOperation(String operation) {
-        ProcessorFraction.operation = operation;
-    }
-
-    private int negate(int temp) {
-        return temp * (-1);
     }
 
     private Fraction arithmetic(Fraction numberOne, Fraction numberTwo) {
