@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="windowMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="411.0" style="-fx-background-color: #3E3E3E; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.number_calculator.FractionController">
+<AnchorPane fx:id="windowMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="411.0" style="-fx-background-color: #3E3E3E; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.number_calculator.FractionController">
     <children>
-        <Pane layoutX="2.0" layoutY="23.0" prefHeight="528.0" prefWidth="408.0" style="-fx-background-radius: 30; -fx-background-color: #111111;">
+        <Pane layoutX="2.0" layoutY="23.0" prefHeight="526.0" prefWidth="408.0" style="-fx-background-radius: 30; -fx-background-color: #111111;">
             <children>
-                <VBox alignment="CENTER" layoutY="15.0" prefHeight="643.0" prefWidth="408.0">
+                <VBox alignment="CENTER" layoutY="-8.0" prefHeight="544.0" prefWidth="408.0">
                     <children>
                         <TextField fx:id="textInput" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="56.0" prefWidth="396.0" style="-fx-background-radius: 15;">
                             <font>
@@ -187,12 +186,6 @@
                                 </Button>
                             </children>
                         </GridPane>
-                        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="408.0">
-                            <children>
-                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
-                            </children>
-                        </HBox>
-                  <Pane prefHeight="78.0" prefWidth="408.0" />
                     </children>
                 </VBox>
             </children>
@@ -227,5 +220,7 @@
                 <Image url="@../../../ico/book.png" />
             </image>
         </ImageView>
+      <Button layoutX="235.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#onWindowComplex" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 30; -fx-background-color: #32CD32;" text="Комплексный" />
+      <Button layoutX="26.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#onWindowConverter" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 30; -fx-background-color: #32CD32;" text="P-ичные числа" />
     </children>
 </AnchorPane>
