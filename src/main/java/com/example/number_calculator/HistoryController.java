@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -79,7 +78,7 @@ public class HistoryController implements Initializable {
                 s.setScene(scene);
                 s.setScene(scene);//установка Scene для Stage
                 s.getIcons().add(new Image(getClass().getResourceAsStream("/ico/calculator.png")));
-                ((MainController) fxmlLoader.getController()).init(s);
+                ((ConverterController) fxmlLoader.getController()).init(s);
                 s.show();//Попытки показать это окно, установив для видимости значение true
             } catch (IOException e) {
                 throw new RuntimeException(e);

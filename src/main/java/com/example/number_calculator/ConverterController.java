@@ -1,25 +1,24 @@
 package com.example.number_calculator;
 
 import com.example.number_calculator.editor_number_systems.EditorConverter;
+import com.example.number_calculator.editor_number_systems.InputTPNumber;
+import com.example.number_calculator.editor_number_systems.ProcessorConverter;
+import com.example.number_calculator.editor_number_systems.WorkingMemory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class MainController {
+public class ConverterController {
     @FXML
     private Button buttonBackSpace;
     @FXML
@@ -138,6 +137,8 @@ public class MainController {
     private TextField textResult;
     private int systemInput;
     EditorConverter editorConverter = new EditorConverter();
+    ProcessorConverter processorConverter = new ProcessorConverter();
+    WorkingMemory memory = new WorkingMemory();
 
     private double x, y;
 
@@ -191,12 +192,18 @@ public class MainController {
         spinnerInput.setValueFactory(spinnerValueFactoryInput);
 
         sliderInput.setValue((10));
+
+
+        EditorConverter.system = 10;
+        getEditor();
     }
 
     @FXML
     void actionOperator(MouseEvent event) {
-        editorConverter.actionOperator(event);
-        printf();
+        processorConverter.actionOperator(event);
+
+        getProcessor();
+        printEditor();
     }
 
     @FXML
@@ -204,6 +211,7 @@ public class MainController {
         systemInput = (int) sliderInput.getValue();
         EditorConverter.system = systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
+        getEditor();
     }
 
     @FXML
@@ -211,6 +219,7 @@ public class MainController {
         systemInput = spinnerInput.getValue();
         EditorConverter.system = systemInput;
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, systemInput);
+        getEditor();
     }
 
     private void numberSystemChanges(Slider slider,
@@ -223,59 +232,70 @@ public class MainController {
 
     @FXML
     void onResultClicked(MouseEvent event) {
-        editorConverter.onResultClicked();
-        printf();
+        processorConverter.onResultClicked(null);
+
+        getProcessor();
+        printEditor();
     }
 
     @FXML
     void onNumberClicked(MouseEvent event) {
         editorConverter.entryNumber(event);
-        printf();
+
+        getEditor();
+        printEditor();
     }
 
     @FXML
     void onSymbolClicked(MouseEvent event) {
         editorConverter.entrySymbol(event);
-        printf();
+
+        getEditor();
+        printEditor();
 
     }
 
     @FXML
     void onOperatorClicking(MouseEvent event) {
         editorConverter.entryOperator(event);
-        printf();
+
+        getEditor();
+        printEditor();
     }
 
     @FXML
     public void onClean(MouseEvent event) {
-        editorConverter.onClean(event);
-        printf();
+        editorConverter.onClean();
+
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
+        getEditor();
+        printEditor();
     }
 
     @FXML
     public void onMemory(MouseEvent event) {
-        editorConverter.memory(event);
-        printf();
+        memory.memory(event);
+
+        getMemory();
+        printEditor();
     }
 
     @FXML
     public void onCleanEntry(MouseEvent event) {
         editorConverter.onCleanEntry(event);
-        printf();
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
+
+        getEditor();
+        printEditor();
     }
 
     @FXML
     public void onBaskSpace(MouseEvent event) {
         editorConverter.onBackSpace(event);
-        printf();
         numberSystemChanges(sliderInput, spinnerValueFactoryInput, spinnerInput, EditorConverter.system);
-    }
 
-    private void printf() {
-        textInput.setText(EditorConverter.lineInput.toString());
-        textResult.setText(EditorConverter.lineResult.toString());
+        getEditor();
+        printEditor();
     }
 
     public void onWindowFraction(MouseEvent event) {
@@ -285,5 +305,69 @@ public class MainController {
     public void onWindowComplex(MouseEvent event) {
 
 
+    }
+
+    private void printEditor() {
+        if(EditorConverter.number_two!=null){
+            editorConverter.dataResult();
+        }else {
+            editorConverter.dataInput();
+        }
+
+
+        textInput.setText(EditorConverter.lineInput.toString());
+        textResult.setText(EditorConverter.lineResult.toString());
+    }
+
+    private void getMemory() {
+        ProcessorConverter.number_one = WorkingMemory.number_one;
+        ProcessorConverter.number_two = WorkingMemory.number_two;
+        ProcessorConverter.number_result = WorkingMemory.number_result;
+        ProcessorConverter.number_temp = WorkingMemory.number_temp;
+        ProcessorConverter.operation = WorkingMemory.operation;
+        ProcessorConverter.system = WorkingMemory.system;
+
+        EditorConverter.number_one = WorkingMemory.number_one;
+        EditorConverter.number_two = WorkingMemory.number_two;
+        EditorConverter.number_result = WorkingMemory.number_result;
+        EditorConverter.number_temp = WorkingMemory.number_temp;
+        EditorConverter.operation = WorkingMemory.operation;
+        EditorConverter.system = WorkingMemory.system;
+
+        editorConverter.setInput();
+    }
+
+    private void getEditor() {
+        ProcessorConverter.number_one = EditorConverter.number_one;
+        ProcessorConverter.number_two = EditorConverter.number_two;
+        ProcessorConverter.number_result = EditorConverter.number_result;
+        ProcessorConverter.number_temp = EditorConverter.number_temp;
+        ProcessorConverter.operation = EditorConverter.operation;
+        ProcessorConverter.system = EditorConverter.system;
+
+        WorkingMemory.number_one = EditorConverter.number_one;
+        WorkingMemory.number_two = EditorConverter.number_two;
+        WorkingMemory.number_result = EditorConverter.number_result;
+        WorkingMemory.number_temp = EditorConverter.number_temp;
+        WorkingMemory.operation = EditorConverter.operation;
+        WorkingMemory.system = EditorConverter.system;
+    }
+
+    private void getProcessor() {
+        WorkingMemory.number_one = ProcessorConverter.number_one;
+        WorkingMemory.number_two = ProcessorConverter.number_two;
+        WorkingMemory.number_result = ProcessorConverter.number_result;
+        WorkingMemory.number_temp = ProcessorConverter.number_temp;
+        WorkingMemory.operation = ProcessorConverter.operation;
+        WorkingMemory.system = ProcessorConverter.system;
+
+        EditorConverter.number_one = ProcessorConverter.number_one;
+        EditorConverter.number_two = ProcessorConverter.number_two;
+        EditorConverter.number_result = ProcessorConverter.number_result;
+        EditorConverter.number_temp = ProcessorConverter.number_temp;
+        EditorConverter.operation = ProcessorConverter.operation;
+        EditorConverter.system = ProcessorConverter.system;
+
+        editorConverter.setInput();
     }
 }
