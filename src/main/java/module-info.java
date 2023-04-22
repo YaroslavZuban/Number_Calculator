@@ -9,4 +9,6 @@ module com.example.number_calculator {
     opens com.example.number_calculator.editor_number_systems to javafx.fxml;
     exports com.example.number_calculator.editor_simple_fraction;
     opens com.example.number_calculator.editor_simple_fraction to javafx.fxml;
+    exports com.example.number_calculator.tak;
+    opens com.example.number_calculator.tak to javafx.fxml;
 }

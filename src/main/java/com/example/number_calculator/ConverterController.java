@@ -333,12 +333,11 @@ public class ConverterController implements IController {
     }
 
     private void printEditor() {
-        if (EditorConverter.number_two != null) {
+        if (EditorConverter.number_two != null && EditorConverter.number_result!=null) {
             editorConverter.dataResult();
         } else {
             editorConverter.dataInput();
         }
-
 
         textInput.setText(EditorConverter.lineInput.toString());
         textResult.setText(EditorConverter.lineResult.toString());

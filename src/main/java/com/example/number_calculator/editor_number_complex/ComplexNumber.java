@@ -6,17 +6,15 @@
 
 package com.example.number_calculator.editor_number_complex;
 
+import com.example.number_calculator.tak.Number;
+
 import java.util.StringTokenizer;
 import java.text.NumberFormat;
-/**
- * ���� ����� �������� ����������� ����� � ���������
- * ��������� �������������� �������� ��� ���.
- * @author  Statsenko Vladimir
- */
+
 public class ComplexNumber {
     
-    private double Re = 0; //�������������� ����� �����
-    private double Im = 0; //������ ����� �����
+    private double Re = 0;
+    private double Im = 0;
     
 
     public ComplexNumber(String value) throws java.text.ParseException {
@@ -116,20 +114,19 @@ public class ComplexNumber {
         Im += value.Im;
     }
 
-    public void sub(ComplexNumber value) {
+    public void subtract(ComplexNumber value) {
         Re -= value.Re;
         Im -= value.Im;
     }
 
-    public void mult(ComplexNumber value) {
+    public void multiply(ComplexNumber value) {
         double tempRe = Re * value.Re - Im * value.Im;
         double tempIm = Re * value.Im + Im * value.Re;
         Re = tempRe;
         Im = tempIm;
     }
 
-
-    public void div(ComplexNumber value) {
+    public void divide(ComplexNumber value) {
         double denominator = value.Re * value.Re + value.Im * value.Im;
         if(denominator == 0)
         {

@@ -5,8 +5,6 @@ package com.example.number_calculator.editor_number_systems;
  */
 public class CalculatorTPNumberMemory {
     private TPNumber value=null;
-
-
     public CalculatorTPNumberMemory() {
         value=new TPNumber("0",10);
     }

@@ -21,7 +21,7 @@
          <children>
             <VBox alignment="CENTER" layoutY="15.0" prefHeight="639.0" prefWidth="408.0">
                <children>
-                  <TextField fx:id="textInput" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="56.0" prefWidth="396.0" style="-fx-background-radius: 15;">
+                  <TextField fx:id="textInput" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="56.0" prefWidth="396.0" promptText="0" style="-fx-background-radius: 15;">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -29,7 +29,7 @@
                         <Insets left="6.0" right="6.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="textResult" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="56.0" prefWidth="396.0" style="-fx-background-radius: 15;">
+                  <TextField fx:id="textResult" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="56.0" prefWidth="396.0" promptText="0" style="-fx-background-radius: 15;">
                      <VBox.margin>
                         <Insets bottom="15.0" left="6.0" right="6.0" top="15.0" />
                      </VBox.margin>
