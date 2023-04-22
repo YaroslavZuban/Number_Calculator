@@ -6,8 +6,6 @@
 
 package com.example.number_calculator.editor_number_complex;
 
-import com.example.number_calculator.tak.Number;
-
 import java.util.StringTokenizer;
 import java.text.NumberFormat;
 
